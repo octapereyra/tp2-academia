@@ -8,11 +8,11 @@ namespace Business.Entities
 {
     public class BusinessEntity
     {
-        private int _id;
-        private States _state;
+        private int _Id;
+        private States _State;
 
-        public int ID { get => _id; set => _id = value; }
-        public States State { get => _state; set => _state = value; }
+        public int ID { get => _Id; set => _Id = value; }
+        public States State { get => _State; set => _State = value; }
 
         public enum States
         {

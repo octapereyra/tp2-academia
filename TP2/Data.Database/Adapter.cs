@@ -1,22 +1,30 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Configuration;
 using System.Data.SqlClient;
 
 namespace Data.Database
 {
     public class Adapter
     {
-        //private SqlConnection sqlConnection = new SqlConnection("ConnectionString;");
+        private SqlConnection _sqlConn;
+        //Clave por defecto a utlizar para la cadena de conexion
+        const string consKeyDefaultCnnString = "ConnStringExpress";
+
+        public SqlConnection SqlConn { get => _sqlConn; set => _sqlConn = value; }
 
         protected void OpenConnection()
         {
-            throw new Exception("Metodo no implementado");
+            string conn = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString;
+            SqlConn = new SqlConnection(conn);
+            SqlConn.Open();
         }
 
         protected void CloseConnection()
         {
-            throw new Exception("Metodo no implementado");
+            SqlConn.Close();
+            SqlConn = null;
         }
 
         /*

@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Business.Entities
 {
-    public class Modulo : BusinessEntity
+    class Plan : BusinessEntity
     {
-        private string _Descripcion;
+        string _Descripcion;
+        int _IDEspecialidad;
 
         public string Descripcion { get => _Descripcion; set => _Descripcion = value; }
+        public int IDEspecialidad { get => _IDEspecialidad; set => _IDEspecialidad = value; }
     }
 }
