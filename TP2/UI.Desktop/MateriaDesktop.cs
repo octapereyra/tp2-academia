@@ -21,7 +21,7 @@ namespace UI.Desktop
 
         public frmMateriaDesktop(ModoForm modo) : this()
         {
-            //this.Modo = ModoForm.Alta;
+            this.Modo = modo;
         }
 
         public frmMateriaDesktop(int idMateria, ModoForm modo) : this()
@@ -123,6 +123,12 @@ namespace UI.Desktop
             if (!result)
             {
                 Notificar("Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (!(int.TryParse(txtHsSem.Text, out _) || int.TryParse(txtHsTot.Text, out _)))
+            {
+                Notificar("La/s hora/s ingresada/s son inválidas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                result = false;
             }
 
 

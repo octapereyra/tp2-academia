@@ -61,7 +61,7 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tabNuevo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsbNuevo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAA4QAAALQCAYAAADIJr5uAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAKSwSURBVHhe7b0LsGZZWZ9/phuYQRSKJDoXZyIBI5YXnCtg
@@ -770,7 +770,7 @@
         dvbzfzb/H0y3iw5VYjUNAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="tabEditar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsbEditar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAClGSURBVHhe7d15vO11Xe9xhnNEODIlkwo3B5IwruJwGaQM
@@ -952,7 +952,7 @@
         6Wo/dbD6fSIiqqZD1P7qGWo39Ti1nbK/3/OK/TDrrPPv8Ifb88yGf5wAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="tabEliminar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsbEliminar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAA1wAAAPeCAYAAAAYnRsXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAP+lSURBVHhe7N11uFZV1zb8RwWkuzulQ6RLGmkBSREBkRZE
@@ -2153,4 +2153,7 @@
         JDRcAAAAAJAkNFwAAAAAkBT/T/h/AenqoBWktb/ZAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
 </root>

@@ -51,7 +51,7 @@ namespace UI.Desktop
             this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.74368F));
             this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.25632F));
             this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
-            this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 299F));
+            this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tlpUsuarioDesktop.Controls.Add(this.lblId, 0, 0);
             this.tlpUsuarioDesktop.Controls.Add(this.lblNombre, 0, 1);
             this.tlpUsuarioDesktop.Controls.Add(this.lblEmail, 0, 2);
@@ -119,14 +119,14 @@ namespace UI.Desktop
             // 
             // txtHsSem
             // 
-            this.txtHsSem.Location = new System.Drawing.Point(649, 37);
+            this.txtHsSem.Location = new System.Drawing.Point(648, 37);
             this.txtHsSem.Name = "txtHsSem";
             this.txtHsSem.Size = new System.Drawing.Size(88, 23);
             this.txtHsSem.TabIndex = 8;
             // 
             // txtHsTot
             // 
-            this.txtHsTot.Location = new System.Drawing.Point(649, 76);
+            this.txtHsTot.Location = new System.Drawing.Point(648, 76);
             this.txtHsTot.Name = "txtHsTot";
             this.txtHsTot.Size = new System.Drawing.Size(88, 23);
             this.txtHsTot.TabIndex = 9;
@@ -134,7 +134,7 @@ namespace UI.Desktop
             // lblHsSem
             // 
             this.lblHsSem.AutoSize = true;
-            this.lblHsSem.Location = new System.Drawing.Point(532, 34);
+            this.lblHsSem.Location = new System.Drawing.Point(531, 34);
             this.lblHsSem.Name = "lblHsSem";
             this.lblHsSem.Size = new System.Drawing.Size(97, 15);
             this.lblHsSem.TabIndex = 12;
@@ -143,7 +143,7 @@ namespace UI.Desktop
             // lblHsTot
             // 
             this.lblHsTot.AutoSize = true;
-            this.lblHsTot.Location = new System.Drawing.Point(532, 73);
+            this.lblHsTot.Location = new System.Drawing.Point(531, 73);
             this.lblHsTot.Name = "lblHsTot";
             this.lblHsTot.Size = new System.Drawing.Size(77, 15);
             this.lblHsTot.TabIndex = 13;
@@ -151,7 +151,7 @@ namespace UI.Desktop
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(532, 115);
+            this.btnAceptar.Location = new System.Drawing.Point(531, 115);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 15;
@@ -161,7 +161,7 @@ namespace UI.Desktop
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(649, 115);
+            this.btnCancelar.Location = new System.Drawing.Point(648, 115);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 16;
@@ -186,6 +186,8 @@ namespace UI.Desktop
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 143);
             this.Controls.Add(this.tlpUsuarioDesktop);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmMateriaDesktop";
             this.Text = "MateriaDesktop";
             this.tlpUsuarioDesktop.ResumeLayout(false);
