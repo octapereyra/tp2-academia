@@ -25,11 +25,6 @@ namespace UI.Desktop
             dgvPersonas.DataSource = pl.GetAll();
         }
 
-        private void Personas_Load(object sender, EventArgs e)
-        {
-            Listar();
-        }
-
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             Listar();
@@ -51,8 +46,8 @@ namespace UI.Desktop
         {
             if (this.dgvPersonas.SelectedRows.Count > 0)
             {
-                int ID = ((Business.Entities.Persona)this.dgvPersonas.SelectedRows[0].DataBoundItem).ID;
-                frmPersonaDesktop frmPersona = new frmPersonaDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                int id = (int)dgvPersonas.SelectedRows[0].Cells[0].Value;
+                frmPersonaDesktop frmPersona = new frmPersonaDesktop(id, ApplicationForm.ModoForm.Modificacion);
                 frmPersona.ShowDialog();
                 this.Listar();
             }
@@ -61,11 +56,16 @@ namespace UI.Desktop
         {
             if (this.dgvPersonas.SelectedRows.Count > 0)
             {
-                int ID = ((Business.Entities.Persona)this.dgvPersonas.SelectedRows[0].DataBoundItem).ID;
-                frmPersonaDesktop frmPersona = new frmPersonaDesktop(ID, ApplicationForm.ModoForm.Baja);
+                int id = (int)dgvPersonas.SelectedRows[0].Cells[0].Value;
+                frmPersonaDesktop frmPersona = new frmPersonaDesktop(id, ApplicationForm.ModoForm.Baja);
                 frmPersona.ShowDialog();
                 this.Listar();
             }
+        }
+
+        private void frmPersonas_Load(object sender, EventArgs e)
+        {
+            Listar();
         }
     }
 }

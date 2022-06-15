@@ -25,7 +25,7 @@ namespace UI.Desktop
             dgvMaterias.DataSource = ml.GetAll();
         }
 
-        private void Usuarios_Load(object sender, EventArgs e)
+        private void frmMaterias_Load(object sender, EventArgs e)
         {
             Listar();
         }
@@ -37,7 +37,7 @@ namespace UI.Desktop
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void tabNuevo_Click(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace UI.Desktop
 
         private void tabEditar_Click(object sender, EventArgs e)
         {
-            int id = ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID;
+            int id = (int)dgvMaterias.SelectedRows[0].Cells[0].Value; //esta celda contiene el ID
             frmMateriaDesktop md = new(id, ApplicationForm.ModoForm.Modificacion);
             md.ShowDialog();
             Listar();
@@ -57,10 +57,11 @@ namespace UI.Desktop
 
         private void tabEliminar_Click(object sender, EventArgs e)
         {
-            int id = ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID;
+            int id = (int)dgvMaterias.SelectedRows[0].Cells[0].Value; //esta celda contiene el ID
             frmMateriaDesktop md = new(id, ApplicationForm.ModoForm.Baja);
             md.ShowDialog();
             Listar();
         }
+
     }
 }

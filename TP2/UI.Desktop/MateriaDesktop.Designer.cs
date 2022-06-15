@@ -51,7 +51,7 @@ namespace UI.Desktop
             this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.74368F));
             this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.25632F));
             this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
-            this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 301F));
             this.tlpUsuarioDesktop.Controls.Add(this.lblId, 0, 0);
             this.tlpUsuarioDesktop.Controls.Add(this.lblNombre, 0, 1);
             this.tlpUsuarioDesktop.Controls.Add(this.lblEmail, 0, 2);
@@ -115,26 +115,26 @@ namespace UI.Desktop
             this.txtDescripcion.Location = new System.Drawing.Point(123, 37);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(167, 23);
-            this.txtDescripcion.TabIndex = 5;
+            this.txtDescripcion.TabIndex = 1;
             // 
             // txtHsSem
             // 
-            this.txtHsSem.Location = new System.Drawing.Point(648, 37);
+            this.txtHsSem.Location = new System.Drawing.Point(647, 37);
             this.txtHsSem.Name = "txtHsSem";
             this.txtHsSem.Size = new System.Drawing.Size(88, 23);
-            this.txtHsSem.TabIndex = 8;
+            this.txtHsSem.TabIndex = 2;
             // 
             // txtHsTot
             // 
-            this.txtHsTot.Location = new System.Drawing.Point(648, 76);
+            this.txtHsTot.Location = new System.Drawing.Point(647, 76);
             this.txtHsTot.Name = "txtHsTot";
             this.txtHsTot.Size = new System.Drawing.Size(88, 23);
-            this.txtHsTot.TabIndex = 9;
+            this.txtHsTot.TabIndex = 4;
             // 
             // lblHsSem
             // 
             this.lblHsSem.AutoSize = true;
-            this.lblHsSem.Location = new System.Drawing.Point(531, 34);
+            this.lblHsSem.Location = new System.Drawing.Point(530, 34);
             this.lblHsSem.Name = "lblHsSem";
             this.lblHsSem.Size = new System.Drawing.Size(97, 15);
             this.lblHsSem.TabIndex = 12;
@@ -143,7 +143,7 @@ namespace UI.Desktop
             // lblHsTot
             // 
             this.lblHsTot.AutoSize = true;
-            this.lblHsTot.Location = new System.Drawing.Point(531, 73);
+            this.lblHsTot.Location = new System.Drawing.Point(530, 73);
             this.lblHsTot.Name = "lblHsTot";
             this.lblHsTot.Size = new System.Drawing.Size(77, 15);
             this.lblHsTot.TabIndex = 13;
@@ -151,20 +151,20 @@ namespace UI.Desktop
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(531, 115);
+            this.btnAceptar.Location = new System.Drawing.Point(530, 115);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 15;
+            this.btnAceptar.TabIndex = 5;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(648, 115);
+            this.btnCancelar.Location = new System.Drawing.Point(647, 115);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 16;
+            this.btnCancelar.TabIndex = 6;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -178,7 +178,7 @@ namespace UI.Desktop
             this.cboPlan.Location = new System.Drawing.Point(123, 76);
             this.cboPlan.Name = "cboPlan";
             this.cboPlan.Size = new System.Drawing.Size(121, 23);
-            this.cboPlan.TabIndex = 17;
+            this.cboPlan.TabIndex = 3;
             // 
             // frmMateriaDesktop
             // 

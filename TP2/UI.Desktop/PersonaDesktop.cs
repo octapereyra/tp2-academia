@@ -60,14 +60,14 @@ namespace UI.Desktop
             dtpFechaNacimiento.Value = PersonaActual.FechaNacimiento;
             txtTelefono.Text = PersonaActual.Telefono;
             cboPlan.SelectedIndex = PersonaActual.IDPLan - 1;
-            cboTipoPersona.SelectedIndex = SeleccionarTipoPersona();
+            cboTipoPersona.SelectedIndex = PersonaActual.GetIDTipoPersona();
 
             switch (Modo)
             {
                 case ModoForm.Alta:
                     btnAceptar.Text = "Guardar";
                     break;
-                case ModoForm.Baja:
+                case ModoForm.Baja:                   
                     btnAceptar.Text = "Eliminar";
                     break;
                 case ModoForm.Modificacion:
@@ -99,7 +99,7 @@ namespace UI.Desktop
             PersonaActual.Email = txtMail.Text;
             PersonaActual.FechaNacimiento = dtpFechaNacimiento.Value;
             PersonaActual.Telefono = txtTelefono.Text;
-            PersonaActual.IDPLan = cboPlan.SelectedIndex;
+            PersonaActual.IDPLan = cboPlan.SelectedIndex + 1;
             PersonaActual.SetTipoPersonaById(cboTipoPersona.SelectedIndex);
 
             switch (Modo)
@@ -127,51 +127,72 @@ namespace UI.Desktop
             pl.Save(PersonaActual);
         }
 
-        public static bool ValidarEmail(string email)
+        private static bool ValidarEmail(string email)
         {
             String expresion;
-            bool rta2 = false;
+            bool rta = false;
             expresion = @"\A(\w+.?\w*@\w+.)(com)\Z";
-
 
             if (Regex.IsMatch(email, expresion))
             {
                 if (Regex.Replace(email, expresion, String.Empty).Length == 0)
                 {
-                    rta2 = true;
+                    rta = true;
                 }
             }
-            return rta2;
+            return rta;
         }
-        public override bool Validar()
+
+        private bool ValidarCamposVacios()
         {
             bool rta = false;
+            List<TextBox> txtboxs = new();
+            txtboxs.Add(txtApellido);
+            txtboxs.Add(txtDireccion);
+            txtboxs.Add(txtLegajo);
+            txtboxs.Add(txtMail);
+            txtboxs.Add(txtNombre);
+            txtboxs.Add(txtTelefono);
 
-            if (txtLegajo.Text != String.Empty && txtNombre.Text != String.Empty
-                && txtApellido.Text != String.Empty && txtMail.Text != String.Empty
-                && txtTelefono.Text != String.Empty && txtDireccion.Text != String.Empty
-                && cboPlan.SelectedIndex != -1 && cboTipoPersona.SelectedIndex != -1)
+            foreach (TextBox txtbox in txtboxs) //compruebo textboxs
             {
-                if (!rta)
+                if (txtbox.Text.Trim().Equals(string.Empty))
                 {
-                    rta = ValidarEmail(txtMail.Text);
-                    if (!rta)
-                    {
-                        Notificar("Email inválido",
-                                  "Revise su correo",
-                                  MessageBoxButtons.OK,
-                                  MessageBoxIcon.Error);
-                    }
+                    rta = true;
                 }
             }
-            else
+
+            if (cboPlan.SelectedIndex == -1 || cboTipoPersona.SelectedIndex == -1) //compruebo combos
             {
-                Notificar("Ficha de persona vacía",
-                          "No puede haber campos vacíos",
-                          MessageBoxButtons.OK,
-                          MessageBoxIcon.Error);
+                rta = true;
             }
 
+            return rta;
+        }
+    
+        public override bool Validar()
+        {
+            bool rta = true;
+
+            if (ValidarCamposVacios())
+            {
+                Notificar("Ficha de persona vacía", "No puede haber campos vacíos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                rta = false;
+            }
+            if (rta)
+            {
+                if (!ValidarEmail(txtMail.Text))
+                {
+                    Notificar("Email incorrecto", "El email ingresado no tiene el formato correcto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    rta = false;
+                }
+                if (!int.TryParse(txtLegajo.Text, out int _))
+                {
+                    Notificar("Legajo incorrecto", "El legajo debe ser un número", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    rta = false;
+                }
+            }
+            
             return rta;
         }
 
@@ -179,8 +200,11 @@ namespace UI.Desktop
         {
             if (Validar())
             {
-                GuardarCambios();
-                this.Close();
+                if (Confirmar(this.btnAceptar.Text.ToLower(), "persona").Equals(DialogResult.Yes))
+                {
+                    GuardarCambios();
+                    this.Close();
+                }
             }
         }
 

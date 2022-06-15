@@ -2,6 +2,7 @@
 using Data.Database;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,19 +19,24 @@ namespace Business.Logic
 
         public PersonaAdapter PersonaData { get => _PersonaData; set => _PersonaData = value; }
 
-        public List<Persona> GetAll()
+        public DataTable GetAll()
         {
-            throw new NotImplementedException();
+            return PersonaData.GetAll();
         }
 
         public Persona GetOne(int idPersona)
         {
-            throw new NotImplementedException();
+            return PersonaData.GetOne(idPersona);
         }
 
         public void Save(Persona personaActual)
         {
-            throw new NotImplementedException();
+            PersonaData.Save(personaActual);
+        }
+
+        public void Delete(int id)
+        {
+            PersonaData.Delete(id);
         }
     }
 }

@@ -78,7 +78,7 @@ namespace UI.Desktop
 
                 if (Modo == ModoForm.Modificacion)
                 {
-                    nuevoUsu.ID = int.Parse(this.lbID.Text);
+                    nuevoUsu.ID = int.Parse(this.txtID.Text);
                     nuevoUsu.State = BusinessEntity.States.Modified;
                     usrLogic.Save(nuevoUsu);
                 }
@@ -86,7 +86,7 @@ namespace UI.Desktop
 
             if (Modo == ModoForm.Baja)
             {
-                nuevoUsu.ID = int.Parse(this.lbID.Text);
+                nuevoUsu.ID = int.Parse(this.txtID.Text);
                 nuevoUsu.State = BusinessEntity.States.Deleted;
                 usrLogic.Save(nuevoUsu);
             }
@@ -106,7 +106,7 @@ namespace UI.Desktop
             }
         }
 
-        public static bool validarEmail(string email)
+        public static bool ValidarEmail(string email)
         {
             String expresion;
             bool rta2 = false;
@@ -145,7 +145,7 @@ namespace UI.Desktop
 
                         if (!rta)
                         {
-                            rta = validarEmail(txtEmail.Text);
+                            rta = ValidarEmail(txtEmail.Text);
                             if (!rta)
                             {
                                 Notificar("Email inválido",
@@ -197,8 +197,11 @@ namespace UI.Desktop
         {
             if (Validar())
             {
-                GuardarCambios();
-                this.Close();
+                if (Confirmar(this.btnAceptar.Text.ToLower(), "usuario").Equals(DialogResult.Yes))
+                {
+                    GuardarCambios();
+                    this.Close();
+                }
             }
         }
 

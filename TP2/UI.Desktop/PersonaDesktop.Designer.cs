@@ -31,22 +31,22 @@ namespace UI.Desktop
         {
             this.tlpUsuarioDesktop = new System.Windows.Forms.TableLayoutPanel();
             this.lblID = new System.Windows.Forms.Label();
-            this.lbApellido = new System.Windows.Forms.Label();
-            this.lblEmail = new System.Windows.Forms.Label();
+            this.lblApellido = new System.Windows.Forms.Label();
+            this.lblPlan = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtDireccion = new System.Windows.Forms.TextBox();
-            this.lbNombre = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
             this.lblDireccion = new System.Windows.Forms.Label();
-            this.btnAceptar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.cboPlan = new System.Windows.Forms.ComboBox();
             this.lblMail = new System.Windows.Forms.Label();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.txtMail = new System.Windows.Forms.TextBox();
             this.txtTelefono = new System.Windows.Forms.TextBox();
-            this.Legajo = new System.Windows.Forms.Label();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.lblLegajo = new System.Windows.Forms.Label();
             this.lblFechaNac = new System.Windows.Forms.Label();
             this.lblTipoPers = new System.Windows.Forms.Label();
             this.txtLegajo = new System.Windows.Forms.TextBox();
@@ -61,15 +61,15 @@ namespace UI.Desktop
             this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.74368F));
             this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.25632F));
             this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
-            this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 302F));
+            this.tlpUsuarioDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 305F));
             this.tlpUsuarioDesktop.Controls.Add(this.lblID, 0, 0);
-            this.tlpUsuarioDesktop.Controls.Add(this.lbApellido, 0, 1);
-            this.tlpUsuarioDesktop.Controls.Add(this.lblEmail, 0, 2);
+            this.tlpUsuarioDesktop.Controls.Add(this.lblApellido, 0, 1);
+            this.tlpUsuarioDesktop.Controls.Add(this.lblPlan, 0, 2);
             this.tlpUsuarioDesktop.Controls.Add(this.txtID, 1, 0);
             this.tlpUsuarioDesktop.Controls.Add(this.txtApellido, 1, 1);
             this.tlpUsuarioDesktop.Controls.Add(this.txtNombre, 3, 1);
             this.tlpUsuarioDesktop.Controls.Add(this.txtDireccion, 3, 2);
-            this.tlpUsuarioDesktop.Controls.Add(this.lbNombre, 2, 1);
+            this.tlpUsuarioDesktop.Controls.Add(this.lblNombre, 2, 1);
             this.tlpUsuarioDesktop.Controls.Add(this.lblDireccion, 2, 2);
             this.tlpUsuarioDesktop.Controls.Add(this.cboPlan, 1, 2);
             this.tlpUsuarioDesktop.Controls.Add(this.lblMail, 0, 3);
@@ -78,7 +78,7 @@ namespace UI.Desktop
             this.tlpUsuarioDesktop.Controls.Add(this.txtTelefono, 3, 3);
             this.tlpUsuarioDesktop.Controls.Add(this.btnAceptar, 2, 6);
             this.tlpUsuarioDesktop.Controls.Add(this.btnCancelar, 3, 6);
-            this.tlpUsuarioDesktop.Controls.Add(this.Legajo, 0, 4);
+            this.tlpUsuarioDesktop.Controls.Add(this.lblLegajo, 0, 4);
             this.tlpUsuarioDesktop.Controls.Add(this.lblFechaNac, 2, 4);
             this.tlpUsuarioDesktop.Controls.Add(this.lblTipoPers, 0, 5);
             this.tlpUsuarioDesktop.Controls.Add(this.txtLegajo, 1, 4);
@@ -107,23 +107,23 @@ namespace UI.Desktop
             this.lblID.TabIndex = 0;
             this.lblID.Text = "ID";
             // 
-            // lbApellido
+            // lblApellido
             // 
-            this.lbApellido.AutoSize = true;
-            this.lbApellido.Location = new System.Drawing.Point(3, 35);
-            this.lbApellido.Name = "lbApellido";
-            this.lbApellido.Size = new System.Drawing.Size(51, 15);
-            this.lbApellido.TabIndex = 1;
-            this.lbApellido.Text = "Apellido";
+            this.lblApellido.AutoSize = true;
+            this.lblApellido.Location = new System.Drawing.Point(3, 35);
+            this.lblApellido.Name = "lblApellido";
+            this.lblApellido.Size = new System.Drawing.Size(51, 15);
+            this.lblApellido.TabIndex = 1;
+            this.lblApellido.Text = "Apellido";
             // 
-            // lblEmail
+            // lblPlan
             // 
-            this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(3, 70);
-            this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(30, 15);
-            this.lblEmail.TabIndex = 2;
-            this.lblEmail.Text = "Plan";
+            this.lblPlan.AutoSize = true;
+            this.lblPlan.Location = new System.Drawing.Point(3, 70);
+            this.lblPlan.Name = "lblPlan";
+            this.lblPlan.Size = new System.Drawing.Size(30, 15);
+            this.lblPlan.TabIndex = 2;
+            this.lblPlan.Text = "Plan";
             // 
             // txtID
             // 
@@ -137,60 +137,40 @@ namespace UI.Desktop
             // 
             this.txtApellido.Location = new System.Drawing.Point(122, 38);
             this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(171, 23);
-            this.txtApellido.TabIndex = 5;
+            this.txtApellido.Size = new System.Drawing.Size(183, 23);
+            this.txtApellido.TabIndex = 1;
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(646, 38);
+            this.txtNombre.Location = new System.Drawing.Point(643, 38);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(183, 23);
-            this.txtNombre.TabIndex = 8;
+            this.txtNombre.TabIndex = 2;
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(646, 73);
+            this.txtDireccion.Location = new System.Drawing.Point(643, 73);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(183, 23);
-            this.txtDireccion.TabIndex = 9;
+            this.txtDireccion.TabIndex = 4;
             // 
-            // lbNombre
+            // lblNombre
             // 
-            this.lbNombre.AutoSize = true;
-            this.lbNombre.Location = new System.Drawing.Point(529, 35);
-            this.lbNombre.Name = "lbNombre";
-            this.lbNombre.Size = new System.Drawing.Size(51, 15);
-            this.lbNombre.TabIndex = 12;
-            this.lbNombre.Text = "Nombre";
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(526, 35);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(51, 15);
+            this.lblNombre.TabIndex = 12;
+            this.lblNombre.Text = "Nombre";
             // 
             // lblDireccion
             // 
             this.lblDireccion.AutoSize = true;
-            this.lblDireccion.Location = new System.Drawing.Point(529, 70);
+            this.lblDireccion.Location = new System.Drawing.Point(526, 70);
             this.lblDireccion.Name = "lblDireccion";
             this.lblDireccion.Size = new System.Drawing.Size(57, 15);
             this.lblDireccion.TabIndex = 13;
             this.lblDireccion.Text = "Dirección";
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Location = new System.Drawing.Point(529, 246);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 15;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(646, 246);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 16;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // cboPlan
             // 
@@ -200,8 +180,8 @@ namespace UI.Desktop
             "Plan 2023"});
             this.cboPlan.Location = new System.Drawing.Point(122, 73);
             this.cboPlan.Name = "cboPlan";
-            this.cboPlan.Size = new System.Drawing.Size(121, 23);
-            this.cboPlan.TabIndex = 17;
+            this.cboPlan.Size = new System.Drawing.Size(100, 23);
+            this.cboPlan.TabIndex = 3;
             // 
             // lblMail
             // 
@@ -215,7 +195,7 @@ namespace UI.Desktop
             // lblTelefono
             // 
             this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Location = new System.Drawing.Point(529, 106);
+            this.lblTelefono.Location = new System.Drawing.Point(526, 106);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(52, 15);
             this.lblTelefono.TabIndex = 19;
@@ -225,29 +205,49 @@ namespace UI.Desktop
             // 
             this.txtMail.Location = new System.Drawing.Point(122, 109);
             this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(100, 23);
-            this.txtMail.TabIndex = 20;
+            this.txtMail.Size = new System.Drawing.Size(183, 23);
+            this.txtMail.TabIndex = 5;
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(646, 109);
+            this.txtTelefono.Location = new System.Drawing.Point(643, 109);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(183, 23);
-            this.txtTelefono.TabIndex = 21;
+            this.txtTelefono.TabIndex = 6;
             // 
-            // Legajo
+            // btnAceptar
             // 
-            this.Legajo.AutoSize = true;
-            this.Legajo.Location = new System.Drawing.Point(3, 152);
-            this.Legajo.Name = "Legajo";
-            this.Legajo.Size = new System.Drawing.Size(42, 15);
-            this.Legajo.TabIndex = 22;
-            this.Legajo.Text = "Legajo";
+            this.btnAceptar.Location = new System.Drawing.Point(526, 246);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
+            this.btnAceptar.TabIndex = 10;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(643, 246);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 11;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // lblLegajo
+            // 
+            this.lblLegajo.AutoSize = true;
+            this.lblLegajo.Location = new System.Drawing.Point(3, 152);
+            this.lblLegajo.Name = "lblLegajo";
+            this.lblLegajo.Size = new System.Drawing.Size(42, 15);
+            this.lblLegajo.TabIndex = 22;
+            this.lblLegajo.Text = "Legajo";
             // 
             // lblFechaNac
             // 
             this.lblFechaNac.AutoSize = true;
-            this.lblFechaNac.Location = new System.Drawing.Point(529, 152);
+            this.lblFechaNac.Location = new System.Drawing.Point(526, 152);
             this.lblFechaNac.Name = "lblFechaNac";
             this.lblFechaNac.Size = new System.Drawing.Size(101, 15);
             this.lblFechaNac.TabIndex = 23;
@@ -267,26 +267,26 @@ namespace UI.Desktop
             this.txtLegajo.Location = new System.Drawing.Point(122, 155);
             this.txtLegajo.Name = "txtLegajo";
             this.txtLegajo.Size = new System.Drawing.Size(100, 23);
-            this.txtLegajo.TabIndex = 26;
+            this.txtLegajo.TabIndex = 7;
             // 
             // cboTipoPersona
             // 
             this.cboTipoPersona.FormattingEnabled = true;
             this.cboTipoPersona.Items.AddRange(new object[] {
-            "Administrativo",
+            "Estudiante",
             "Docente",
-            "Estudiante"});
+            "Administrativo"});
             this.cboTipoPersona.Location = new System.Drawing.Point(122, 195);
             this.cboTipoPersona.Name = "cboTipoPersona";
-            this.cboTipoPersona.Size = new System.Drawing.Size(121, 23);
-            this.cboTipoPersona.TabIndex = 28;
+            this.cboTipoPersona.Size = new System.Drawing.Size(183, 23);
+            this.cboTipoPersona.TabIndex = 9;
             // 
             // dtpFechaNacimiento
             // 
-            this.dtpFechaNacimiento.Location = new System.Drawing.Point(646, 155);
+            this.dtpFechaNacimiento.Location = new System.Drawing.Point(643, 155);
             this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
             this.dtpFechaNacimiento.Size = new System.Drawing.Size(222, 23);
-            this.dtpFechaNacimiento.TabIndex = 29;
+            this.dtpFechaNacimiento.TabIndex = 8;
             this.dtpFechaNacimiento.Value = new System.DateTime(2022, 6, 6, 16, 36, 7, 0);
             // 
             // frmPersonaDesktop
@@ -309,13 +309,13 @@ namespace UI.Desktop
 
         private System.Windows.Forms.TableLayoutPanel tlpUsuarioDesktop;
         private System.Windows.Forms.Label lblID;
-        private System.Windows.Forms.Label lbApellido;
-        private System.Windows.Forms.Label lblEmail;
+        private System.Windows.Forms.Label lblApellido;
+        private System.Windows.Forms.Label lblPlan;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtDireccion;
-        private System.Windows.Forms.Label lbNombre;
+        private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblDireccion;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
@@ -324,7 +324,7 @@ namespace UI.Desktop
         private System.Windows.Forms.Label lblTelefono;
         private System.Windows.Forms.TextBox txtMail;
         private System.Windows.Forms.TextBox txtTelefono;
-        private System.Windows.Forms.Label Legajo;
+        private System.Windows.Forms.Label lblLegajo;
         private System.Windows.Forms.Label lblFechaNac;
         private System.Windows.Forms.Label lblTipoPers;
         private System.Windows.Forms.TextBox txtLegajo;

@@ -101,7 +101,14 @@ namespace UI.Desktop
         {
             MapearADatos();
             MateriaLogic ml = new();
-            ml.Save(MateriaActual);
+            try
+            {
+                ml.Save(MateriaActual);
+            }
+            catch(Exception)
+            {
+                Notificar("Error crítico", "Error al guardar cambios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public override bool Validar()
         {
@@ -120,24 +127,18 @@ namespace UI.Desktop
                 }
             }
 
-            if (!result)
+            if (!result || cboPlan.SelectedIndex == -1)
             {
-                Notificar("Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            if (!(int.TryParse(txtHsSem.Text, out _) || int.TryParse(txtHsTot.Text, out _)))
-            {
-                Notificar("La/s hora/s ingresada/s son inválidas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Notificar("Ficha de materia incompleta","Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 result = false;
             }
 
-
-            if (cboPlan.SelectedIndex == -1)
+            if (!(int.TryParse(txtHsSem.Text, out _) && int.TryParse(txtHsTot.Text, out _)))
             {
+                Notificar("Hora inválida","La/s hora/s ingresada/s son inválidas", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 result = false;
-                Notificar("Debe elegir un plan", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-           
+
             return result;
         }
 
@@ -145,8 +146,11 @@ namespace UI.Desktop
         {
             if (Validar())
             {
-                GuardarCambios();
-                this.Close();
+                if (Confirmar(this.btnAceptar.Text.ToLower(), "materia").Equals(DialogResult.Yes))
+                {
+                    GuardarCambios();
+                    this.Close();
+                }
             }
         }
 

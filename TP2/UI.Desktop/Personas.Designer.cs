@@ -39,6 +39,16 @@ namespace UI.Desktop
             this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
+            this.id_persona = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipo_persona = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaNac = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tcUsuarios.ContentPanel.SuspendLayout();
             this.tcUsuarios.TopToolStripPanel.SuspendLayout();
             this.tcUsuarios.SuspendLayout();
@@ -53,11 +63,11 @@ namespace UI.Desktop
             // tcUsuarios.ContentPanel
             // 
             this.tcUsuarios.ContentPanel.Controls.Add(this.tlPersonas);
-            this.tcUsuarios.ContentPanel.Size = new System.Drawing.Size(951, 474);
+            this.tcUsuarios.ContentPanel.Size = new System.Drawing.Size(1208, 474);
             this.tcUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcUsuarios.Location = new System.Drawing.Point(0, 0);
             this.tcUsuarios.Name = "tcUsuarios";
-            this.tcUsuarios.Size = new System.Drawing.Size(951, 499);
+            this.tcUsuarios.Size = new System.Drawing.Size(1208, 499);
             this.tcUsuarios.TabIndex = 0;
             this.tcUsuarios.Text = "toolStripContainer1";
             // 
@@ -79,7 +89,7 @@ namespace UI.Desktop
             this.tlPersonas.RowCount = 2;
             this.tlPersonas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlPersonas.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlPersonas.Size = new System.Drawing.Size(951, 474);
+            this.tlPersonas.Size = new System.Drawing.Size(1208, 474);
             this.tlPersonas.TabIndex = 0;
             // 
             // dgvPersonas
@@ -87,6 +97,17 @@ namespace UI.Desktop
             this.dgvPersonas.AllowUserToAddRows = false;
             this.dgvPersonas.AllowUserToDeleteRows = false;
             this.dgvPersonas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPersonas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id_persona,
+            this.legajo,
+            this.tipo_persona,
+            this.nombre,
+            this.apellido,
+            this.direccion,
+            this.email,
+            this.telefono,
+            this.fechaNac,
+            this.plan});
             this.tlPersonas.SetColumnSpan(this.dgvPersonas, 2);
             this.dgvPersonas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPersonas.Location = new System.Drawing.Point(3, 3);
@@ -95,13 +116,13 @@ namespace UI.Desktop
             this.dgvPersonas.ReadOnly = true;
             this.dgvPersonas.RowTemplate.Height = 25;
             this.dgvPersonas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPersonas.Size = new System.Drawing.Size(945, 439);
+            this.dgvPersonas.Size = new System.Drawing.Size(1202, 439);
             this.dgvPersonas.TabIndex = 0;
             // 
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActualizar.Location = new System.Drawing.Point(792, 448);
+            this.btnActualizar.Location = new System.Drawing.Point(1049, 448);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(75, 23);
             this.btnActualizar.TabIndex = 1;
@@ -111,7 +132,7 @@ namespace UI.Desktop
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(873, 448);
+            this.btnSalir.Location = new System.Drawing.Point(1130, 448);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 2;
@@ -164,14 +185,86 @@ namespace UI.Desktop
             this.tsbEliminar.ToolTipText = "Eliminar";
             this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
             // 
+            // id_persona
+            // 
+            this.id_persona.DataPropertyName = "id_persona";
+            this.id_persona.HeaderText = "ID";
+            this.id_persona.Name = "id_persona";
+            this.id_persona.ReadOnly = true;
+            this.id_persona.Visible = false;
+            // 
+            // legajo
+            // 
+            this.legajo.DataPropertyName = "legajo";
+            this.legajo.HeaderText = "Legajo";
+            this.legajo.Name = "legajo";
+            this.legajo.ReadOnly = true;
+            // 
+            // tipo_persona
+            // 
+            this.tipo_persona.DataPropertyName = "tipo_persona";
+            this.tipo_persona.HeaderText = "Tipo de persona";
+            this.tipo_persona.Name = "tipo_persona";
+            this.tipo_persona.ReadOnly = true;
+            // 
+            // nombre
+            // 
+            this.nombre.DataPropertyName = "nombre";
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // apellido
+            // 
+            this.apellido.DataPropertyName = "apellido";
+            this.apellido.HeaderText = "Apellido";
+            this.apellido.Name = "apellido";
+            this.apellido.ReadOnly = true;
+            // 
+            // direccion
+            // 
+            this.direccion.DataPropertyName = "direccion";
+            this.direccion.HeaderText = "Dirección";
+            this.direccion.Name = "direccion";
+            this.direccion.ReadOnly = true;
+            // 
+            // email
+            // 
+            this.email.DataPropertyName = "email";
+            this.email.HeaderText = "Email";
+            this.email.Name = "email";
+            this.email.ReadOnly = true;
+            // 
+            // telefono
+            // 
+            this.telefono.DataPropertyName = "telefono";
+            this.telefono.HeaderText = "Teléfono";
+            this.telefono.Name = "telefono";
+            this.telefono.ReadOnly = true;
+            // 
+            // fechaNac
+            // 
+            this.fechaNac.DataPropertyName = "fecha_nac";
+            this.fechaNac.HeaderText = "Fecha de nacimiento";
+            this.fechaNac.Name = "fechaNac";
+            this.fechaNac.ReadOnly = true;
+            // 
+            // plan
+            // 
+            this.plan.DataPropertyName = "desc_plan";
+            this.plan.HeaderText = "Plan";
+            this.plan.Name = "plan";
+            this.plan.ReadOnly = true;
+            // 
             // frmPersonas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(951, 499);
+            this.ClientSize = new System.Drawing.Size(1208, 499);
             this.Controls.Add(this.tcUsuarios);
             this.Name = "frmPersonas";
             this.Text = "Personas";
+            this.Load += new System.EventHandler(this.frmPersonas_Load);
             this.tcUsuarios.ContentPanel.ResumeLayout(false);
             this.tcUsuarios.TopToolStripPanel.ResumeLayout(false);
             this.tcUsuarios.TopToolStripPanel.PerformLayout();
@@ -196,6 +289,16 @@ namespace UI.Desktop
         private System.Windows.Forms.ToolStripButton tsbNuevo;
         private System.Windows.Forms.ToolStripButton tsbEditar;
         private System.Windows.Forms.ToolStripButton tsbEliminar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_persona;
+        private System.Windows.Forms.DataGridViewTextBoxColumn legajo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipo_persona;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn apellido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn direccion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn email;
+        private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaNac;
+        private System.Windows.Forms.DataGridViewTextBoxColumn plan;
     }
 }
 

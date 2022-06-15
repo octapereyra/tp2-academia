@@ -9,9 +9,12 @@ namespace Data.Database
     public class Adapter
     {
         private SqlConnection _sqlConn;
+        private SqlDataAdapter _dataAdapter;
+
         //Clave por defecto a utlizar para la cadena de conexion
         const string consKeyDefaultCnnString = "ConnStringExpress";
-
+      
+        public SqlDataAdapter DataAdapter { get => _dataAdapter; set => _dataAdapter = value; }
         public SqlConnection SqlConn { get => _sqlConn; set => _sqlConn = value; }
 
         protected void OpenConnection()

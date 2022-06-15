@@ -11,29 +11,18 @@ namespace Data.Database
 {
     public class MateriaAdapter : Adapter
     {
-        public List<Materia> GetAll()
+        public DataTable GetAll()
         {
-            List<Materia> materias = new();
+            DataTable materias = new();
             try
             {
-                this.OpenConnection();
-                SqlCommand cmdMaterias = new SqlCommand("select * from materias", SqlConn);
-                SqlDataReader drMaterias = cmdMaterias.ExecuteReader();
-
-                while (drMaterias.Read())
-                {
-                    Materia mat = new();
-
-                    mat.ID = (int)drMaterias["id_materia"];
-                    mat.Descripcion = (string)drMaterias["desc_materia"];
-                    mat.HSSemanales = (int)drMaterias["hs_semanales"];
-                    mat.HSTotales = (int)drMaterias["hs_totales"];
-                    mat.IDPlan = (int)drMaterias["id_plan"];
-                    mat.State = BusinessEntity.States.Unmodified;
-
-                    materias.Add(mat);
-                }
-                drMaterias.Close();
+                this.OpenConnection();            
+                SqlCommand cmdMaterias = new SqlCommand("select m.id_materia, m.desc_materia, m.hs_semanales, m.hs_totales, p.desc_plan from materias m "+ 
+                                                            "inner join planes p "+
+                                                            "on m.id_plan = p.id_plan;", SqlConn);            
+                DataAdapter = new SqlDataAdapter(cmdMaterias);
+                DataAdapter.Fill(materias);
+                DataAdapter.Dispose();             
             }
             catch (Exception ex)
             {
@@ -155,7 +144,7 @@ namespace Data.Database
         {
             if (materia.State == BusinessEntity.States.Deleted)
             {
-                this.Delete(materia.ID);
+                Delete(materia.ID);
             }
             else if (materia.State == BusinessEntity.States.New)
             {

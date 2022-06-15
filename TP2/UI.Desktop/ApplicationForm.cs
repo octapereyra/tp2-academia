@@ -40,5 +40,10 @@ namespace UI.Desktop
         {
             this.Notificar(this.Text, mensaje, botones, icono);
         }
+        public DialogResult Confirmar(string accion, string entity)
+        {
+            return MessageBox.Show("¿Está seguro que desea "+accion+" "+entity+ "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+        }
+
     }
 }
