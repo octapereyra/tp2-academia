@@ -24,7 +24,7 @@ namespace Data.Database
                 {
                     Materia mat = new()
                     {
-                        Descripcion = (string)dataReader["descripcion"],
+                        Descripcion = (string)dataReader["desc_materia"],
                         ID = (int)dataReader["id_materia"],
                         HSSemanales = (int)dataReader["hs_semanales"],
                         HSTotales = (int)dataReader["hs_totales"],
