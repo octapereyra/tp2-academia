@@ -19,7 +19,7 @@ namespace Business.Logic
 
         public PersonaAdapter PersonaData { get => _PersonaData; set => _PersonaData = value; }
 
-        public DataTable GetAll()
+        public List<Persona> GetAll()
         {
             return PersonaData.GetAll();
         }

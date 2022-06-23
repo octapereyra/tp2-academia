@@ -11,20 +11,14 @@ namespace Data.Database
 {
     public class PersonaAdapter : Adapter
     {
-        public DataTable GetAll()
+        public List<Persona> GetAll()
         {
-            DataTable personas = new();
+            List<Persona> personas = new();
             try
             {
                 OpenConnection();
-                SqlCommand command = new SqlCommand("select p.id_persona, p.nombre, p.apellido, p.direccion, p.email, p.telefono, p.fecha_nac, p.legajo, p.tipo_persona, pl.desc_plan from personas p "+
-                                                        "inner join planes pl "+
-                                                        "on p.id_plan = pl.id_plan;", SqlConn);
-                DataAdapter = new(command);
-                DataAdapter.Fill(personas);
-
-                DataAdapter.Dispose();
-                /*
+                SqlCommand command = new SqlCommand("select * from personas", SqlConn);
+                SqlDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
                     Persona p = new()
@@ -42,8 +36,7 @@ namespace Data.Database
                     p.SetTipoPersonaById((int)dataReader["tipo_persona"]);
                     personas.Add(p);                  
                 }
-                dataReader.Close();
-                */
+                dataReader.Close();             
             }
             catch (Exception ex)
             {

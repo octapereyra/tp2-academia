@@ -11,18 +11,28 @@ namespace Data.Database
 {
     public class MateriaAdapter : Adapter
     {
-        public DataTable GetAll()
+        public List<Materia> GetAll()
         {
-            DataTable materias = new();
+            List<Materia> materias = new();
             try
             {
-                this.OpenConnection();            
-                SqlCommand cmdMaterias = new SqlCommand("select m.id_materia, m.desc_materia, m.hs_semanales, m.hs_totales, p.desc_plan from materias m "+ 
-                                                            "inner join planes p "+
-                                                            "on m.id_plan = p.id_plan;", SqlConn);            
-                DataAdapter = new SqlDataAdapter(cmdMaterias);
-                DataAdapter.Fill(materias);
-                DataAdapter.Dispose();             
+                this.OpenConnection();
+                SqlCommand cmdMaterias = new SqlCommand("select * from materias", SqlConn);
+                SqlDataReader dataReader = cmdMaterias.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    Materia mat = new()
+                    {
+                        Descripcion = (string)dataReader["descripcion"],
+                        ID = (int)dataReader["id_materia"],
+                        HSSemanales = (int)dataReader["hs_semanales"],
+                        HSTotales = (int)dataReader["hs_totales"],
+                        IDPlan = (int)dataReader["id_plan"],
+                    };
+                    materias.Add(mat);
+               }
+                          
             }
             catch (Exception ex)
             {

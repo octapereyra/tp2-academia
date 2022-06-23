@@ -22,7 +22,7 @@ namespace Business.Logic
             return MateriaData.GetOne(id);
         }
 
-        public DataTable GetAll()
+        public List<Materia> GetAll()
         {
             return MateriaData.GetAll();
         }

@@ -46,7 +46,7 @@ namespace UI.Desktop
         {
             if (this.dgvPersonas.SelectedRows.Count > 0)
             {
-                int id = (int)dgvPersonas.SelectedRows[0].Cells[0].Value;
+                int id = ((Persona)(dgvPersonas.SelectedRows[0].DataBoundItem)).ID;
                 frmPersonaDesktop frmPersona = new frmPersonaDesktop(id, ApplicationForm.ModoForm.Modificacion);
                 frmPersona.ShowDialog();
                 this.Listar();
@@ -56,7 +56,7 @@ namespace UI.Desktop
         {
             if (this.dgvPersonas.SelectedRows.Count > 0)
             {
-                int id = (int)dgvPersonas.SelectedRows[0].Cells[0].Value;
+                int id = ((Persona)(dgvPersonas.SelectedRows[0].DataBoundItem)).ID;
                 frmPersonaDesktop frmPersona = new frmPersonaDesktop(id, ApplicationForm.ModoForm.Baja);
                 frmPersona.ShowDialog();
                 this.Listar();

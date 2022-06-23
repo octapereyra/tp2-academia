@@ -49,7 +49,7 @@ namespace UI.Desktop
 
         private void tabEditar_Click(object sender, EventArgs e)
         {
-            int id = (int)dgvMaterias.SelectedRows[0].Cells[0].Value; //esta celda contiene el ID
+            int id = ((Materia)(dgvMaterias.SelectedRows[0].DataBoundItem)).ID;
             frmMateriaDesktop md = new(id, ApplicationForm.ModoForm.Modificacion);
             md.ShowDialog();
             Listar();
@@ -57,7 +57,7 @@ namespace UI.Desktop
 
         private void tabEliminar_Click(object sender, EventArgs e)
         {
-            int id = (int)dgvMaterias.SelectedRows[0].Cells[0].Value; //esta celda contiene el ID
+            int id = ((Materia)(dgvMaterias.SelectedRows[0].DataBoundItem)).ID;
             frmMateriaDesktop md = new(id, ApplicationForm.ModoForm.Baja);
             md.ShowDialog();
             Listar();
