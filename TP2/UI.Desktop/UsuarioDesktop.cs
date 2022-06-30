@@ -124,66 +124,50 @@ namespace UI.Desktop
         }
         public override bool Validar()
         {
-            bool rta = false;
+            bool rta = true;
+            string errorString = string.Empty;
 
-            if (txtUsuario.Text != String.Empty && txtNombre.Text != String.Empty
-                && txtApellido.Text != String.Empty && txtClave.Text != String.Empty
-                && txtConfirmarClave.Text != String.Empty && txtEmail.Text != String.Empty)
+            if (txtUsuario.Text == String.Empty || txtNombre.Text == String.Empty
+                || txtApellido.Text == String.Empty || txtClave.Text == String.Empty
+                || txtConfirmarClave.Text == String.Empty || txtEmail.Text == String.Empty)
             {
-                if (txtClave.Text == txtConfirmarClave.Text)
-                {
-                    int cantCarac = txtClave.Text.Length;
+                errorString += "No puede haber campos vacíos\n";
+                rta = false;
+            }
 
-                    if (cantCarac >= 8)
-                    {
-                        foreach (char item in txtClave.Text)
-                        {
-                            rta = char.IsWhiteSpace(item);
-                            if (rta)
-                                break;
-                        }
+            if (txtClave.Text != txtConfirmarClave.Text)
+            {
+                errorString += "El campo Clave no coincide con el campo confirmar clave\n";
+                rta = false;
+            }
 
-                        if (!rta)
-                        {
-                            rta = ValidarEmail(txtEmail.Text);
-                            if (!rta)
-                            {
-                                Notificar("Email inválido",
-                                          "Revise su correo",
-                                          MessageBoxButtons.OK,
-                                          MessageBoxIcon.Error);
-                            }
-                        }
-                        else
-                        {
-                            Notificar("Contraseña inválida",
-                                         "La contraseña no puede contener espacios en blanco",
-                                         MessageBoxButtons.OK,
-                                         MessageBoxIcon.Error);
-                        }
-                    }
-                    else
-                    {
-                        Notificar("Contraseña inválida",
-                                         "La contraseña al menos 8 caracteres",
-                                         MessageBoxButtons.OK,
-                                         MessageBoxIcon.Error);
-                    }
-                }
-                else
+            if (txtClave.Text.Length >= 8)
+            {
+                foreach (char item in txtClave.Text)
                 {
-                    Notificar("Contraseña inválida",
-                                         "El campo Clave no coincide con el campo Confirmar Clave",
-                                         MessageBoxButtons.OK,
-                                         MessageBoxIcon.Error);
+                    if (char.IsWhiteSpace(item))
+                    {
+                        errorString += "La contraseña no puede contener espacios en blanco\n";
+                            rta = false;
+                            break;
+                    }
                 }
             }
             else
             {
-                Notificar("Ficha de usuario vacía",
-                          "No puede haber campos vacíos",
-                          MessageBoxButtons.OK,
-                          MessageBoxIcon.Error);
+                errorString += "La contraseña debe tener al menos 8 caracteres\n";
+                rta = false;
+            }
+
+            if (!ValidarEmail(txtEmail.Text))
+            {
+                errorString += "Revise su correo\n";
+                rta = false;
+            }
+
+            if (errorString != string.Empty)
+            {
+                Notificar("Error", errorString, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return rta;
@@ -195,12 +179,20 @@ namespace UI.Desktop
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (Validar())
+            if (Modo.Equals(ModoForm.Baja))
             {
                 if (Confirmar(this.btnAceptar.Text.ToLower(), "usuario").Equals(DialogResult.Yes))
                 {
                     GuardarCambios();
                     this.Close();
+                }
+            }
+            else
+            {
+                if (Validar())
+                {
+                    GuardarCambios();
+                    Close();
                 }
             }
         }

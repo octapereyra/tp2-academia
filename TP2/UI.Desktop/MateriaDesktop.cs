@@ -22,28 +22,6 @@ namespace UI.Desktop
         public frmMateriaDesktop(ModoForm modo) : this()
         {
             this.Modo = modo;
-        }
-
-        public frmMateriaDesktop(int idMateria, ModoForm modo) : this()
-        {
-            this.Modo = modo;
-            MateriaLogic ml = new();
-            MateriaActual = ml.GetOne(idMateria);
-            MapearDeDatos();
-        }
-
-        private Materia _MateriaActual;
-
-        public Materia MateriaActual { get => _MateriaActual; set => _MateriaActual = value; }
-
-        public override void MapearDeDatos()
-        {
-            txtID.Text = MateriaActual.ID.ToString();
-            txtDescripcion.Text = MateriaActual.Descripcion;
-            txtHsSem.Text = MateriaActual.HSSemanales.ToString();
-            txtHsTot.Text = MateriaActual.HSTotales.ToString();
-            cboPlan.SelectedIndex = MateriaActual.IDPlan - 1; //revisar esto
-
             switch (Modo)
             {
                 case ModoForm.Alta:
@@ -62,6 +40,47 @@ namespace UI.Desktop
                     break;
             }
         }
+
+        public frmMateriaDesktop(int idMateria, ModoForm modo) : this()
+        {
+            this.Modo = modo;
+            switch (Modo)
+            {
+                case ModoForm.Alta:
+                    btnAceptar.Text = "Guardar";
+                    break;
+                case ModoForm.Baja:
+                    btnAceptar.Text = "Eliminar";
+                    break;
+                case ModoForm.Modificacion:
+                    btnAceptar.Text = "Guardar";
+                    break;
+                case ModoForm.Consulta:
+                    btnAceptar.Text = "Aceptar";
+                    break;
+                default:
+                    break;
+            }
+            MateriaLogic ml = new();
+            MateriaActual = ml.GetOne(idMateria);
+            MapearDeDatos();
+        }
+
+        private Materia _MateriaActual;
+
+        public Materia MateriaActual { get => _MateriaActual; set => _MateriaActual = value; }
+
+        public override void MapearDeDatos()
+        {
+            txtID.Text = MateriaActual.ID.ToString();
+            txtDescripcion.Text = MateriaActual.Descripcion;
+            txtHsSem.Text = MateriaActual.HSSemanales.ToString();
+            txtHsTot.Text = MateriaActual.HSTotales.ToString();
+            cboPlan.SelectedIndex = MateriaActual.IDPlan - 1;
+            //cboPlan.DataSource = CargarPlanes();
+
+        }
+
         public override void MapearADatos()
         {
             if (Modo == ModoForm.Alta)
@@ -97,6 +116,13 @@ namespace UI.Desktop
                     break;
             }
         }
+
+        private void CargarPlanes()
+        {
+            PlanLogic pl = new();
+            pl.GetAll();
+
+        }
         public override void GuardarCambios()
         {
             MapearADatos();
@@ -105,7 +131,7 @@ namespace UI.Desktop
             {
                 ml.Save(MateriaActual);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 Notificar("Error crítico", "Error al guardar cambios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -113,6 +139,7 @@ namespace UI.Desktop
         public override bool Validar()
         {
             bool result = true;
+            string errorString = string.Empty;
 
             List<TextBox> txtboxs = new();
             txtboxs.Add(txtHsSem);
@@ -121,7 +148,7 @@ namespace UI.Desktop
 
             foreach (TextBox txt in txtboxs)
             {
-                if(txt.Text.Trim() == string.Empty)
+                if (txt.Text.Trim() == string.Empty)
                 {
                     result = false;
                 }
@@ -129,28 +156,37 @@ namespace UI.Desktop
 
             if (!result || cboPlan.SelectedIndex == -1)
             {
-                Notificar("Ficha de materia incompleta","Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorString = "Debe completar todos los campos\n";
                 result = false;
             }
 
-            if (!(int.TryParse(txtHsSem.Text, out _) && int.TryParse(txtHsTot.Text, out _)))
+            if (!(uint.TryParse(txtHsSem.Text, out _) && uint.TryParse(txtHsTot.Text, out _)) || int.Parse(txtHsTot.Text) < int.Parse(txtHsSem.Text))
             {
-                Notificar("Hora inválida","La/s hora/s ingresada/s son inválidas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorString = errorString + "La/s hora/s ingresada/s son inválidas\n";
                 result = false;
             }
 
+            if (errorString != String.Empty) 
+            {
+                Notificar("Error", errorString, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             return result;
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (Validar())
+            if (this.Modo.Equals(ModoForm.Baja))
             {
                 if (Confirmar(this.btnAceptar.Text.ToLower(), "materia").Equals(DialogResult.Yes))
                 {
                     GuardarCambios();
                     this.Close();
                 }
+            }
+            else if (Validar())
+            {                          
+                GuardarCambios();
+                Close();              
             }
         }
 

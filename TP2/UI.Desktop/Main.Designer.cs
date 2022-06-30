@@ -31,72 +31,102 @@ namespace UI.Desktop
         {
             this.mnuPrincipal = new System.Windows.Forms.MenuStrip();
             this.mnuArchivo = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAbrir = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLogout = new System.Windows.Forms.ToolStripMenuItem();
+            this.datosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPersonas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMaterias = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEspecialidades = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPlanes = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuPrincipal
             // 
             this.mnuPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuArchivo});
+            this.mnuArchivo,
+            this.datosToolStripMenuItem});
             this.mnuPrincipal.Location = new System.Drawing.Point(0, 0);
             this.mnuPrincipal.Name = "mnuPrincipal";
-            this.mnuPrincipal.Size = new System.Drawing.Size(800, 24);
+            this.mnuPrincipal.Size = new System.Drawing.Size(1279, 24);
             this.mnuPrincipal.TabIndex = 0;
             this.mnuPrincipal.Text = "menuStrip1";
             // 
             // mnuArchivo
             // 
             this.mnuArchivo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuAbrir});
+            this.mnuLogout});
             this.mnuArchivo.Name = "mnuArchivo";
             this.mnuArchivo.Size = new System.Drawing.Size(60, 20);
             this.mnuArchivo.Text = "Archivo";
             // 
-            // mnuAbrir
+            // mnuLogout
             // 
-            this.mnuAbrir.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuLogout.Name = "mnuLogout";
+            this.mnuLogout.Size = new System.Drawing.Size(180, 22);
+            this.mnuLogout.Text = "Cerrar sesión";
+            this.mnuLogout.Click += new System.EventHandler(this.mnuLogout_Click);
+            // 
+            // datosToolStripMenuItem
+            // 
+            this.datosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuUsuarios,
             this.mnuPersonas,
             this.mnuMaterias,
-            this.mnuUsuarios});
-            this.mnuAbrir.Name = "mnuAbrir";
-            this.mnuAbrir.Size = new System.Drawing.Size(100, 22);
-            this.mnuAbrir.Text = "Abrir";
+            this.mnuEspecialidades,
+            this.mnuPlanes});
+            this.datosToolStripMenuItem.Name = "datosToolStripMenuItem";
+            this.datosToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.datosToolStripMenuItem.Text = "Datos";
+            // 
+            // mnuUsuarios
+            // 
+            this.mnuUsuarios.Name = "mnuUsuarios";
+            this.mnuUsuarios.Size = new System.Drawing.Size(180, 22);
+            this.mnuUsuarios.Text = "Usuarios";
+            this.mnuUsuarios.Click += new System.EventHandler(this.mnuUsuarios_Click);
             // 
             // mnuPersonas
             // 
             this.mnuPersonas.Name = "mnuPersonas";
-            this.mnuPersonas.Size = new System.Drawing.Size(121, 22);
+            this.mnuPersonas.Size = new System.Drawing.Size(180, 22);
             this.mnuPersonas.Text = "Personas";
             this.mnuPersonas.Click += new System.EventHandler(this.mnuPersonas_Click);
             // 
             // mnuMaterias
             // 
             this.mnuMaterias.Name = "mnuMaterias";
-            this.mnuMaterias.Size = new System.Drawing.Size(121, 22);
+            this.mnuMaterias.Size = new System.Drawing.Size(180, 22);
             this.mnuMaterias.Text = "Materias";
             this.mnuMaterias.Click += new System.EventHandler(this.mnuMaterias_Click);
             // 
-            // mnuUsuarios
+            // mnuEspecialidades
             // 
-            this.mnuUsuarios.Name = "mnuUsuarios";
-            this.mnuUsuarios.Size = new System.Drawing.Size(121, 22);
-            this.mnuUsuarios.Text = "Usuarios";
-            this.mnuUsuarios.Click += new System.EventHandler(this.mnuUsuarios_Click);
+            this.mnuEspecialidades.Name = "mnuEspecialidades";
+            this.mnuEspecialidades.Size = new System.Drawing.Size(180, 22);
+            this.mnuEspecialidades.Text = "Especialidades";
+            this.mnuEspecialidades.Click += new System.EventHandler(this.mnuEspecialidades_Click);
+            // 
+            // mnuPlanes
+            // 
+            this.mnuPlanes.Name = "mnuPlanes";
+            this.mnuPlanes.Size = new System.Drawing.Size(180, 22);
+            this.mnuPlanes.Text = "Planes";
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1279, 558);
             this.Controls.Add(this.mnuPrincipal);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnuPrincipal;
+            this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Text = "Academia";
+            this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.mnuPrincipal.ResumeLayout(false);
             this.mnuPrincipal.PerformLayout();
             this.ResumeLayout(false);
@@ -104,13 +134,21 @@ namespace UI.Desktop
 
         }
 
+        private void MnuMaterias_Click(object sender, System.EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
 
         private System.Windows.Forms.MenuStrip mnuPrincipal;
         private System.Windows.Forms.ToolStripMenuItem mnuArchivo;
-        private System.Windows.Forms.ToolStripMenuItem mnuAbrir;
+        private System.Windows.Forms.ToolStripMenuItem mnuLogout;
+        private System.Windows.Forms.ToolStripMenuItem datosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuUsuarios;
         private System.Windows.Forms.ToolStripMenuItem mnuPersonas;
         private System.Windows.Forms.ToolStripMenuItem mnuMaterias;
-        private System.Windows.Forms.ToolStripMenuItem mnuUsuarios;
+        private System.Windows.Forms.ToolStripMenuItem mnuEspecialidades;
+        private System.Windows.Forms.ToolStripMenuItem mnuPlanes;
     }
 }

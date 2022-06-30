@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Business.Entities;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
+using System.Data;
 
 namespace Data.Database
 {

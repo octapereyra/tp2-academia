@@ -36,7 +36,7 @@ namespace Data.Database
             }
             catch (Exception ex)
             {
-                Exception handledException = new Exception("Error al recuperar lista de usuarios", ex);
+                Exception handledException = new Exception("Error al recuperar lista de materias", ex);
                 throw handledException;
             }
             finally

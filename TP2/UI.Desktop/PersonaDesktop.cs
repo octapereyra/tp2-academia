@@ -173,24 +173,32 @@ namespace UI.Desktop
         public override bool Validar()
         {
             bool rta = true;
+            string errorString = string.Empty;
 
             if (ValidarCamposVacios())
             {
-                Notificar("Ficha de persona vacía", "No puede haber campos vacíos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorString = "No puede haber campos vacíos\n";
                 rta = false;
             }
-            if (rta)
+            if (!ValidarEmail(txtMail.Text))
             {
-                if (!ValidarEmail(txtMail.Text))
-                {
-                    Notificar("Email incorrecto", "El email ingresado no tiene el formato correcto", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    rta = false;
-                }
-                if (!int.TryParse(txtLegajo.Text, out int _))
-                {
-                    Notificar("Legajo incorrecto", "El legajo debe ser un número", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    rta = false;
-                }
+                errorString += "El email ingresado no tiene el formato correcto\n";
+                rta = false;
+            }
+            if (!int.TryParse(txtLegajo.Text, out int _))
+            {
+                errorString += "El legajo debe ser un número\n";
+                rta = false;
+            }
+            if (!uint.TryParse(txtTelefono.Text, out uint _))
+            {
+                errorString += "El teléfono debe ser un número\n";
+                rta = false;
+            }           
+
+            if (errorString != string.Empty)
+            {
+                Notificar("Error", errorString, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
             return rta;
@@ -198,12 +206,20 @@ namespace UI.Desktop
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (Validar())
+            if (Modo.Equals(ModoForm.Baja))
             {
                 if (Confirmar(this.btnAceptar.Text.ToLower(), "persona").Equals(DialogResult.Yes))
                 {
                     GuardarCambios();
                     this.Close();
+                }
+            }
+            else
+            {
+                if (Validar())
+                {
+                    GuardarCambios();
+                    Close();
                 }
             }
         }
