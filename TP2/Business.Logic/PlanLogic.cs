@@ -22,12 +22,19 @@ namespace Business.Logic
             return PlanData.GetAll();
         }
 
-        public Plan GetOne()
+        public void Save(Plan planActual)
         {
-            throw new NotImplementedException();
+            PlanData.Save(planActual);
         }
 
+        public Plan GetOne(int idPlan)
+        {
+            return PlanData.GetOne(idPlan);
+        }
 
-
+        public object GetPlanesByEspecialidad(int idEspecialidad)
+        {
+            return PlanData.GetPlanesByEspecialidad(idEspecialidad);
+        }
     }
 }

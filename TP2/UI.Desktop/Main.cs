@@ -54,6 +54,15 @@ namespace UI.Desktop
             esp.Show();
         }
 
+        private void mnuPlanes_Click(object sender, EventArgs e)
+        {
+            CloseForms();
+            frmPlanes plan = new();
+            plan.MdiParent = this;
+            plan.WindowState = FormWindowState.Maximized;
+            plan.Show();
+        }
+
         private void CloseForms()
         {
             Form[] forms = this.MdiChildren;
@@ -76,5 +85,7 @@ namespace UI.Desktop
         {
             this.Dispose();
         }
+
+
     }
 }

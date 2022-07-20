@@ -22,6 +22,7 @@ namespace UI.Desktop
         public void Listar()
         {
             UsuarioLogic ul = new();
+            dgvUsuarios.AutoGenerateColumns = false;
             dgvUsuarios.DataSource = ul.GetAll();
         }
 

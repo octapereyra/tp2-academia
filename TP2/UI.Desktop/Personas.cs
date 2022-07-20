@@ -22,6 +22,7 @@ namespace UI.Desktop
         public void Listar()
         {
             PersonaLogic pl = new();
+            dgvPersonas.AutoGenerateColumns = false;
             dgvPersonas.DataSource = pl.GetAll();
         }
 

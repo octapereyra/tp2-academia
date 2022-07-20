@@ -63,7 +63,7 @@ namespace UI.Desktop
             // mnuLogout
             // 
             this.mnuLogout.Name = "mnuLogout";
-            this.mnuLogout.Size = new System.Drawing.Size(180, 22);
+            this.mnuLogout.Size = new System.Drawing.Size(142, 22);
             this.mnuLogout.Text = "Cerrar sesión";
             this.mnuLogout.Click += new System.EventHandler(this.mnuLogout_Click);
             // 
@@ -112,6 +112,7 @@ namespace UI.Desktop
             this.mnuPlanes.Name = "mnuPlanes";
             this.mnuPlanes.Size = new System.Drawing.Size(180, 22);
             this.mnuPlanes.Text = "Planes";
+            this.mnuPlanes.Click += new System.EventHandler(this.mnuPlanes_Click);
             // 
             // frmMain
             // 

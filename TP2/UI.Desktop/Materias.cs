@@ -22,6 +22,7 @@ namespace UI.Desktop
         public void Listar()
         {
             MateriaLogic ml = new();
+            dgvMaterias.AutoGenerateColumns = false;
             dgvMaterias.DataSource = ml.GetAll();
         }
 

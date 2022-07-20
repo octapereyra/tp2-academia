@@ -17,53 +17,51 @@ namespace UI.Desktop
         public frmMateriaDesktop()
         {
             InitializeComponent();
+            CargarEspecialidades();
+            switch (Modo)
+            {
+                case ModoForm.Alta:
+                    btnAceptar.Text = "Guardar";
+                    break;
+                case ModoForm.Baja:
+                    btnAceptar.Text = "Eliminar";
+                    break;
+                case ModoForm.Modificacion:
+                    btnAceptar.Text = "Guardar";
+                    break;
+                case ModoForm.Consulta:
+                    btnAceptar.Text = "Aceptar";
+                    break;
+                default:
+                    break;
+            }
         }
 
         public frmMateriaDesktop(ModoForm modo) : this()
         {
             this.Modo = modo;
-            switch (Modo)
-            {
-                case ModoForm.Alta:
-                    btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Baja:
-                    btnAceptar.Text = "Eliminar";
-                    break;
-                case ModoForm.Modificacion:
-                    btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Consulta:
-                    btnAceptar.Text = "Aceptar";
-                    break;
-                default:
-                    break;
-            }
         }
 
         public frmMateriaDesktop(int idMateria, ModoForm modo) : this()
         {
             this.Modo = modo;
-            switch (Modo)
-            {
-                case ModoForm.Alta:
-                    btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Baja:
-                    btnAceptar.Text = "Eliminar";
-                    break;
-                case ModoForm.Modificacion:
-                    btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Consulta:
-                    btnAceptar.Text = "Aceptar";
-                    break;
-                default:
-                    break;
-            }
             MateriaLogic ml = new();
             MateriaActual = ml.GetOne(idMateria);
             MapearDeDatos();
+        }
+
+        private void CargarEspecialidades()
+        {
+            EspecialidadLogic el = new();
+            cboEspecialidad.DataSource = el.GetAll();
+            cboEspecialidad.DisplayMember = "descripcion";
+        }
+        private void CargarPlanes(int idEspecialidad)
+        {
+            cboPlan.Enabled = true;
+            PlanLogic pl = new();
+            cboPlan.DataSource = pl.GetPlanesByEspecialidad(idEspecialidad);
+            cboPlan.DisplayMember = "descripcion";
         }
 
         private Materia _MateriaActual;
@@ -76,9 +74,7 @@ namespace UI.Desktop
             txtDescripcion.Text = MateriaActual.Descripcion;
             txtHsSem.Text = MateriaActual.HSSemanales.ToString();
             txtHsTot.Text = MateriaActual.HSTotales.ToString();
-            cboPlan.SelectedIndex = MateriaActual.IDPlan - 1;
-            //cboPlan.DataSource = CargarPlanes();
-
+            cboPlan.SelectedValue = MateriaActual.IDPlan;          
         }
 
         public override void MapearADatos()
@@ -96,7 +92,7 @@ namespace UI.Desktop
             MateriaActual.Descripcion = txtDescripcion.Text;
             MateriaActual.HSSemanales = int.Parse(txtHsSem.Text);
             MateriaActual.HSTotales = int.Parse(txtHsTot.Text);
-            MateriaActual.IDPlan = cboPlan.SelectedIndex + 1;
+            MateriaActual.IDPlan = (int)cboPlan.SelectedValue;
 
             switch (Modo)
             {
@@ -115,13 +111,6 @@ namespace UI.Desktop
                 default:
                     break;
             }
-        }
-
-        private void CargarPlanes()
-        {
-            PlanLogic pl = new();
-            pl.GetAll();
-
         }
         public override void GuardarCambios()
         {
@@ -172,7 +161,6 @@ namespace UI.Desktop
             }
             return result;
         }
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (this.Modo.Equals(ModoForm.Baja))
@@ -189,10 +177,14 @@ namespace UI.Desktop
                 Close();              
             }
         }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void cboEspecialidad_SelectedValueChanged(object sender, EventArgs e)
+        {
+            cboPlan.Text = "";
+            CargarPlanes(((Especialidad)cboEspecialidad.SelectedValue).ID);         
         }
     }
 }
