@@ -32,12 +32,20 @@ namespace UI.Desktop
             this.mnuPrincipal = new System.Windows.Forms.MenuStrip();
             this.mnuArchivo = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLogout = new System.Windows.Forms.ToolStripMenuItem();
-            this.datosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDatos = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPersonas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMaterias = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEspecialidades = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPlanes = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCursos = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuComisiones = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRegistros = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuReportes = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuReporteCursos = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuReportePlanes = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuInscripcionCurso = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRegistroNotas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +53,9 @@ namespace UI.Desktop
             // 
             this.mnuPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuArchivo,
-            this.datosToolStripMenuItem});
+            this.mnuDatos,
+            this.mnuRegistros,
+            this.mnuReportes});
             this.mnuPrincipal.Location = new System.Drawing.Point(0, 0);
             this.mnuPrincipal.Name = "mnuPrincipal";
             this.mnuPrincipal.Size = new System.Drawing.Size(1279, 24);
@@ -63,21 +73,23 @@ namespace UI.Desktop
             // mnuLogout
             // 
             this.mnuLogout.Name = "mnuLogout";
-            this.mnuLogout.Size = new System.Drawing.Size(142, 22);
+            this.mnuLogout.Size = new System.Drawing.Size(180, 22);
             this.mnuLogout.Text = "Cerrar sesión";
             this.mnuLogout.Click += new System.EventHandler(this.mnuLogout_Click);
             // 
-            // datosToolStripMenuItem
+            // mnuDatos
             // 
-            this.datosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuDatos.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuUsuarios,
             this.mnuPersonas,
             this.mnuMaterias,
             this.mnuEspecialidades,
-            this.mnuPlanes});
-            this.datosToolStripMenuItem.Name = "datosToolStripMenuItem";
-            this.datosToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-            this.datosToolStripMenuItem.Text = "Datos";
+            this.mnuPlanes,
+            this.mnuCursos,
+            this.mnuComisiones});
+            this.mnuDatos.Name = "mnuDatos";
+            this.mnuDatos.Size = new System.Drawing.Size(49, 20);
+            this.mnuDatos.Text = "Datos";
             // 
             // mnuUsuarios
             // 
@@ -114,6 +126,62 @@ namespace UI.Desktop
             this.mnuPlanes.Text = "Planes";
             this.mnuPlanes.Click += new System.EventHandler(this.mnuPlanes_Click);
             // 
+            // mnuCursos
+            // 
+            this.mnuCursos.Name = "mnuCursos";
+            this.mnuCursos.Size = new System.Drawing.Size(180, 22);
+            this.mnuCursos.Text = "Cursos";
+            this.mnuCursos.Click += new System.EventHandler(this.mnuCursos_Click);
+            // 
+            // mnuComisiones
+            // 
+            this.mnuComisiones.Name = "mnuComisiones";
+            this.mnuComisiones.Size = new System.Drawing.Size(180, 22);
+            this.mnuComisiones.Text = "Comisiones";
+            this.mnuComisiones.Click += new System.EventHandler(this.mnuComisiones_Click);
+            // 
+            // mnuRegistros
+            // 
+            this.mnuRegistros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuInscripcionCurso,
+            this.mnuRegistroNotas});
+            this.mnuRegistros.Name = "mnuRegistros";
+            this.mnuRegistros.Size = new System.Drawing.Size(148, 20);
+            this.mnuRegistros.Text = "Registros e inscripciones";
+            // 
+            // mnuReportes
+            // 
+            this.mnuReportes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuReporteCursos,
+            this.mnuReportePlanes});
+            this.mnuReportes.Name = "mnuReportes";
+            this.mnuReportes.Size = new System.Drawing.Size(65, 20);
+            this.mnuReportes.Text = "Reportes";
+            // 
+            // mnuReporteCursos
+            // 
+            this.mnuReporteCursos.Name = "mnuReporteCursos";
+            this.mnuReporteCursos.Size = new System.Drawing.Size(180, 22);
+            this.mnuReporteCursos.Text = "Cursos";
+            // 
+            // mnuReportePlanes
+            // 
+            this.mnuReportePlanes.Name = "mnuReportePlanes";
+            this.mnuReportePlanes.Size = new System.Drawing.Size(180, 22);
+            this.mnuReportePlanes.Text = "Planes";
+            // 
+            // mnuInscripcionCurso
+            // 
+            this.mnuInscripcionCurso.Name = "mnuInscripcionCurso";
+            this.mnuInscripcionCurso.Size = new System.Drawing.Size(180, 22);
+            this.mnuInscripcionCurso.Text = "Inscripción a curso";
+            // 
+            // mnuRegistroNotas
+            // 
+            this.mnuRegistroNotas.Name = "mnuRegistroNotas";
+            this.mnuRegistroNotas.Size = new System.Drawing.Size(180, 22);
+            this.mnuRegistroNotas.Text = "Registro de notas";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -145,11 +213,19 @@ namespace UI.Desktop
         private System.Windows.Forms.MenuStrip mnuPrincipal;
         private System.Windows.Forms.ToolStripMenuItem mnuArchivo;
         private System.Windows.Forms.ToolStripMenuItem mnuLogout;
-        private System.Windows.Forms.ToolStripMenuItem datosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuDatos;
         private System.Windows.Forms.ToolStripMenuItem mnuUsuarios;
         private System.Windows.Forms.ToolStripMenuItem mnuPersonas;
         private System.Windows.Forms.ToolStripMenuItem mnuMaterias;
         private System.Windows.Forms.ToolStripMenuItem mnuEspecialidades;
         private System.Windows.Forms.ToolStripMenuItem mnuPlanes;
+        private System.Windows.Forms.ToolStripMenuItem mnuCursos;
+        private System.Windows.Forms.ToolStripMenuItem mnuComisiones;
+        private System.Windows.Forms.ToolStripMenuItem mnuRegistros;
+        private System.Windows.Forms.ToolStripMenuItem mnuInscripcionCurso;
+        private System.Windows.Forms.ToolStripMenuItem mnuRegistroNotas;
+        private System.Windows.Forms.ToolStripMenuItem mnuReportes;
+        private System.Windows.Forms.ToolStripMenuItem mnuReporteCursos;
+        private System.Windows.Forms.ToolStripMenuItem mnuReportePlanes;
     }
 }

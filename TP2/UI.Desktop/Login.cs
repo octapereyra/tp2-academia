@@ -23,11 +23,8 @@ namespace UI.Desktop
         {
             get => _UsuarioActual; set => _UsuarioActual = value;
         }
-
-
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 LoginLogic ll = new();
@@ -63,9 +60,5 @@ namespace UI.Desktop
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

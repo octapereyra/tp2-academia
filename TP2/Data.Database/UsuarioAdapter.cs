@@ -8,37 +8,19 @@ using System.Data;
 
 namespace Data.Database
 {
-     public class UsuarioAdapter:Adapter
+     public class UsuarioAdapter : Adapter
     {
-      
-
         public List<Usuario> GetAll()
         {
-            //instanciamos el objeto lista a retornar
             List<Usuario> usuarios = new List<Usuario>();
             try
             {
-                //abrimos la conexion a la base de datos con el metodo que creamos antes
                 this.OpenConnection();
-
-                //creamos un obj sqlcommand que sera la sentencia SQL 
-                // que vamos a ejecutar contra la base de datos 
-                //los daos de la BD usuario,contraseña,servidor,etc.
-                //estan en el connection string 
                 SqlCommand cmdUsuarios = new SqlCommand("select * from usuarios", SqlConn);
-                //instanciamos un objeto dataReader que sera
-                // el q recuperara los datos de la BD
                 SqlDataReader drUsuarios = cmdUsuarios.ExecuteReader();
-                //read() lee una fila de las devueltas por el comando sql
-                //carga los datos en drUsuarios para poder accederlos, 
-                //devuelve verdadero mientras haya podido leer datos
-                // y avanza a la fila siguiente para el proximo read
                 while (drUsuarios.Read())
                 {
-                    //creamos un objeto Usuario de la capa de entidades para copiar
-                    //los datos de la fila del dataReader al objeto de entidades
                     Usuario usr = new Usuario();
-                    //ahora copiamos los datos de la fila al objeto
                     usr.ID = (int)drUsuarios["id_usuario"];
                     usr.NombreUsuario = (string)drUsuarios["nombre_usuario"];
                     usr.Clave = (string)drUsuarios["clave"];
@@ -46,14 +28,10 @@ namespace Data.Database
                     usr.Nombre = (string)drUsuarios["nombre"];
                     usr.Apellido = (string)drUsuarios["apellido"];
                     usr.EMail = (string)drUsuarios["email"];
-
-                    //agregamos el objeto con datos a la lista que devolveremos
+                    usr.IdPersona = (int)drUsuarios["id_persona"];
                     usuarios.Add(usr);
                 }
-
-                //cerramos el datareader y la conexion a la BD
                 drUsuarios.Close();
-
             }
             catch (Exception Ex)
             {
@@ -66,15 +44,10 @@ namespace Data.Database
             {
                 this.CloseConnection();
             }
-
-
             return usuarios;
-        }
-
-      
+        }     
         public Business.Entities.Usuario GetOne(int ID)
         {
-            //return Usuarios.Find(delegate(Usuario u) { return u.ID == ID; });
             Usuario usr = new Usuario();
             try
             {
@@ -91,7 +64,7 @@ namespace Data.Database
                     usr.Nombre = (string)drUsuarios["nombre"];
                     usr.Apellido = (string)drUsuarios["apellido"];
                     usr.EMail = (string)drUsuarios["email"];
-
+                    usr.IdPersona = (int)drUsuarios["id_persona"];
                 }
 
                 drUsuarios.Close();
@@ -106,11 +79,9 @@ namespace Data.Database
                 this.CloseConnection();
             }
             return usr;
-        }
-      
+        }     
         public void Delete(int ID)
         {
-            //Usuarios.Remove(this.GetOne(ID));
             try
             {
                 this.OpenConnection();
@@ -128,31 +99,8 @@ namespace Data.Database
                 this.CloseConnection();
             }
         }
-
         public void Save(Usuario usuario)
         {
-            //if (usuario.State == BusinessEntity.States.New)
-            //{
-            //    int NextID = 0;
-            //    foreach (Usuario usr in Usuarios)
-            //    {
-            //        if (usr.ID > NextID)
-            //        {
-            //            NextID = usr.ID;
-            //        }
-            //    }
-            //    usuario.ID = NextID + 1;
-            //    Usuarios.Add(usuario);
-            //}
-            //else if (usuario.State == BusinessEntity.States.Deleted)
-            //{
-            //    this.Delete(usuario.ID);
-            //}
-            //else if (usuario.State == BusinessEntity.States.Modified)
-            //{
-            //    Usuarios[Usuarios.FindIndex(delegate(Usuario u) { return u.ID == usuario.ID; })]=usuario;
-            //}
-            //usuario.State = BusinessEntity.States.Unmodified;
             if (usuario.State == BusinessEntity.States.Deleted)
             {
                 this.Delete(usuario.ID);
@@ -167,7 +115,6 @@ namespace Data.Database
             }
             usuario.State = BusinessEntity.States.Unmodified;
         }
-
         protected void Update(Usuario usuario)
         {
             try
@@ -210,8 +157,6 @@ namespace Data.Database
                 cmdInsert.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = usuario.Apellido;
                 cmdInsert.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = usuario.EMail;
                 usuario.ID = Decimal.ToInt32((decimal)cmdInsert.ExecuteScalar());
-                // así se obtiene el ID que asigno la BD automaticamente
-                // cmdInsert.ExecuteNonQuery(); (tendriá q estar?)
             }
             catch (Exception Ex)
             {

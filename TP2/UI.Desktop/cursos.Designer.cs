@@ -169,7 +169,7 @@ namespace UI.Desktop
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tcCursos);
             this.Name = "frmCursos";
-            this.Text = "cursos";
+            this.Text = "Cursos";
             this.Load += new System.EventHandler(this.frmCursos_Load);
             this.tcCursos.ContentPanel.ResumeLayout(false);
             this.tcCursos.TopToolStripPanel.ResumeLayout(false);

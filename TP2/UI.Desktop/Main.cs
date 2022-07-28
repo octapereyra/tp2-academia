@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Business.Entities;
+using Business.Logic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +18,27 @@ namespace UI.Desktop
         {
             InitializeComponent();
             this.IsMdiContainer = true;
+        }
+        //permisos
+        private void OcultarElementos(Persona personaActual)
+        {
+            switch (personaActual.TipoPersona)
+            {
+                case Persona.TiposPersonas.Estudiante:
+                    mnuDatos.Enabled = false;
+                    mnuRegistroNotas.Enabled = false;
+                    mnuReportes.Enabled = false;
+                    break;
+                case Persona.TiposPersonas.Docente:
+                    mnuDatos.Enabled = false;
+                    mnuInscripcionCurso.Enabled = false;                   
+                    break;
+                case Persona.TiposPersonas.Administrativo:
+                    mnuRegistroNotas.Enabled = false;
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void mnuPersonas_Click(object sender, EventArgs e)
@@ -62,7 +85,23 @@ namespace UI.Desktop
             plan.WindowState = FormWindowState.Maximized;
             plan.Show();
         }
+        private void mnuCursos_Click(object sender, EventArgs e)
+        {
+            CloseForms();
+            frmCursos cursos = new();
+            cursos.MdiParent = this;
+            cursos.WindowState = FormWindowState.Maximized;
+            cursos.Show();
+        }
 
+        private void mnuComisiones_Click(object sender, EventArgs e)
+        {
+            CloseForms();
+            frmComisiones comisiones = new();
+            comisiones.MdiParent = this;
+            comisiones.WindowState = FormWindowState.Maximized;
+            comisiones.Show();
+        }
         private void CloseForms()
         {
             Form[] forms = this.MdiChildren;
@@ -79,6 +118,11 @@ namespace UI.Desktop
             {
                 this.Dispose();
             }
+            else
+            {
+                PersonaLogic pl = new();              
+                OcultarElementos(pl.GetOne(login.UsuarioActual.IdPersona));
+            }
         }
 
         private void mnuLogout_Click(object sender, EventArgs e)
@@ -86,6 +130,6 @@ namespace UI.Desktop
             this.Dispose();
         }
 
-
+       
     }
 }
