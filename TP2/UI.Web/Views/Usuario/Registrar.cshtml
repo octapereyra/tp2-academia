@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "Registrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Usuarios</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Usuarios</li>
+    <li class="breadcrumb-item active">Registrar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> Nuevo Usuario
+    </div>
+    <div class="card-body">
+        <form action="@Url.Action("Registrar","Usuario")" method="post">
+            <div class="form-group">
+                <label>Nombre de usuario</label>
+                <input type="text" class="form-control" name="NombreUsuario" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Clave</label>
+                <input type="password" class="form-control" name="Clave" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" name="Nombre" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" class="form-control" name="Apellido" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" name="EMail" autocomplete="off" required />
+            </div>
+            <div class="form-check">
+                <label>Habilitado</label>
+                <input type="checkbox" class="form-check-input" name="Habilitado" />
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <a class="btn btn-warning" href="@Url.Action("Usuarios","Home")">Volver</a>
+
+        </form>
+
+    </div>
+</div>
+

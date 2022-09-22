@@ -6,12 +6,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using UI.Web.Models;
+using Business.Entities;
+using Business.Logic;
+using UI.Web.Permisos;
 
 namespace UI.Web.Controllers
 {
+    [ValidarSession]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> _logger;        
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -23,9 +27,21 @@ namespace UI.Web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Materias()
         {
             return View();
+        }
+
+        public IActionResult Usuarios()
+        {
+            List<Usuario> users = new UsuarioLogic().GetAll();          
+            return View(users);
+        }
+
+        public IActionResult CerrarSesion()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Login");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -34,10 +50,5 @@ namespace UI.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public ActionResult PaginaTest()
-        {
-
-            return View();
-        }
     }
 }

@@ -19,7 +19,8 @@ namespace Data.Database
 
         protected void OpenConnection()
         {
-            string conn = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString;
+            //string conn = ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString;
+            string conn = "Server=localhost\\SQLEXPRESS;Database=Academia;Trusted_Connection=True;";
             SqlConn = new SqlConnection(conn);
             SqlConn.Open();
         }

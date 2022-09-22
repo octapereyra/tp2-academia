@@ -26,9 +26,9 @@ namespace Business.Logic
         {
            return UsuarioData.GetAll();
         }
-        public void Save(Usuario user)
+        public int Save(Usuario user)
         {
-            UsuarioData.Save(user);
+            return UsuarioData.Save(user);
         }
         public void Delete(int id)
         {

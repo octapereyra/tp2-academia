@@ -28,7 +28,7 @@ namespace Data.Database
                     usr.Nombre = (string)drUsuarios["nombre"];
                     usr.Apellido = (string)drUsuarios["apellido"];
                     usr.EMail = (string)drUsuarios["email"];
-                    usr.IdPersona = (int)drUsuarios["id_persona"];
+                    //usr.IdPersona = (int)drUsuarios["id_persona"];
                     usuarios.Add(usr);
                 }
                 drUsuarios.Close();
@@ -99,21 +99,24 @@ namespace Data.Database
                 this.CloseConnection();
             }
         }
-        public void Save(Usuario usuario)
+        public int Save(Usuario usuario)
         {
+            int id = 0;
+
             if (usuario.State == BusinessEntity.States.Deleted)
             {
                 this.Delete(usuario.ID);
             }
             else if (usuario.State == BusinessEntity.States.New)
             {
-                this.Insert(usuario);
+                id = this.Insert(usuario);
             }
             else if (usuario.State == BusinessEntity.States.Modified)
             {
                 this.Update(usuario);
             }
             usuario.State = BusinessEntity.States.Unmodified;
+            return id;
         }
         protected void Update(Usuario usuario)
         {
@@ -141,7 +144,7 @@ namespace Data.Database
                 this.CloseConnection();
             }
         }
-        protected void Insert(Usuario usuario)
+        protected int Insert(Usuario usuario)
         {
             try
             {
@@ -157,6 +160,8 @@ namespace Data.Database
                 cmdInsert.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = usuario.Apellido;
                 cmdInsert.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = usuario.EMail;
                 usuario.ID = Decimal.ToInt32((decimal)cmdInsert.ExecuteScalar());
+
+                return usuario.ID;
             }
             catch (Exception Ex)
             {
