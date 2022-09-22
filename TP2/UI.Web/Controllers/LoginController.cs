@@ -23,30 +23,20 @@ namespace UI.Web.Controllers
 
             if (userLogged == null)
             {
-                ViewData["msj"] = "Usuario no encontrado";
+                ViewData["msj"] = "Usuario y/o clave incorrectos";
+                return View();
+            }
+            if (!userLogged.Habilitado)
+            {
+                ViewData["msj"] = "Usuario no habilitado";
                 return View();
             }
             else
             {
                 HttpContext.Session.SetString("userId", userLogged.ID.ToString());
                 return RedirectToAction("Index", "Home");
-
             }
 
         }
-
-        //public IActionResult Register()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public IActionResult Register(Usuario user)
-        //{
-        //    bool registrado;
-        //    string msj;
-
-        //    return View();
-        //}
     }
 }

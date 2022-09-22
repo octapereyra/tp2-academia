@@ -39,13 +39,24 @@
             </div>
             <div class="form-check">
                 <label>Habilitado</label>
-                <input type="checkbox" class="form-check-input" name="Habilitado" />
+                <input type="checkbox" id="chkHabilitado" class="form-check-input" name="Habilitado" />
             </div>
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="submit" onclick="registrar()" class="btn btn-primary">Registrar</button>
             <a class="btn btn-warning" href="@Url.Action("Usuarios","Home")">Volver</a>
 
         </form>
-
     </div>
 </div>
 
+@section scripts { 
+<script>
+    function registrar() {
+        if ($('#chkHabilitado').is(':checked')) {
+            $('#chkHabilitado').prop('value', true);
+        } else {
+            $('#chkHabilitado').prop('value', false);
+        }
+    }
+
+</script>
+    }

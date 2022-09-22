@@ -1,0 +1,70 @@
+﻿@model Business.Entities.Usuario
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Usuarios</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Usuarios</li>
+    <li class="breadcrumb-item active">Editar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> Editar Usuario
+    </div>
+    <div class="card-body">
+        <form action="@Url.Action("Editar","Usuario")" method="post">
+            <input type="hidden" class="form-control" name="ID" value="@Html.DisplayFor(m => m.ID)" />
+            <div class="form-group">
+                <label>Nombre de usuario</label>
+                <input type="text" class="form-control" name="NombreUsuario" value="@Html.DisplayTextFor(m => m.NombreUsuario)" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Clave</label>
+                <input type="password" class="form-control" name="Clave" value="@Html.DisplayTextFor(m => m.Clave)" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" name="Nombre" value="@Html.DisplayTextFor(m => m.Nombre)" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" class="form-control" name="Apellido" value="@Html.DisplayTextFor(m => m.Apellido)" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" name="EMail" value="@Html.DisplayTextFor(m => m.EMail)" autocomplete="off" required />
+            </div>
+            <div class="form-check">
+                <label>Habilitado</label>
+                <input type="checkbox" class="form-check-input" id="chkHabilitado" name="Habilitado" />
+            </div>
+            <button type="submit" onclick="editar()" class="btn btn-primary">Editar</button>
+            <a class="btn btn-warning" href="@Url.Action("Usuarios","Home")">Volver</a>
+        </form>
+    </div>
+</div>
+
+@section scripts{ 
+<script>
+    
+    if ('@Html.DisplayTextFor(m => m.Habilitado)' == 'True') {
+        $('#chkHabilitado').prop("checked", true);
+    } else {
+        $('#chkHabilitado').prop("checked", false);
+    }
+
+    function editar() {
+        if ($('#chkHabilitado').is(':checked')) {
+            $('#chkHabilitado').prop('value', true);
+        } else {
+            $('#chkHabilitado').prop('value', false);
+        }
+    }
+</script>
+}
+

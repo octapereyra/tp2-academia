@@ -23,5 +23,46 @@ namespace UI.Web.Controllers
 
             return RedirectToAction("Usuarios","Home");
         }
+
+        [HttpGet]
+        public ActionResult Editar(int? id)
+        {
+            if (id == null)
+            return RedirectToAction("Usuarios", "Home");           
+
+            List<Usuario> users = new UsuarioLogic().GetAll();
+            Usuario user = users.Where(u => u.ID == id).FirstOrDefault();
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Editar(Usuario user)
+        {
+            user.State = BusinessEntity.States.Modified;
+            new UsuarioLogic().Save(user);
+
+            return RedirectToAction("Usuarios","Home");
+        }
+
+        [HttpGet]
+        public ActionResult Eliminar(int? id)
+        {
+            if (id == null)
+                return RedirectToAction("Usuarios", "Home");
+
+            List<Usuario> users = new UsuarioLogic().GetAll();
+            Usuario user = users.Where(u => u.ID == id).FirstOrDefault();
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Eliminar(string id)
+        {
+            new UsuarioLogic().Delete(int.Parse(id));
+
+            return RedirectToAction("Usuarios","Home");
+        }
     }
 }
