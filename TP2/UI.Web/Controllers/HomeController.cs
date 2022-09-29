@@ -39,6 +39,10 @@ namespace UI.Web.Controllers
             return View(users);
         }
 
+        public IActionResult InscribirMateria()
+        {
+            return View();
+        }
         public IActionResult CerrarSesion()
         {
             HttpContext.Session.Clear();

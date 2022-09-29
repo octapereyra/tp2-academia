@@ -12,7 +12,7 @@ namespace UI.Web.Permisos
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            if (context.HttpContext.Session.GetString("userId") == null)
+            if (context.HttpContext.Session.GetInt32("userId") == null)
             {
                 context.Result = new RedirectResult("~/Login/Login");
             }

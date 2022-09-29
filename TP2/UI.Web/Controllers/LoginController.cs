@@ -33,7 +33,8 @@ namespace UI.Web.Controllers
             }
             else
             {
-                HttpContext.Session.SetString("userId", userLogged.ID.ToString());
+                HttpContext.Session.SetInt32("userId", userLogged.ID);
+                HttpContext.Session.SetString("username", userLogged.NombreUsuario);
                 return RedirectToAction("Index", "Home");
             }
 
