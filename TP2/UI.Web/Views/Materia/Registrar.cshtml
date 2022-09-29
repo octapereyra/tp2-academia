@@ -1,0 +1,48 @@
+﻿@model List<Business.Entities.Plan>
+@{
+    ViewData["Title"] = "Registrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Materias</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Materias</li>
+    <li class="breadcrumb-item active">Registrar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Nueva Materia
+    </div>
+    <div class="card-body">
+        <form action="@Url.Action("Registrar","Materia")" method="post">
+            <div class="form-group">
+                <label>Descripción</label>
+                <input type="text" class="form-control" name="Descripcion" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Horas Semanales</label>
+                <input type="number" class="form-control" name="HSSemanales" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Horas Totales</label>
+                <input type="number" class="form-control" name="HSTotales" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Plan</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Elegir Plan</option>
+                    @foreach (Business.Entities.Plan plan in Model)
+	                    {
+		                    <option value="@plan.ID">@plan.Descripcion</option>
+	                    }
+                </select>
+            </div>        
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <a class="btn btn-warning" href="@Url.Action("Materias","Home")">Volver</a>
+
+        </form>
+    </div>
+</div>
+

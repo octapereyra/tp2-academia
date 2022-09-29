@@ -29,7 +29,8 @@ namespace UI.Web.Controllers
 
         public IActionResult Materias()
         {
-            return View();
+            List<Materia> materias = new MateriaLogic().GetAll();
+            return View(materias);
         }
 
         public IActionResult Usuarios()

@@ -61,7 +61,7 @@ namespace UI.Web.Controllers
         public ActionResult Eliminar(string id)
         {
             new UsuarioLogic().Delete(int.Parse(id));
-
+            
             return RedirectToAction("Usuarios","Home");
         }
     }
