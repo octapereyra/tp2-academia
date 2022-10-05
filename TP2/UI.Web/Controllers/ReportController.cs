@@ -22,7 +22,8 @@ namespace UI.Web.Controllers
         
         public IActionResult InformeCursos()
         {
-            return View();
+            List<Curso> cursos = new CursoLogic().GetAll();
+            return View(cursos);
         }
 
         public IActionResult InformePlanes()

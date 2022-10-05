@@ -1,15 +1,70 @@
-﻿
+﻿@using Business.Entities
+@using Business.Logic
+@model List<Curso>
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
-<html>
+<html lang="es">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>InformeCursos</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe_cursos-@DateTime.Today.ToString()</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
 </head>
 <body>
+    <h1 class="mt-2">Cursos</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item">Entidades</li>
+        <li class="breadcrumb-item active">Cursos</li>
+    </ol>
+
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-book me-1"></i> Informe de Cursos
+        </div>
+        <div class="card-body">
+            <hr />
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Año</th>
+                            <th>Cupo</th>
+                            <th>Descripción</th>
+                            <th>Comisión</th>
+                            <th>Materia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Curso curso in Model)
+                        {
+                        <tr>
+                            <td>@curso.ID</td>
+                            <td>@curso.AnioCalendario</td>
+                            <td>@curso.Cupo</td>
+                            <td>@curso.Descripcion</td>
+                            @{ Comision com = new ComisionLogic().GetOne(curso.IDComision);}
+                            <td>@com.Descripcion</td>
+                            @{ Materia mat = new MateriaLogic().GetOne(curso.IDMateria);}
+                            <td>@mat.Descripcion</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/scripts.js"></script>
+    <script src="~/js/all.min.js"></script>
 </body>
 </html>
