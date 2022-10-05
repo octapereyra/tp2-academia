@@ -8,6 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DinkToPdf;
+using DinkToPdf.Contracts;
+using UI.Web.Extension;
+using System.IO;
 
 namespace UI.Web
 {
@@ -33,6 +37,10 @@ namespace UI.Web
             });
 
             services.AddControllersWithViews();
+
+            var context = new CustomAssemblyLoadContext();
+            context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "LibreriaPDF/libwkhtmltox.dll"));
+            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +70,8 @@ namespace UI.Web
                     name: "default",
                     pattern: "{controller=Login}/{action=Login}/{id?}");
             });
+         
         }
+        
     }
 }

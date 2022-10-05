@@ -1,0 +1,64 @@
+﻿@model List<Business.Entities.Plan>
+@using Business.Entities
+@using Business.Logic
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe_planes-@DateTime.Today.ToString()</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+<body>
+    <h1 class="mt-2">Planes</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item">Entidades</li>
+        <li class="breadcrumb-item active">Planes</li>
+    </ol>
+
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-book me-1"></i> Informe de planes
+        </div>
+        <div class="card-body">
+            <hr />
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Descripción</th>
+                            <th>Especialidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Plan plan in Model)
+                        {
+                            <tr>
+                                <td>@plan.ID</td>
+                                <td>@plan.Descripcion</td>
+                                @{ Especialidad esp = new EspecialidadLogic().GetOne(plan.IDEspecialidad);}
+                                <td>@esp.Descripcion</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/scripts.js"></script>
+    <script src="~/js/all.min.js"></script>
+</body>
+</html>

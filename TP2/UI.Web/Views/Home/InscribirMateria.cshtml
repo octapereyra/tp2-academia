@@ -19,7 +19,7 @@
         <form action="@Url.Action("Inscribir","Registro")" method="post">
             <div class="form-group">
                 <label>Elegir Materia</label>
-                <select class="form-select" name="IDMateria" onchange="cargaCurso()" required>
+                <select class="form-select" name="IDMateria" id="IdMateria" onchange="cargaCurso()" required>
                     @{
                         List<Materia> materias = new MateriaLogic().GetAll();
                         foreach (Materia mat in materias)
@@ -30,15 +30,16 @@
                     }
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group">               
                 <label>Elegi el curso</label>
-                <select class="form-select" name="IDCurso" aria-label="Default select example" required disabled>
+                <select class="form-select" name="IDCurso" id="IdCurso" required disabled>
                     @{
-                        //List<Curso> cursos = new CursoLogic().GetAll().Where(c => c.IDMateria = 1);
+                        List<Curso> cursos = new CursoLogic().GetAll();
+                        //cursos = (List<Curso>)cursos.Where(c => c.IDMateria == 1);
 
-                        foreach (Materia mat in materias)
+                        foreach (Curso cur in cursos)
                         {
-                            <option value="@mat.ID">@mat.Descripcion</option>
+                            <option value="@cur.ID">@cur.Descripcion</option>
                         }
 
                     }
@@ -61,7 +62,7 @@
                 <input type="checkbox" id="chkHabilitado" class="form-check-input" name="Habilitado" />
             </div>
             <button type="submit" class="btn btn-primary">Registrar</button>
-            <a class="btn btn-warning" href="@Url.Action("Usuarios","Home")">Volver</a>
+            <a class="btn btn-warning" href="@Url.Action("Index","Home")">Volver</a>
 
         </form>
     </div>
@@ -70,10 +71,9 @@
 @section scripts {
     <script>
         function cargaCurso() {
-            var mat = document.getElementsByName("IDMateria");
-            var idMat = mat.value;
-            var curso
+            var e = document.getElementById("IdMateria");
         }
+        
         
     </script>
 
