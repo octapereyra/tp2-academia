@@ -1,0 +1,35 @@
+﻿@using Business.Entities
+@using Business.Logic
+@model Comision
+@{
+    ViewData["Title"] = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Comisiones</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Comisiones</li>
+    <li class="breadcrumb-item active">Eliminar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-chalkboard me-1"></i> Eliminar Comisión
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger">
+            ¿Desea eliminar la comisión <b>@Html.DisplayTextFor(c => c.Descripcion)</b>?
+        </div>
+        <form action="@Url.Action("Eliminar","Comision")" method="post">
+            <input type="hidden" class="form-control" name="ID" value="@Html.DisplayTextFor(c => c.ID)" />
+
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a class="btn btn-warning" href="@Url.Action("Comisiones","Home")">Volver</a>
+        </form>
+
+    </div>
+</div>
+
+
+

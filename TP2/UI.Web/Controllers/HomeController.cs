@@ -33,6 +33,12 @@ namespace UI.Web.Controllers
             return View(users);
         }
 
+        public IActionResult Comisiones()
+        {
+            List<Comision> comisiones = new ComisionLogic().GetAll();
+            return View(comisiones);
+        }
+
         public IActionResult InscribirMateria()
         {
             return View();

@@ -1,0 +1,59 @@
+﻿@using Business.Entities
+@using Business.Logic
+@model List<Comision>
+@{
+    ViewData["Title"] = "Comisiones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Comisiones</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item active">Comisiones</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-chalkboard me-1"></i> Lista de comisiones
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <a type="button" class="btn btn-success" href="@Url.Action("Registrar","Comision")">Crear Nueva</a>
+            </div>
+        </div>
+        <hr />
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Año</th>
+                        <th>Descripción</th>
+                        <th>Plan</th>
+                        <th style="width:150px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Comision com in Model)
+                    {
+                    <tr>
+                        <td>@com.ID</td>
+                        <td>@com.AnioEspecialidad</td>
+                        <td>@com.Descripcion</td>
+                        @{Plan plan = new PlanLogic().GetOne(com.IDPlan);}
+                        <td>@plan.Descripcion</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Comision", new { id = com.ID })">Editar</a>
+                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Comision", new { id = com.ID })">Eliminar</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
