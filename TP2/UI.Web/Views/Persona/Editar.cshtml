@@ -1,0 +1,82 @@
+﻿@model Business.Entities.Persona
+@using Business.Entities
+@using Business.Logic
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Personas</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Personas</li>
+    <li class="breadcrumb-item active">Editar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Editar Persona
+    </div>
+    <div class="card-body">
+        <form action="@Url.Action("Editar","Persona")" method="post">
+            <input type="hidden" class="form-control" name="ID" value="@Html.DisplayFor(p => p.ID)" />
+            <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" class="form-control" name="Apellido" value="@Html.DisplayTextFor(p => p.Apellido)" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" name="Nombre" value="@Html.DisplayTextFor(p => p.Nombre)" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Direccion</label>
+                <input type="text" class="form-control" name="Direccion" value="@Html.DisplayTextFor(p => p.Direccion)" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="Email" value="@Html.DisplayTextFor(p => p.Email)" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Telefono</label>
+                <input type="text" class="form-control" name="Telefono" value="@Html.DisplayTextFor(p => p.Telefono)" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Tipo Persona</label>
+                <input type="text" class="form-control" name="TipoPersona" value="@Html.DisplayTextFor(p => p.TipoPersona)" autocomplete="off" required />
+            </div>
+
+
+            <div class="form-group">
+                <label>Legajo</label>
+                <input type="number" class="form-control" name="Legajo" value="@Html.DisplayTextFor(p => p.Legajo)" autocomplete="off" required />
+            </div>
+           
+            @{
+                List<Plan> planes = new PlanLogic().GetAll();
+            }
+            <div class="form-group">
+                <label>Plan</label>
+                <select class="form-select" name="IDPlan" aria-label="Default select example" required>
+                    @{
+                        foreach (Plan p in planes)
+                        {
+                            if (Model.IDPLan == p.ID)
+                            {
+                                <option value="@p.ID" selected>@p.Descripcion</option>
+                            }
+                            else
+                            {
+                                <option value="@p.ID">@p.Descripcion</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+
+            <button type="submit" onclick="editar()" class="btn btn-primary">Editar</button>
+            <a class="btn btn-warning" href="@Url.Action("Personas","Home")">Volver</a>
+        </form>
+    </div>
+</div>
+
+

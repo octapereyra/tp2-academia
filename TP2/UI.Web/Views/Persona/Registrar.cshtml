@@ -1,0 +1,66 @@
+﻿@model List<Business.Entities.Plan>
+@{
+    ViewData["Title"] = "Registrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Personas</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Personas</li>
+    <li class="breadcrumb-item active">Registrar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Nueva Persona
+    </div>
+    <div class="card-body">
+        <form action="@Url.Action("Registrar","Persona")" method="post">
+            <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" class="form-control" name="Apellido" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" name="Nombre" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Direccion</label>
+                <input type="text" class="form-control" name="Direccion" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="Email" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Telefono</label>
+                <input type="text" class="form-control" name="Telefono" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Tipo Persona</label>
+                <input type="text" class="form-control" name="TipoPersona" autocomplete="off" required />
+            </div>
+
+
+            <div class="form-group">
+                <label>Legajo</label>
+                <input type="number" class="form-control" name="Legajo" autocomplete="off" required />
+            </div>
+
+            <div class="form-group">
+                <label>Plan</label>
+                <select class="form-select" name="IDPlan" aria-label="Elegir plan" required>
+                    @foreach (Business.Entities.Plan plan in Model)
+                    {
+                        <option value="@plan.ID">@plan.Descripcion</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <a class="btn btn-warning" href="@Url.Action("Personas","Home")">Volver</a>
+
+        </form>
+    </div>
+</div>
+

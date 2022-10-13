@@ -1,0 +1,31 @@
+﻿@model Business.Entities.Persona
+@{
+    ViewData["Title"] = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Personas</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Personas</li>
+    <li class="breadcrumb-item active">Eliminar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Eliminar Persona
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger">
+            ¿Desea eliminar la persona <b>@Html.DisplayTextFor(p => p.Apellido)</b>?
+        </div>
+        <form action="@Url.Action("Eliminar","Persona")" method="post">
+            <input type="hidden" class="form-control" name="ID" value="@Html.DisplayTextFor(p => p.ID)" />
+
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a class="btn btn-warning" href="@Url.Action("Personas","Home")">Volver</a>
+        </form>
+
+    </div>
+</div>
+

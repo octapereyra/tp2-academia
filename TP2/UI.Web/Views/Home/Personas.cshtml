@@ -1,0 +1,65 @@
+﻿@model List<Business.Entities.Persona>
+@{
+    ViewData["Title"] = "Personas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Personas</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item active">Personas</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Lista de personas
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <a type="button" class="btn btn-success" href="@Url.Action("Registrar","Persona")">Crear Nueva</a>
+            </div>
+        </div>
+        <hr />
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Apellido</th>
+                        <th>Nombre</th>
+                        <th>Direccion</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                        <th>Tipo Persona</th>
+                        <th>Legajo</th>
+                        <th>Plan</th>
+                        <th style="width:150px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Business.Entities.Persona per in Model)
+                    {
+                        <tr>
+                            <td>@per.Apellido</td>
+                            <td>@per.Nombre</td>
+                            <td>@per.Direccion</td>
+                            <td>@per.Email</td>
+                            <td>@per.Telefono</td>
+                            <td>@per.TipoPersona</td>
+                            <td>@per.Legajo</td>
+                            
+                            @{Business.Entities.Plan plan = new Business.Logic.PlanLogic().GetOne(per.IDPLan);}
+                            <td>@plan.Descripcion</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Persona", new { id = per.ID })">Editar</a>
+                                <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Persona", new { id = per.ID })">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

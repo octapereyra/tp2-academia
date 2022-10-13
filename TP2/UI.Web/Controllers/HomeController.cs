@@ -38,6 +38,11 @@ namespace UI.Web.Controllers
             List<Comision> comisiones = new ComisionLogic().GetAll();
             return View(comisiones);
         }
+        public IActionResult Personas()
+        {
+            List<Persona> personas = new PersonaLogic().GetAll();
+            return View(personas);
+        }
 
         public IActionResult InscribirMateria()
         {
