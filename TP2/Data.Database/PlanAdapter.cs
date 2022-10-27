@@ -163,7 +163,7 @@ namespace Data.Database
             return plan;
         }
 
-        public object GetPlanesByEspecialidad(int idEsp)
+        public List<Plan> GetPlanesByEspecialidad(int idEsp)
         {
             List<Plan> planes = new();
             try

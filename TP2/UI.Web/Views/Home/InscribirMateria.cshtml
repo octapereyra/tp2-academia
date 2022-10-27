@@ -31,46 +31,15 @@
             </div>
             <div class="form-group">
                 <label>Elegir Plan</label>
-                <input type="hidden" id="selectedIdEspecialidad" value="" />
-                <select class="form-select" name="IDPlan" id="IdPlan" onchange="cargaMateria()" required disabled>
-                    @*mandar el id por post al controlador y recuperar de ahi la lista filtrada*@
-                    @{
-                        List<Plan> plans = new PlanLogic().GetAll();                     
-                        foreach (Plan plan in plans)
-                        {
-                            <option value="@plan.ID">@plan.Descripcion</option>
-                        }
-
-                    }
-                </select>
+                <select class="form-select" name="IDPlan" id="IdPlan" onchange="cargaMateria()" required disabled></select>
             </div>
             <div class="form-group">
                 <label>Elegir Materia</label>
-                <select class="form-select" name="IDMateria" id="IdMateria" onchange="cargaCurso()" required disabled>
-                    @{
-                        List<Materia> materias = new MateriaLogic().GetAll();
-                        foreach (Materia mat in materias)
-                        {
-                            <option value="@mat.ID">@mat.Descripcion</option>
-                        }
-
-                    }
-                </select>
+                <select class="form-select" name="IDMateria" id="IdMateria" onchange="cargaCurso()" required disabled></select>
             </div>
             <div class="form-group">
                 <label>Elegi el curso</label>
-                <select class="form-select" name="IDCurso" id="IdCurso" required disabled>
-                    @{
-                        List<Curso> cursos = new CursoLogic().GetAll();
-                        //cursos = (List<Curso>)cursos.Where(c => c.IDMateria == 1);
-
-                        foreach (Curso cur in cursos)
-                        {
-                            <option value="@cur.ID">@cur.Descripcion</option>
-                        }
-
-                    }
-                </select>
+                <select class="form-select" name="IDCurso" id="IdCurso" required disabled></select>
             </div>
             <div class="form-group">
                 <label>Nombre</label>
@@ -98,21 +67,52 @@
 @section scripts {
     <script>
         function cargaPlan() {
-            let select = document.getElementById('IdEspecialidad');
-            let value = select.options[select.selectedIndex].value;
-            console.log(value);
-
+            let value = $("#IdEspecialidad option:selected").val();
             document.getElementById('IdPlan').removeAttribute('disabled');
-            let input = document.getElementById('selectedIdEspecialidad');
-            input.setAttribute('value', value);
-            
+
+            $.ajax({
+                url: "@Url.Action("GetPlanes","Inscripcion")",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    id_especialidad: value
+                },
+                success: function (response) {
+
+                    $("#IdPlan").empty();
+                    $.each(response, function (i, element) {
+                        $("#IdPlan").append(
+                            $("<option>").attr({ "value": element.id }).text(element.descripcion)
+                        )
+                    })
+                }
+            })
         }
 
-        //function cargaCurso() {
-        //    var e = document.getElementById("IdMateria");
-        //}
-        
-        
+        function cargaMateria() {
+            let value = $("#IdPlan option:selected").val();
+            document.getElementById('IdMateria').removeAttribute('disabled');
+
+            $.ajax({
+                url: "@Url.Action("GetMaterias","Inscripcion")",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    id_plan: value
+                },
+                success: function (response) {
+
+                    $("#IdMateria").empty();
+                    $.each(response, function (i, element) {
+                        $("#IdMateria").append(
+                            $("<option>").attr({ "value": element.id }).text(element.descripcion)
+                        )
+                    })
+                }
+            })
+        }
+
+
     </script>
 
 

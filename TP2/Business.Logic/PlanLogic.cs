@@ -32,7 +32,7 @@ namespace Business.Logic
             return PlanData.GetOne(idPlan);
         }
 
-        public object GetPlanesByEspecialidad(int idEspecialidad)
+        public List<Plan> GetPlanesByEspecialidad(int idEspecialidad)
         {
             return PlanData.GetPlanesByEspecialidad(idEspecialidad);
         }
