@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "Inscribir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Inscripción a cursado</h1>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-info me-1"></i> Información
+    </div>
+    <div class="card-body">
+        <div class="alert alert-info">
+            @ViewData["msj"]
+        </div>
+        <br />
+        <a class="btn btn-primary" href="@Url.Action("InscribirMateria","Home")">Volver</a>
+    </div>
+</div>
+
+
