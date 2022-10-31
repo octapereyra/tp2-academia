@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Business.Entities.AlumnoInscripcion>
+@using Business.Entities
+@using Business.Logic 
+@{
+    ViewData["Title"] = "RegistrarNota";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Listado de alumnos</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Registros</li>
+    <li class="breadcrumb-item active">Notas</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> @ViewData["curso"]
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Legajo</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Nota</th>
+                        <th>Condición</th>
+                        <th style="width:150px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (AlumnoInscripcion alumno in Model)
+                    {
+                        Persona p = new PersonaLogic().GetOne(alumno.IDAlumno);
+                    <tr>
+                        <td>@p.Legajo</td>
+                        <td>@p.Nombre</td>
+                        <td>@p.Apellido</td>
+                        <td>@alumno.Nota</td>
+                        <td>@alumno.Condicion</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("EditarNota","Registro", new { id = alumno.ID })">Modificar nota</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

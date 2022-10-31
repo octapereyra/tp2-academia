@@ -48,6 +48,10 @@ namespace UI.Web.Controllers
         {
             return View();
         }
+        public IActionResult RegistrarNotas()
+        {
+            return View();
+        }
         public IActionResult CerrarSesion()
         {
             HttpContext.Session.Clear();

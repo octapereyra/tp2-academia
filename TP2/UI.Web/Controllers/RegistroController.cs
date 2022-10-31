@@ -43,5 +43,14 @@ namespace UI.Web.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult RegistrarNota(int? IDCurso)
+        {
+            IEnumerable<AlumnoInscripcion> inscripciones = new InscripcionLogic().GetAll();
+            inscripciones = inscripciones.Where(i => i.IDCurso == IDCurso);
+            ViewData["curso"] = "Curso "+IDCurso;
+            return View(inscripciones);
+        }
     }
 }

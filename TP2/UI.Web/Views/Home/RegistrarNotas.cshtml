@@ -1,0 +1,58 @@
+﻿@using Business.Entities
+@using Business.Logic
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "RegistrarNotas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Usuario user = new UsuarioLogic().GetOne((int)Context.Session.GetInt32("userId"));
+    Persona docente = new PersonaLogic().GetOne(user.IdPersona);
+    IEnumerable<DocenteCurso> dictados = new DocenteCursoLogic().GetAll();
+    List<Curso> cursos = new CursoLogic().GetAll();
+    List<Curso> cursos_docente = new();
+    dictados = dictados.Where(d => d.IDDocente == docente.ID);
+}
+
+<h1 class="mt-2">Registro de notas</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Registros</li>
+    <li class="breadcrumb-item active">Registro de notas</li>
+</ol>
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-pencil me-1"></i> Registrar nota
+    </div>
+    <div class="card-body">
+        <form action="@Url.Action("RegistrarNota","Registro")" method="post">
+            <div class="form-group">
+                <label>Elegir Curso</label>
+                <select class="form-select" name="IDCurso" id="IdCurso" required>
+                    @{
+                        foreach (DocenteCurso dictado in dictados)
+                        {
+                            foreach (Curso curso in cursos)
+                            {
+                                if (curso.ID == dictado.IDCurso)
+                                {
+                                    cursos_docente.Add(curso);
+                                }
+                            }
+                        }
+                        foreach (Curso c in cursos_docente)
+                        {
+                            Comision comision = new ComisionLogic().GetOne(c.IDComision);
+                            Materia materia = new MateriaLogic().GetOne(c.IDMateria);
+                            string text = materia.Descripcion + " " + comision.Descripcion;
+                            <option value="@c.ID">@text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Mostrar listado de alumnos</button>
+            <a class="btn btn-warning" href="@Url.Action("Index","Home")">Volver</a>
+
+        </form>
+    </div>
+</div>
+

@@ -18,23 +18,6 @@
     <div class="card-body">
         <p>Completá el formulario para inscribirte a cursar la materia que desees. Si el curso que deseas no aparece es porque se quedó sin cupo</p>
         <form action="@Url.Action("Inscribir","Registro")" method="post">
-            @*
-                <div class="form-group">
-                    <label>Especialidad</label>
-                    <select class="form-select" name="IDEspecialidad" id="IdEspecialidad" onchange="cargaPlan()" required>
-                        @{
-                            List<Especialidad> especialidades = new EspecialidadLogic().GetAll();
-                            foreach (Especialidad esp in especialidades)
-                            {
-                                <option value="@esp.ID">@esp.Descripcion</option>
-                            }
-                        }
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Elegir Plan</label>
-                    <select class="form-select" name="IDPlan" id="IdPlan" onchange="cargaMateria()" required disabled></select>
-                </div>*@
             <div class="form-group">
                 <label>Elegir Materia</label>
                 <select class="form-select" name="IDMateria" id="IdMateria" onchange="cargaComision()" required>
@@ -87,9 +70,5 @@
         }
 
     </script>
-
-
-
-
 
 }

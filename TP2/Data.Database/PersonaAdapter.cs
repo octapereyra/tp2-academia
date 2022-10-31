@@ -53,27 +53,29 @@ namespace Data.Database
 
         public Persona GetOne(int id)
         {
-            Persona persona;
+            Persona persona = new();
             try
             {
                 OpenConnection();
                 SqlCommand command = new SqlCommand("select * from personas where id_persona = @id", SqlConn);
                 command.Parameters.Add("@id", SqlDbType.Int).Value = id;
                 SqlDataReader dataReader = command.ExecuteReader();
-                dataReader.Read();
-                persona = new()
+                while (dataReader.Read())
                 {
-                    ID = (int)dataReader["id_persona"],
-                    Apellido = dataReader["apellido"].ToString(),
-                    Direccion = dataReader["direccion"].ToString(),
-                    Nombre = dataReader["nombre"].ToString(),
-                    Email = dataReader["email"].ToString(),
-                    FechaNacimiento = (DateTime)dataReader["fecha_nac"],
-                    Telefono = dataReader["telefono"].ToString(),
-                    Legajo = (int)dataReader["legajo"],
-                    IDPLan = (int)dataReader["id_plan"],
-                };
-                persona.SetTipoPersonaById((int)dataReader["tipo_persona"]);
+                    persona = new()
+                    {
+                        ID = (int)dataReader["id_persona"],
+                        Apellido = dataReader["apellido"].ToString(),
+                        Direccion = dataReader["direccion"].ToString(),
+                        Nombre = dataReader["nombre"].ToString(),
+                        Email = dataReader["email"].ToString(),
+                        FechaNacimiento = (DateTime)dataReader["fecha_nac"],
+                        Telefono = dataReader["telefono"].ToString(),
+                        Legajo = (int)dataReader["legajo"],
+                        IDPLan = (int)dataReader["id_plan"],
+                    };
+                    persona.SetTipoPersonaById((int)dataReader["tipo_persona"]);
+                }
                 dataReader.Close();               
             }
             catch (Exception ex)
