@@ -28,5 +28,13 @@ namespace UI.Web.Controllers
             return Json(comisiones);
         }
 
+        [HttpGet]
+        public ActionResult ListarInscripciones(int? id)
+        {
+            IEnumerable<AlumnoInscripcion> inscripciones = new InscripcionLogic().GetAll();
+            inscripciones = inscripciones.Where(i => i.IDAlumno == id);        
+            return View(inscripciones);        
+        }
+
     }
 }

@@ -43,6 +43,17 @@ namespace UI.Web.Controllers
             List<Persona> personas = new PersonaLogic().GetAll();
             return View(personas);
         }
+        public IActionResult Especialidades()
+        {
+            List<Especialidad> especialidades = new EspecialidadLogic().GetAll();
+            return View(especialidades);
+        }
+
+        public IActionResult Planes()
+        {
+            List<Plan> planes = new PlanLogic().GetAll();
+            return View(planes);
+        }
 
         public IActionResult InscribirMateria()
         {

@@ -1,0 +1,33 @@
+﻿@model Business.Entities.Especialidad
+@using Business.Entities
+@using Business.Logic
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Especialidades</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Especialidades</li>
+    <li class="breadcrumb-item active">Editar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-paint-brush me-1"></i> Editar Especialidad
+    </div>
+    <div class="card-body">
+        <form action="@Url.Action("Editar","Especialidad")" method="post">
+            <input type="hidden" class="form-control" name="ID" value="@Html.DisplayFor(e => e.ID)" />
+            <div class="form-group">
+                <label>Descripción</label>
+                <input type="text" class="form-control" name="Descripcion" value="@Html.DisplayTextFor(e => e.Descripcion)" autocomplete="off" required />
+            </div>
+
+            <button type="submit" onclick="editar()" class="btn btn-primary">Editar</button>
+            <a class="btn btn-warning" href="@Url.Action("Especialidades","Home")">Volver</a>
+        </form>
+    </div>
+</div>
+

@@ -19,6 +19,7 @@ namespace UI.Desktop
             InitializeComponent();
             this.IsMdiContainer = true;
         }
+        public Usuario UsuarioLogueado { get; set; }
         //permisos
         private void OcultarElementos(Persona personaActual)
         {
@@ -122,6 +123,7 @@ namespace UI.Desktop
             {
                 PersonaLogic pl = new();              
                 OcultarElementos(pl.GetOne(login.UsuarioActual.IdPersona));
+                UsuarioLogueado = login.UsuarioActual;
             }
         }
 
@@ -130,6 +132,13 @@ namespace UI.Desktop
             this.Dispose();
         }
 
-       
+        private void mnuRegistroNotas_Click(object sender, EventArgs e)
+        {
+            CloseForms();
+            frmRegistroNotas rn = new(UsuarioLogueado);
+            rn.MdiParent = this;
+            rn.WindowState = FormWindowState.Maximized;
+            rn.Show();
+        }
     }
 }

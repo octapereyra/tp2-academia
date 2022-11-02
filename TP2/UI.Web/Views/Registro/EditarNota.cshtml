@@ -1,0 +1,39 @@
+﻿@using Business.Entities
+@using Business.Logic
+@model AlumnoInscripcion
+@{
+    ViewData["Title"] = "EditarNota";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Registros</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Registros</li>
+    <li class="breadcrumb-item">Notas</li>
+    <li class="breadcrumb-item active">Registrar nota</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-pen me-1"></i> Registrar Nota
+    </div>
+    <div class="card-body">
+        <form action="@Url.Action("EditarNota","Registro")" method="post">
+            <input type="hidden" class="form-control" name="ID" value="@Html.DisplayFor(a => a.ID)" />
+            <input type="hidden" class="form-control" name="IDCurso" value="@Html.DisplayFor(a => a.IDCurso)" />
+            <input type="hidden" class="form-control" name="IDAlumno" value="@Html.DisplayFor(a => a.IDAlumno)" />
+            <div class="form-group">
+                <label>Nota</label>
+                <input type="number" class="form-control" name="Nota" value="@Html.DisplayTextFor(a => a.Nota)" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Condición</label>
+                <input type="text" class="form-control" name="Condicion" value="@Html.DisplayTextFor(a => a.Condicion)" autocomplete="off" required />
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Registrar nota</button>
+            <a class="btn btn-warning" href="@Url.Action("RegistrarNota","Registro")">Volver</a>
+        </form>
+    </div>
+</div>
+

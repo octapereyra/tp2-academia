@@ -1,0 +1,50 @@
+﻿@model List<Business.Entities.Especialidad>
+@{
+    ViewData["Title"] = "Especialidad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Especialidades</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item active">Especialidades</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-paint-brush me-1"></i> Lista de especialidades
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <a type="button" class="btn btn-success" href="@Url.Action("Registrar","Especialidad")">Crear Nueva</a>
+            </div>
+        </div>
+        <hr />
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción</th>
+                        <th style="width:150px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Business.Entities.Especialidad esp in Model)
+                    {
+                    <tr>
+                        <td>@esp.ID</td>
+                        <td>@esp.Descripcion</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Especialidad", new { id=esp.ID })">Editar</a>
+                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Especialidad", new { id=esp.ID })">Eliminar</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

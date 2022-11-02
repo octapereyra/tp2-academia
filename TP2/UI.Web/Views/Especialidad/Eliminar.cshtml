@@ -1,0 +1,31 @@
+﻿@model Business.Entities.Especialidad
+@{
+    ViewData["Title"] = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Especialidades</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Especialidades</li>
+    <li class="breadcrumb-item active">Eliminar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Eliminar Especialidad
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger">
+            ¿Desea eliminar la especialidad? <b>@Html.DisplayTextFor(e => e.Descripcion)</b>?
+        </div>
+        <form action="@Url.Action("Eliminar","Especialidades")" method="post">
+            <input type="hidden" class="form-control" name="ID" value="@Html.DisplayTextFor(e => e.ID)" />
+
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a class="btn btn-warning" href="@Url.Action("Especialidades","Home")">Volver</a>
+        </form>
+
+    </div>
+</div>
+

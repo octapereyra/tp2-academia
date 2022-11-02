@@ -27,14 +27,21 @@ namespace UI.Web.Controllers
                 Condicion = "Inscripto",
                 Nota = 0,
                 State = BusinessEntity.States.New,
-            };           
-                new InscripcionLogic().Save(inscripcion);
-                curso.Cupo -= 1;
-                curso.State = BusinessEntity.States.Modified;
-                new CursoLogic().Save(curso);
-                Comision com = new ComisionLogic().GetOne(curso.IDComision);
-                Materia mat = new MateriaLogic().GetOne(curso.IDMateria);
-                ViewData["msj"] = "Inscripción realizada con éxito. Te inscribiste en la materia " + mat.Descripcion + " en la comisión " + com.Descripcion;
+            }; 
+                if (ValidarInscripcion(alumno.IdPersona, curso.ID))
+                {
+                    new InscripcionLogic().Save(inscripcion);
+                    curso.Cupo -= 1;
+                    curso.State = BusinessEntity.States.Modified;
+                    new CursoLogic().Save(curso);
+                    Comision com = new ComisionLogic().GetOne(curso.IDComision);
+                    Materia mat = new MateriaLogic().GetOne(curso.IDMateria);
+                    ViewData["msj"] = "Inscripción realizada con éxito. Te inscribiste en la materia " + mat.Descripcion + " en la comisión " + com.Descripcion;
+                }
+                else
+                {
+                    throw new Exception("Error. Ya estas inscripto en esa materia");
+                }           
             }
             catch(Exception ex)
             {
@@ -51,6 +58,40 @@ namespace UI.Web.Controllers
             inscripciones = inscripciones.Where(i => i.IDCurso == IDCurso);
             ViewData["curso"] = "Curso "+IDCurso;
             return View(inscripciones);
+        }
+
+        [HttpGet]
+        public ActionResult EditarNota(int? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+            List<AlumnoInscripcion> alumnos = new InscripcionLogic().GetAll();
+            AlumnoInscripcion alu = alumnos.Where(a => a.ID == id).FirstOrDefault();
+
+            return View(alu);
+        }
+
+        [HttpPost]
+        public ActionResult EditarNota(AlumnoInscripcion alumno)
+        {
+            alumno.State = BusinessEntity.States.Modified;
+            new InscripcionLogic().Save(alumno);
+
+            return RedirectToAction("RegistrarNotas","Home");
+        }
+
+        private bool ValidarInscripcion(int idAlumno, int idCurso)
+        {
+            bool valida = true;
+            List<AlumnoInscripcion> inscripciones = new InscripcionLogic().GetAll();
+            foreach (AlumnoInscripcion ai in inscripciones)
+            {
+                if (idAlumno == ai.IDAlumno && idCurso == ai.IDCurso)
+                {
+                    valida = false;
+                }               
+            }
+            return valida;
         }
     }
 }

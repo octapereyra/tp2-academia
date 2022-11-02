@@ -4,6 +4,9 @@
 @{
     ViewData["Title"] = "InscribirMateria";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Usuario user = new UsuarioLogic().GetOne((int)Context.Session.GetInt32("userId"));
+    Persona persona = new PersonaLogic().GetOne(user.IdPersona);
 }
 
 <h1 class="mt-2">Inscripción a cursado</h1>
@@ -11,6 +14,16 @@
     <li class="breadcrumb-item">Registros</li>
     <li class="breadcrumb-item active">Inscripción a cursado</li>
 </ol>
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-list me-1"></i> Ver inscripciones
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Consultar materias que estás inscripto</h5>
+        <a href="@Url.Action("ListarInscripciones","Inscripcion", new {id = persona.ID })" class="btn btn-primary">Consultar</a>
+    </div>
+</div>
+<br />
 <div class="card">
     <div class="card-header">
         <i class="fas fa-book me-1"></i> Inscribirse a cursado
@@ -22,9 +35,7 @@
                 <label>Elegir Materia</label>
                 <select class="form-select" name="IDMateria" id="IdMateria" onchange="cargaComision()" required>
                     @{
-                        IEnumerable<Materia> materia = new MateriaLogic().GetAll();
-                        Usuario user = new UsuarioLogic().GetOne((int)Context.Session.GetInt32("userId"));
-                        Persona persona = new PersonaLogic().GetOne(user.IdPersona);
+                        IEnumerable<Materia> materia = new MateriaLogic().GetAll();                      
                         materia = materia.Where(m => m.IDPlan == persona.IDPLan);
                                     foreach (Materia m in materia)
                         {

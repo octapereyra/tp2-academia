@@ -41,11 +41,11 @@ namespace UI.Desktop
             this.mnuCursos = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuComisiones = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRegistros = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuInscripcionCurso = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRegistroNotas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReportes = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReporteCursos = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReportePlanes = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuInscripcionCurso = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRegistroNotas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +73,7 @@ namespace UI.Desktop
             // mnuLogout
             // 
             this.mnuLogout.Name = "mnuLogout";
-            this.mnuLogout.Size = new System.Drawing.Size(180, 22);
+            this.mnuLogout.Size = new System.Drawing.Size(142, 22);
             this.mnuLogout.Text = "Cerrar sesión";
             this.mnuLogout.Click += new System.EventHandler(this.mnuLogout_Click);
             // 
@@ -94,49 +94,49 @@ namespace UI.Desktop
             // mnuUsuarios
             // 
             this.mnuUsuarios.Name = "mnuUsuarios";
-            this.mnuUsuarios.Size = new System.Drawing.Size(180, 22);
+            this.mnuUsuarios.Size = new System.Drawing.Size(150, 22);
             this.mnuUsuarios.Text = "Usuarios";
             this.mnuUsuarios.Click += new System.EventHandler(this.mnuUsuarios_Click);
             // 
             // mnuPersonas
             // 
             this.mnuPersonas.Name = "mnuPersonas";
-            this.mnuPersonas.Size = new System.Drawing.Size(180, 22);
+            this.mnuPersonas.Size = new System.Drawing.Size(150, 22);
             this.mnuPersonas.Text = "Personas";
             this.mnuPersonas.Click += new System.EventHandler(this.mnuPersonas_Click);
             // 
             // mnuMaterias
             // 
             this.mnuMaterias.Name = "mnuMaterias";
-            this.mnuMaterias.Size = new System.Drawing.Size(180, 22);
+            this.mnuMaterias.Size = new System.Drawing.Size(150, 22);
             this.mnuMaterias.Text = "Materias";
             this.mnuMaterias.Click += new System.EventHandler(this.mnuMaterias_Click);
             // 
             // mnuEspecialidades
             // 
             this.mnuEspecialidades.Name = "mnuEspecialidades";
-            this.mnuEspecialidades.Size = new System.Drawing.Size(180, 22);
+            this.mnuEspecialidades.Size = new System.Drawing.Size(150, 22);
             this.mnuEspecialidades.Text = "Especialidades";
             this.mnuEspecialidades.Click += new System.EventHandler(this.mnuEspecialidades_Click);
             // 
             // mnuPlanes
             // 
             this.mnuPlanes.Name = "mnuPlanes";
-            this.mnuPlanes.Size = new System.Drawing.Size(180, 22);
+            this.mnuPlanes.Size = new System.Drawing.Size(150, 22);
             this.mnuPlanes.Text = "Planes";
             this.mnuPlanes.Click += new System.EventHandler(this.mnuPlanes_Click);
             // 
             // mnuCursos
             // 
             this.mnuCursos.Name = "mnuCursos";
-            this.mnuCursos.Size = new System.Drawing.Size(180, 22);
+            this.mnuCursos.Size = new System.Drawing.Size(150, 22);
             this.mnuCursos.Text = "Cursos";
             this.mnuCursos.Click += new System.EventHandler(this.mnuCursos_Click);
             // 
             // mnuComisiones
             // 
             this.mnuComisiones.Name = "mnuComisiones";
-            this.mnuComisiones.Size = new System.Drawing.Size(180, 22);
+            this.mnuComisiones.Size = new System.Drawing.Size(150, 22);
             this.mnuComisiones.Text = "Comisiones";
             this.mnuComisiones.Click += new System.EventHandler(this.mnuComisiones_Click);
             // 
@@ -148,6 +148,19 @@ namespace UI.Desktop
             this.mnuRegistros.Name = "mnuRegistros";
             this.mnuRegistros.Size = new System.Drawing.Size(148, 20);
             this.mnuRegistros.Text = "Registros e inscripciones";
+            // 
+            // mnuInscripcionCurso
+            // 
+            this.mnuInscripcionCurso.Name = "mnuInscripcionCurso";
+            this.mnuInscripcionCurso.Size = new System.Drawing.Size(180, 22);
+            this.mnuInscripcionCurso.Text = "Inscripción a curso";
+            // 
+            // mnuRegistroNotas
+            // 
+            this.mnuRegistroNotas.Name = "mnuRegistroNotas";
+            this.mnuRegistroNotas.Size = new System.Drawing.Size(180, 22);
+            this.mnuRegistroNotas.Text = "Registro de notas";
+            this.mnuRegistroNotas.Click += new System.EventHandler(this.mnuRegistroNotas_Click);
             // 
             // mnuReportes
             // 
@@ -161,26 +174,14 @@ namespace UI.Desktop
             // mnuReporteCursos
             // 
             this.mnuReporteCursos.Name = "mnuReporteCursos";
-            this.mnuReporteCursos.Size = new System.Drawing.Size(180, 22);
+            this.mnuReporteCursos.Size = new System.Drawing.Size(110, 22);
             this.mnuReporteCursos.Text = "Cursos";
             // 
             // mnuReportePlanes
             // 
             this.mnuReportePlanes.Name = "mnuReportePlanes";
-            this.mnuReportePlanes.Size = new System.Drawing.Size(180, 22);
+            this.mnuReportePlanes.Size = new System.Drawing.Size(110, 22);
             this.mnuReportePlanes.Text = "Planes";
-            // 
-            // mnuInscripcionCurso
-            // 
-            this.mnuInscripcionCurso.Name = "mnuInscripcionCurso";
-            this.mnuInscripcionCurso.Size = new System.Drawing.Size(180, 22);
-            this.mnuInscripcionCurso.Text = "Inscripción a curso";
-            // 
-            // mnuRegistroNotas
-            // 
-            this.mnuRegistroNotas.Name = "mnuRegistroNotas";
-            this.mnuRegistroNotas.Size = new System.Drawing.Size(180, 22);
-            this.mnuRegistroNotas.Text = "Registro de notas";
             // 
             // frmMain
             // 

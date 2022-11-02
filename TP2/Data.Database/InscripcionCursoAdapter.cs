@@ -113,7 +113,7 @@ namespace Data.Database
                     "id_alumno = @id_alumno, " +
                     "id_curso = @id_curso, " +
                     "condicion = @condicion, " +
-                    "nota = @nota" +
+                    "nota = @nota " +
                     "WHERE id_inscripcion = @id", SqlConn);
 
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = insc.ID;

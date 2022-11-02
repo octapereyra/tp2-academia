@@ -1,0 +1,54 @@
+﻿@model Business.Entities.Plan
+@using Business.Entities
+@using Business.Logic
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Planes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Planes</li>
+    <li class="breadcrumb-item active">Editar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Editar Plan
+    </div>
+    <div class="card-body">
+        <form action="@Url.Action("Editar","Plan")" method="post">
+            <input type="hidden" class="form-control" name="ID" value="@Html.DisplayFor(p => p.ID)" />
+            <div class="form-group">
+                <label>Descripción</label>
+                <input type="text" class="form-control" name="Descripcion" value="@Html.DisplayTextFor(p => p.Descripcion)" autocomplete="off" required />
+            </div>
+            @{ 
+                List<Especialidad> esp = new EspecialidadLogic().GetAll();
+            }
+            <div class="form-group">
+                <label>Plan</label>
+                <select class="form-select" name="IDPlan" aria-label="Default select example" required>
+                    @{
+                        foreach (Especialidad e in esp)
+                        {
+                            if (Model.IDEspecialidad == e.ID)
+                            {
+                                <option value="@e.ID" selected>@e.Descripcion</option>
+                            }
+                            else
+                            {
+                                <option value="@e.ID">@e.Descripcion</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+
+            <button type="submit" onclick="editar()" class="btn btn-primary">Editar</button>
+            <a class="btn btn-warning" href="@Url.Action("Planes","Home")">Volver</a>
+        </form>
+    </div>
+</div>
+

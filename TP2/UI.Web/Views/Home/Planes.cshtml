@@ -1,0 +1,54 @@
+﻿@model List<Business.Entities.Plan>  
+@{
+    ViewData["Title"] = "Planes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Planes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item active">Planes</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Lista de planes
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <a type="button" class="btn btn-success" href="@Url.Action("Registrar","Planes")">Crear Nuevo</a>
+            </div>
+        </div>
+        <hr />
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción</th>
+                        <th>Especialidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Business.Entities.Plan plan in Model)
+                    {
+                        <tr>
+                    <td>@plan.ID</td>
+                    <td>@plan.Descripcion</td>
+                    @{Business.Entities.Especialidad esp = new Business.Logic.EspecialidadLogic().GetOne(plan.IDEspecialidad);}
+                    <td>@esp.Descripcion</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Plan", new { id = plan.ID })">Editar</a>
+                        <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Plan", new { id = plan.ID })">Eliminar</a>
+            </td>
+                            </tr>}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+

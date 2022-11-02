@@ -1,0 +1,64 @@
+﻿@using Business.Entities
+@using Business.Logic
+@model IEnumerable<AlumnoInscripcion>
+@{
+    ViewData["Title"] = "ListarInscripciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    IEnumerable<Curso> cursos = new CursoLogic().GetAll();
+}
+
+<h1 class="mt-2">Inscripciones</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Registros</li>
+    <li class="breadcrumb-item">Inscripción a cursado</li>
+    <li class="breadcrumb-item active">Ver inscripciones</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Lista de inscripciones
+    </div>
+    <div class="card-body">
+        @if (Model.Count() != 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Materia</th>
+                            <th>Comisión</th>
+                            <th>Nota</th>
+                            <th>Condición</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (AlumnoInscripcion ai in Model)
+                        {
+                            Curso curso = cursos.Where(c => c.ID == ai.IDCurso).First();
+                            Comision comision = new ComisionLogic().GetOne(curso.IDComision);
+                            Materia materia = new MateriaLogic().GetOne(curso.IDMateria);
+
+                            <tr>
+                                <td>@materia.Descripcion</td>
+                                <td>@comision.Descripcion</td>
+                                <td>@ai.Nota</td>
+                                <td>@ai.Condicion</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <a class="btn btn-warning" href="@Url.Action("InscribirMateria", "Home")">Volver</a>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                No estas inscripto a ninguna materia.
+            </div>
+            <br />
+            <a class="btn btn-primary" href="@Url.Action("InscribirMateria","Home")">Volver</a>
+        }
+    </div>
+</div>
+
