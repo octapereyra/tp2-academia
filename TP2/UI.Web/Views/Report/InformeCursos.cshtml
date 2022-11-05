@@ -32,26 +32,22 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Año</th>
-                            <th>Cupo</th>
-                            <th>Descripción</th>
-                            <th>Comisión</th>
                             <th>Materia</th>
+                            <th>Comisión</th>
+                            <th>Cupo</th>
+                            <th>Año</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (Curso curso in Model)
                         {
                         <tr>
-                            <td>@curso.ID</td>
-                            <td>@curso.AnioCalendario</td>
-                            <td>@curso.Cupo</td>
-                            <td>@curso.Descripcion</td>
-                            @{ Comision com = new ComisionLogic().GetOne(curso.IDComision);}
-                            <td>@com.Descripcion</td>
                             @{ Materia mat = new MateriaLogic().GetOne(curso.IDMateria);}
                             <td>@mat.Descripcion</td>
+                            @{ Comision com = new ComisionLogic().GetOne(curso.IDComision);}
+                            <td>@com.Descripcion</td>
+                            <td>@curso.Cupo</td>
+                            <td>@curso.AnioCalendario</td>
                         </tr>
                         }
                     </tbody>
@@ -59,8 +55,6 @@
             </div>
         </div>
     </div>
-
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>

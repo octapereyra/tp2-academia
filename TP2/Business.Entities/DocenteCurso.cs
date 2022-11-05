@@ -38,7 +38,6 @@ namespace Business.Entities
                     throw new Exception("No existe el tipo cargo especificado: " + id.ToString());
             }
         }
-
         public int GetIDTipoCargo()
         {
             switch (this.Cargo)
@@ -51,6 +50,22 @@ namespace Business.Entities
                     return 2;
                 case TiposCargos.Profesor_Titular:
                     return 3;
+                default:
+                    throw new Exception("No existe el tipo cargo especificado: " + this.Cargo.ToString());
+            }
+        }
+        public string GetStringTipoCargo()
+        {
+            switch (this.Cargo)
+            {
+                case TiposCargos.Ayudante:
+                    return "Ayudante";
+                case TiposCargos.JTP:
+                    return "Jefe de trabajos prácticos";
+                case TiposCargos.Profesor_Adjunto:
+                    return "Adjunto";
+                case TiposCargos.Profesor_Titular:
+                    return "Titular";
                 default:
                     throw new Exception("No existe el tipo cargo especificado: " + this.Cargo.ToString());
             }

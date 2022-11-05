@@ -9,24 +9,13 @@
     <title>@ViewData["Title"] - UI.Web</title>
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/styles.css" />
-    @{ 
-        Usuario userLogged = new UsuarioLogic().GetOne((int)Context.Session.GetInt32("userId"));
-        Persona personaActual = new PersonaLogic().GetOne(userLogged.IdPersona);
-    }
-</head>
+    </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="index.html">Academia</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        @*<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>*@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
             <li class="nav-item dropdown">
@@ -46,17 +35,33 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Registros</div>
-                                <a class="nav-link" href="@Url.Action("InscribirMateria", "Home")">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-pen"></i></div>
-                                    Inscripcion a curso
-                                </a>
-                                <a class="nav-link" href="@Url.Action("RegistrarNotas", "Home")">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-check"></i></div>
-                                    Registro de notas
-                                </a>
-                            
-                        <div class="sb-sidenav-menu-heading">Datos</div>
+                        @{ Persona personaActual;
+                            if (Context.Session.IsAvailable)
+                            {
+                                Usuario userLogged = new UsuarioLogic().GetOne((int)Context.Session.GetInt32("userId"));
+                                personaActual = new PersonaLogic().GetOne(userLogged.IdPersona);
+                            }
+                            else
+                            {
+                                personaActual = new();
+                            }
 
+                            if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Estudiante))
+                            {
+                        <a class="nav-link" href="@Url.Action("InscribirMateria", "Home")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-pen"></i></div>
+                            Inscripcion a curso
+                        </a>
+                            }
+                            if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Docente))
+                            {
+                            <a class="nav-link" href="@Url.Action("RegistrarNotas", "Home")">
+                                <div class="sb-nav-link-icon"><i class="fas fa-check"></i></div>
+                                Registro de notas
+                            </a>
+                                }}
+                        <div class="sb-sidenav-menu-heading">Datos</div>
+                        @if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Administrativo)) { 
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
                             Entidades
@@ -70,20 +75,24 @@
                                 <a class="nav-link" href="@Url.Action("Especialidades", "Home")">Especialidades</a>
                                 <a class="nav-link" href="@Url.Action("Planes", "Home")">Planes</a>
                                 <a class="nav-link" href="@Url.Action("Personas", "Home")">Personas</a>
+                                <a class="nav-link" href="@Url.Action("Docentes", "Home")">Docentes</a>
                             </nav>
                         </div>
-
+                         }
                         <div class="sb-sidenav-menu-heading">Reportes</div>
+                        @if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Docente)) { 
                         <a class="nav-link" href="@Url.Action("Cursos", "Report")" target="_blank">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Cursos
                         </a>
+                        }
+                        @if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Estudiante)) { 
                         <a class="nav-link" href="@Url.Action("Planes", "Report")" target="_blank">
                             <div class="sb-nav-link-icon"><i class="fas fa-hand-paper"></i></div>
                             Planes
                         </a>
-                                
-                            
+                        }
+
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -101,7 +110,7 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Academia @DateTime.Now.Year</div>                     
+                        <div class="text-muted">Copyright &copy; Academia @DateTime.Now.Year</div>
                     </div>
                 </div>
             </footer>

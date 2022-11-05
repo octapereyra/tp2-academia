@@ -54,6 +54,11 @@ namespace UI.Web.Controllers
             List<Plan> planes = new PlanLogic().GetAll();
             return View(planes);
         }
+        public IActionResult Docentes()
+        {
+            List<DocenteCurso> docentes = new DocenteCursoLogic().GetAll();
+            return View(docentes);
+        }
 
         public IActionResult InscribirMateria()
         {

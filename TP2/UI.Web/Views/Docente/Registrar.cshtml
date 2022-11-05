@@ -1,0 +1,62 @@
+﻿@using Business.Entities;
+@using Business.Logic;
+@model IEnumerable<Persona> 
+@{
+    ViewData["Title"] = "Registrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<Curso> cursos = new CursoLogic().GetAll();
+}
+
+<h1 class="mt-2">Docentes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Docentes</li>
+    <li class="breadcrumb-item active">Registrar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> Registrar docente a curso
+    </div>
+    <div class="card-body">
+        <form action="@Url.Action("Registrar","Docente")" method="post">
+            <div class="form-group">
+                <label>Elegir docente</label>
+                <select class="form-select" name="IDDocente" aria-label="Elegir docente" required>
+                    @foreach (Persona docente in Model)
+                    {
+                        string text = docente.Apellido + " " + docente.Nombre;
+                        <option value="@docente.ID">@text</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Curso</label>
+                <select class="form-select" name="IDCurso" aria-label="Curso" required>
+                    @foreach (Curso c in cursos)
+                    {
+                        Materia mat = new MateriaLogic().GetOne(c.IDMateria);
+                        Comision com = new ComisionLogic().GetOne(c.IDComision);
+                        string text = mat.Descripcion + " - " + com.Descripcion;
+                        <option value="@c.ID">@text</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Cargo</label>
+                <select class="form-select" name="Cargo" aria-label="Cargo" required>
+                    <option value=0>Ayudante</option>
+                    <option value=1>Jefe de trabajos prácticos</option>
+                    <option value=2>Adjunto</option>
+                    <option value=3>Titular</option>
+                </select>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <a class="btn btn-warning" href="@Url.Action("Docentes","Home")">Volver</a>
+
+        </form>
+    </div>
+</div>
+

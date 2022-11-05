@@ -1,0 +1,63 @@
+﻿@using Business.Entities;
+@using Business.Logic;
+@model List<DocenteCurso>
+@{
+    ViewData["Title"] = "Docentes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+
+}
+<h1 class="mt-2">Docentes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item active">Docentes</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Lista de docentes
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <a type="button" class="btn btn-success" href="@Url.Action("Registrar","Docente")">Registrar docente</a>
+            </div>
+        </div>
+        <hr />
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Materia</th>
+                        <th>Comision</th>
+                        <th>Cargo</th>
+                        <th style="width:150px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DocenteCurso dc in Model)
+                    {
+                        Persona docente = new PersonaLogic().GetOne(dc.IDDocente);
+                        Curso curso = new CursoLogic().GetOne(dc.IDCurso);
+                        Materia mat = new MateriaLogic().GetOne(curso.IDMateria);
+                        Comision com = new ComisionLogic().GetOne(curso.IDComision);
+                    <tr>
+                        <td>@docente.Nombre</td>
+                        <td>@docente.Apellido</td>
+                        <td>@mat.Descripcion</td>
+                        <td>@com.Descripcion</td>
+                        <td>@dc.GetStringTipoCargo()</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Docente", new { id = mat.ID })">Editar</a>
+                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Docente", new { id = mat.ID })">Eliminar</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

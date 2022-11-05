@@ -59,7 +59,7 @@ namespace Data.Database
                 SqlDataReader drCursos = cmdCursos.ExecuteReader();
                 if (drCursos.Read()) //q hace??
                 {
-                    cur.ID = (int)drCursos["id_especialidad"];
+                    cur.ID = (int)drCursos["id_curso"];
                     //cur.Descripcion = (string)drCursos["desc_especialidad"];
                     cur.Cupo = (int)drCursos["cupo"];
                     cur.AnioCalendario = (int)drCursos["anio_calendario"];
