@@ -1,0 +1,59 @@
+﻿@model List<Business.Entities.Curso>
+@{
+    ViewData["Title"] = "Cursos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //2º agrego Cursos en layout?
+    // 3º creo los metodos Registrar , editar y eliminar en CursoController?
+}
+
+<h1 class="mt-2">Cursos</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item active">Cursos</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Lista de cursos
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <a type="button" class="btn btn-success" href="@Url.Action("Registrar","Curso")">Crear Nuevo</a>
+            </div>
+        </div>
+        <hr />
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th> Materia</th>
+                        <th>Comision</th>
+                        <th>Cupo</th>
+                        <th>Año calendario</th>
+      
+                        <th style="width:150px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Business.Entities.Curso cur in Model)
+                    {
+                    <tr>
+                        @{Business.Entities.Materia mat = new Business.Logic.MateriaLogic().GetOne(cur.IDMateria);}
+                        <td>@mat.Descripcion</td>
+                        @{Business.Entities.Comision com = new Business.Logic.ComisionLogic().GetOne(cur.IDComision);}
+                        <td>@com.Descripcion</td>
+                        <td>@cur.Cupo</td>
+                        <td>@cur.AnioCalendario</td>
+
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Curso", new { id = cur.ID })">Editar</a>
+                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Curso", new { id = cur.ID })">Eliminar</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

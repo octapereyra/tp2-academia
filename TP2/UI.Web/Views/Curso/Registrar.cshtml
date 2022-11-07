@@ -1,0 +1,68 @@
+﻿@using Business.Entities;
+@using Business.Logic;
+
+@model IEnumerable<Materia> 
+    @{
+        ViewData["Title"] = "Registrar";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+        List<Comision> comisiones = new ComisionLogic().GetAll();
+    }
+
+    <h1 class="mt-2">Personas</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item">Entidades</li>
+        <li class="breadcrumb-item">Cursos</li>
+        <li class="breadcrumb-item active">Registrar</li>
+    </ol>
+
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-book me-1"></i> Nuevo curso
+        </div>
+        <div class="card-body">
+            <form action="@Url.Action("Registrar","Curso")" method="post">
+
+
+
+                <div class="form-group">
+                    <label>Elegir materia </label>
+                    <select class="form-select" name="IDMateria" aria-label="Elegir materia" required>
+                        @foreach (Materia mat in Model)
+                        {
+                            string text = mat.Descripcion;
+                            <option value="@mat.ID">@text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Elegir comision</label>
+                    <select class="form-select" name="IDComision" aria-label="Curso" required>
+                        @foreach (Comision c in comisiones)
+                        {
+
+                            Plan p = new PlanLogic().GetOne(c.IDPlan);
+                            Especialidad e = new EspecialidadLogic().GetOne(p.IDEspecialidad);
+                            string text = c.Descripcion + " - " + p.Descripcion + "-"+e.Descripcion;
+                            <option value="@c.ID"> @text</option>//que hace esto?
+
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Cupo</label>
+                    <input type="number" class="form-control" name="Cupo" autocomplete="off" required />
+                </div>
+                <div class="form-group">
+                    <label>Año calendario</label>
+                    <input type="number" class="form-control" name="AnioCalendario" autocomplete="off" required />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <a class="btn btn-warning" href="@Url.Action("Cursos","Home")">Volver</a>
+
+            </form>
+        </div>
+    </div>

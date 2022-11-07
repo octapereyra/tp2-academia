@@ -16,7 +16,7 @@ namespace UI.Web.Controllers
     public class HomeController : Controller
     {
         
-        public IActionResult Index()
+        public IActionResult Index() // q hace?
         {
             return View();
         }
@@ -54,20 +54,26 @@ namespace UI.Web.Controllers
             List<Plan> planes = new PlanLogic().GetAll();
             return View(planes);
         }
-        public IActionResult Docentes()
-        {
-            List<DocenteCurso> docentes = new DocenteCursoLogic().GetAll();
-            return View(docentes);
-        }
+
+
 
         public IActionResult InscribirMateria()
         {
             return View();
         }
-        public IActionResult RegistrarNotas()
+        public IActionResult RegistrarNotas() // a los datos ya los tengo
         {
             return View();
         }
+        
+        public IActionResult Cursos()//1º arranco creando la vista vacia cursos.cshtml desde aca? o controlador?
+        {
+            List<Curso> cursos = new CursoLogic().GetAll();
+            return View(cursos); // a q vista pasa la lista?
+        }
+
+
+
         public IActionResult CerrarSesion()
         {
             HttpContext.Session.Clear();
@@ -75,7 +81,7 @@ namespace UI.Web.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error() // q muestra??
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }

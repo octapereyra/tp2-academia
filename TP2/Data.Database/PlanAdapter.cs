@@ -108,7 +108,7 @@ namespace Data.Database
             }
         }
 
-        private void Delete(int ID)
+        public void Delete(int ID)
         {
             try
             {

@@ -1,0 +1,47 @@
+﻿@using Business.Entities
+@using Business.Logic
+
+@model Business.Entities.Curso  
+@{  // IEnumerable<Curso>
+    ViewData["Title"] = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<Curso> cursos = new CursoLogic().GetAll();  
+}
+
+<h1 class="mt-2">Cursoss</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Cursos</li>
+    <li class="breadcrumb-item active">Eliminar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Eliminar Curso
+    </div>
+    <div class="card-body">
+
+        @{
+            foreach (Curso cur in cursos)
+            {
+                //Curso curso = cursos.Where(c => c.ID == cur.IDCurso).First();
+                Comision com = new ComisionLogic().GetOne(cur.IDComision);
+                Materia mat = new MateriaLogic().GetOne(cur.IDMateria);
+
+            }
+            //como joineo cursos con materias y comisiones?
+            <div class="alert alert-danger">
+                ¿Desea eliminar el curso <b>@Html.DisplayTextFor(c => c.ID)</b>?
+            </div>
+        }
+
+
+        <form action="@Url.Action("Eliminar","Curso")" method="post">
+            <input type="hidden" class="form-control" name="ID" value="@Html.DisplayTextFor(c => c.ID)" />
+
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a class="btn btn-warning" href="@Url.Action("Cursos","Home")">Volver</a>
+        </form>
+
+    </div>
+</div>

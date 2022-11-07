@@ -1,0 +1,88 @@
+﻿@using Business.Entities
+@using Business.Logic
+
+@model Business.Entities.Curso
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-2">Cursos</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Cursos</li>
+    <li class="breadcrumb-item active">Editar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-book me-1"></i> Editar curso
+    </div>
+    <div class="card-body">
+        <form action="@Url.Action("Editar","Curso")" method="post"> @*por aca mando al curso a cursoController*@
+            <input type="hidden" class="form-control" name="ID" value="@Html.DisplayFor(c => c.ID)" />
+
+
+            @{
+                List<Materia> materias = new MateriaLogic().GetAll();
+            }
+            <div class="form-group">
+                <label>Materia</label>
+                <select class="form-select" name="IDMateria" aria-label="Default select example" required>
+                    @{
+                        foreach (Materia m in materias)
+                        {
+                            if (Model.IDMateria == m.ID)
+                            {
+                                <option value="@m.ID" selected>@m.Descripcion</option>
+                            }
+                            else
+                            {
+                                <option value="@m.ID">@m.Descripcion</option>
+                                // que se muestra en este caso?
+
+                            }
+                        }
+                    }
+                </select>
+            </div>
+
+            @{
+                List<Comision> comisiones = new ComisionLogic().GetAll();
+            }
+            <div class="form-group">
+                <label>Comision</label>
+                <select class="form-select" name="IDComision" aria-label="Default select example" required>
+                    @{
+                        foreach (Comision c in comisiones)
+                        {
+                            if (Model.IDComision == c.ID)
+                            {
+                                <option value="@c.ID" selected>@c.Descripcion</option>
+                            }
+                            else
+                            {
+                                <option value="@c.ID">@c.Descripcion</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Año Calendario</label>                                                   @{ /*como funciona esto? como sabe q c es curso*/}
+                <input type="number" class="form-control" name="AnioCalendario" value="@Html.DisplayTextFor(c => c.AnioCalendario)" autocomplete="off" required />
+            </div>
+
+            <div class="form-group">
+                <label>Cupo</label>                                                   
+                <input type="number" class="form-control" name="Cupo" value="@Html.DisplayTextFor(c => c.Cupo)" autocomplete="off" required />
+            </div>
+
+                                            @{ }
+            <button type="submit" onclick="editar()" class="btn btn-primary">Editar</button>
+            <a class="btn btn-warning" href="@Url.Action("Cursos","Home")">Volver</a>
+        </form>
+    </div>
+</div>
