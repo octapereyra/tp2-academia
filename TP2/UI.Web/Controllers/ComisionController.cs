@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Entities;
 using Business.Logic;
+using Microsoft.AspNetCore.Http;
 
 namespace UI.Web.Controllers
 {
@@ -19,10 +20,20 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Registrar(Comision com)
         {
-            com.State = BusinessEntity.States.New;
-            new ComisionLogic().Save(com);
-
-            return RedirectToAction("Comisiones", "Home");
+            string get;
+            try
+            {
+                com.State = BusinessEntity.States.New;
+                new ComisionLogic().Save(com);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action","Comisiones");
+            return RedirectToAction("Informacion","Home",new { get });
         }
 
         [HttpGet]
@@ -40,10 +51,20 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Editar(Comision com)
         {
-            com.State = BusinessEntity.States.Modified;
-            new ComisionLogic().Save(com);
-
-            return RedirectToAction("Comisiones", "Home");
+            string get;
+            try
+            {               
+                com.State = BusinessEntity.States.Modified;
+                new ComisionLogic().Save(com);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Comisiones");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
         [HttpGet]
@@ -61,9 +82,19 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Eliminar(string id)
         {
-            new ComisionLogic().Delete(int.Parse(id));
-
-            return RedirectToAction("Comisiones", "Home");
+            string get;
+            try
+            {
+                new ComisionLogic().Delete(int.Parse(id));
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Comisiones");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
     }
 }

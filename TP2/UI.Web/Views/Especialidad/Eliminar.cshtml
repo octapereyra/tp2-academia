@@ -19,7 +19,7 @@
         <div class="alert alert-danger">
             ¿Desea eliminar la especialidad? <b>@Html.DisplayTextFor(e => e.Descripcion)</b>?
         </div>
-        <form action="@Url.Action("Eliminar","Especialidades")" method="post">
+        <form action="@Url.Action("Eliminar","Especialidad")" method="post">
             <input type="hidden" class="form-control" name="ID" value="@Html.DisplayTextFor(e => e.ID)" />
 
             <button type="submit" class="btn btn-danger">Eliminar</button>

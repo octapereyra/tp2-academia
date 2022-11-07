@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Entities;
 using Business.Logic;
+using Microsoft.AspNetCore.Http;
 
 namespace UI.Web.Controllers
 {
@@ -20,32 +21,21 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Registrar(DocenteCurso dc)
         {
-            dc.State = BusinessEntity.States.New;
-            new DocenteCursoLogic().Save(dc);
-
-            return RedirectToAction("Docentes", "Home");
-        }
-
-        [HttpGet]
-        public ActionResult Editar(int? id)
-        {
-            if (id == null)
-                return RedirectToAction("Docentes", "Home");
-
-            List<DocenteCurso> docentes = new DocenteCursoLogic().GetAll();
-            DocenteCurso dc = docentes.Where(d => d.ID == id).FirstOrDefault();
-
-            return View(dc);
-        }
-
-        [HttpPost]
-        public ActionResult Editar(DocenteCurso dc)
-        {
-            dc.State = BusinessEntity.States.Modified;
-            new DocenteCursoLogic().Save(dc);
-
-            return RedirectToAction("Docentes", "Home");
-        }
+            string get;
+            try
+            {
+                dc.State = BusinessEntity.States.New;
+                new DocenteCursoLogic().Save(dc);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Docentes");
+            return RedirectToAction("Informacion", "Home", new { get });
+        }     
 
         [HttpGet]
         public ActionResult Eliminar(int? id)
@@ -62,9 +52,19 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Eliminar(string id)
         {
-            new DocenteCursoLogic().Delete(int.Parse(id));
-
-            return RedirectToAction("Docentes", "Home");
+            string get;
+            try
+            {
+                new DocenteCursoLogic().Delete(int.Parse(id));
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Docentes");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
     }
 }

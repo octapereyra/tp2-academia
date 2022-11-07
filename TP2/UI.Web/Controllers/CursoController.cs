@@ -5,28 +5,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Entities;
 using Business.Logic;
+using Microsoft.AspNetCore.Http;
 
 namespace UI.Web.Controllers
 {
     public class CursoController : Controller
     {   
-        //4º
-        public ActionResult Registrar() //crear cada vista con razor?
+        
+        public ActionResult Registrar() 
         {
             List<Materia> materias = new MateriaLogic().GetAll();
-            return View(materias); //a donde y xq pasar  materias? y comisiones?
+            return View(materias);
         }
         [HttpPost]
         public ActionResult Registrar(Curso cur)
         {
-            cur.State = BusinessEntity.States.New;
-            new CursoLogic().Save(cur);
-            return RedirectToAction("Cursos", "Home");
+            string get;
+            try
+            {
+                cur.State = BusinessEntity.States.New;
+                new CursoLogic().Save(cur);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Cursos");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
-        [HttpGet] //retorno el curso en el q hago la edicion?
+        [HttpGet] 
         public ActionResult Editar(int? id)
         {
-            if (id == null) // se puede poner un cartel?
+            if (id == null) 
                 return RedirectToAction("Cursos", "Home");
             List<Curso> curs = new CursoLogic().GetAll();
             Curso cur = curs.Where(c => c.ID == id).FirstOrDefault();
@@ -34,13 +46,23 @@ namespace UI.Web.Controllers
             return View(cur);
         }
 
-        [HttpPost] //edito el curso
+        [HttpPost] 
         public ActionResult Editar(Curso cur)
         {
-            cur.State = BusinessEntity.States.Modified;
-            new CursoLogic().Save(cur);
-
-            return RedirectToAction("Cursos", "Home");
+            string get;
+            try
+            {
+                cur.State = BusinessEntity.States.Modified;
+                new CursoLogic().Save(cur);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Cursos");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
         [HttpGet]
@@ -56,11 +78,21 @@ namespace UI.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Eliminar(string id) //xq string?
+        public ActionResult Eliminar(string id)
         {
-            new CursoLogic().Delete(int.Parse(id));
-
-            return RedirectToAction("Cursos", "Home");
+            string get;
+            try
+            {
+                new CursoLogic().Delete(int.Parse(id));
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Cursos");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
     }
 }

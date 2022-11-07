@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Entities;
 using Business.Logic;
+using Microsoft.AspNetCore.Http;
 
 namespace UI.Web.Controllers
 {
@@ -18,10 +19,20 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Registrar(Plan plan)
         {
-            plan.State = BusinessEntity.States.New;
-            new PlanLogic().Save(plan);
-
-            return RedirectToAction("Planes", "Home");
+            string get;
+            try
+            {
+                plan.State = BusinessEntity.States.New;
+                new PlanLogic().Save(plan);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Planes");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
         [HttpGet]
@@ -39,10 +50,20 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Editar(Plan plan)
         {
-            plan.State = BusinessEntity.States.Modified;
-            new PlanLogic().Save(plan);
-
-            return RedirectToAction("Planes", "Home");
+            string get;
+            try
+            {
+                plan.State = BusinessEntity.States.Modified;
+                new PlanLogic().Save(plan);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Planes");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
     }

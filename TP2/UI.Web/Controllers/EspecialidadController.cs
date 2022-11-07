@@ -19,10 +19,20 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Registrar(Especialidad esp)
         {
-            esp.State = BusinessEntity.States.New;
-            new EspecialidadLogic().Save(esp);
-
-            return RedirectToAction("Especialidades", "Home");
+            string get;
+            try
+            {
+                esp.State = BusinessEntity.States.New;
+                new EspecialidadLogic().Save(esp);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Especialidades");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
         [HttpGet]
@@ -40,10 +50,20 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Editar(Especialidad esp)
         {
-            esp.State = BusinessEntity.States.Modified;
-            new EspecialidadLogic().Save(esp);
-
-            return RedirectToAction("Especialidades", "Home");
+            string get;
+            try
+            {
+                esp.State = BusinessEntity.States.Modified;
+                new EspecialidadLogic().Save(esp);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Especialidades");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
         [HttpGet]
@@ -61,9 +81,19 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Eliminar(string id)
         {
-            new EspecialidadLogic().Delete(int.Parse(id));
-
-            return RedirectToAction("Especialidades", "Home");
+            string get;
+            try
+            {
+                new EspecialidadLogic().Delete(int.Parse(id));
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Especialidades");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
     }
 }

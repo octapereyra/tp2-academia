@@ -1,8 +1,39 @@
-﻿
+﻿@using Business.Entities
+@using Business.Logic
+@model DocenteCurso
 @{
     ViewData["Title"] = "Eliminar";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Persona docente = new PersonaLogic().GetOne(Model.IDDocente);
+    Curso curso = new CursoLogic().GetOne(Model.IDCurso);
+    Materia mat = new MateriaLogic().GetOne(curso.IDMateria);
+    Comision com = new ComisionLogic().GetOne(curso.IDComision);
+    string nombre = docente.Apellido + " " + docente.Nombre;
 }
 
-<h1>Eliminar</h1>
+<h1 class="mt-2">Docentes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item">Entidades</li>
+    <li class="breadcrumb-item">Docentes</li>
+    <li class="breadcrumb-item active">Eliminar</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-user me-1"></i> Eliminar docente
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger">
+            ¿Desea eliminar al docente <b>@nombre</b> de la materia @mat.Descripcion en la comisión @com.Descripcion ?
+        </div>
+        <form action="@Url.Action("Eliminar","Docente")" method="post">
+            <input type="hidden" class="form-control" name="ID" value="@Html.DisplayTextFor(d => d.ID)" />
+
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a class="btn btn-warning" href="@Url.Action("Docentes","Home")">Volver</a>
+        </form>
+
+    </div>
+</div>
 

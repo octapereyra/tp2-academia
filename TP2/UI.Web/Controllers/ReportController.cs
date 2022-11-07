@@ -8,6 +8,7 @@ using DinkToPdf.Contracts;
 using Microsoft.AspNetCore.Http.Extensions;
 using Business.Entities;
 using Business.Logic;
+using UI.Web.Permisos;
 
 namespace UI.Web.Controllers
 {
@@ -31,6 +32,7 @@ namespace UI.Web.Controllers
             List<Plan> planes = new PlanLogic().GetAll();
             return View(planes);
         }
+        [PermisosRol(Persona.TiposPersonas.Docente)]
         public IActionResult Cursos()
         {
             string pagina_actual = HttpContext.Request.Path;
@@ -59,6 +61,7 @@ namespace UI.Web.Controllers
             return File(archivoPDF,"application/pdf");
         }
 
+        [PermisosRol(Persona.TiposPersonas.Estudiante)]
         public IActionResult Planes()
         {
             string pagina_actual = HttpContext.Request.Path;

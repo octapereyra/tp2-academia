@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Entities;
 using Business.Logic;
+using Microsoft.AspNetCore.Http;
 
 namespace UI.Web.Controllers
 {
@@ -19,10 +20,20 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Registrar(Materia mat)
         {
-            mat.State = BusinessEntity.States.New;
-            new MateriaLogic().Save(mat);
-
-            return RedirectToAction("Materias", "Home");
+            string get;
+            try
+            {
+                mat.State = BusinessEntity.States.New;
+                new MateriaLogic().Save(mat);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Materias");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
         [HttpGet]
@@ -40,10 +51,20 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Editar(Materia mat)
         {
-            mat.State = BusinessEntity.States.Modified;
-            new MateriaLogic().Save(mat);
-
-            return RedirectToAction("Materias", "Home");
+            string get;
+            try
+            {
+                mat.State = BusinessEntity.States.Modified;
+                new MateriaLogic().Save(mat);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Materias");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
         [HttpGet]
@@ -61,9 +82,19 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Eliminar(string id)
         {
-            new MateriaLogic().Delete(int.Parse(id));
-
-            return RedirectToAction("Materias", "Home");
+            string get;
+            try
+            {
+                new MateriaLogic().Delete(int.Parse(id));
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Materias");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
     }
 }

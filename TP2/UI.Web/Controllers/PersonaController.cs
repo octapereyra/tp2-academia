@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Entities;
 using Business.Logic;
+using Microsoft.AspNetCore.Http;
 
 namespace UI.Web.Controllers
 {
@@ -19,9 +20,20 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Registrar(Persona per)
         {
-            per.State = BusinessEntity.States.New;
-            new PersonaLogic().Save(per);
-            return RedirectToAction("Personas","Home");
+            string get;
+            try
+            {
+                per.State = BusinessEntity.States.New;
+                new PersonaLogic().Save(per);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Personas");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
        
@@ -38,10 +50,20 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Editar(Persona per)
         {
-            per.State = BusinessEntity.States.Modified;
-            new PersonaLogic().Save(per);
-
-            return RedirectToAction("Personas", "Home");
+            string get;
+            try
+            {
+                per.State = BusinessEntity.States.Modified;
+                new PersonaLogic().Save(per);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Personas");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
 
@@ -61,9 +83,19 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Eliminar(string id)
         {
-            new PersonaLogic().Delete(int.Parse(id));
-
-            return RedirectToAction("Personas", "Home");
+            string get;
+            try
+            {
+                new PersonaLogic().Delete(int.Parse(id));
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Personas");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
 

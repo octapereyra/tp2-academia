@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Entities;
 using Business.Logic;
+using Microsoft.AspNetCore.Http;
 
 namespace UI.Web.Controllers
 {
@@ -18,10 +19,20 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Registrar(Usuario user)
         {
-            user.State = BusinessEntity.States.New;
-            new UsuarioLogic().Save(user);
-
-            return RedirectToAction("Usuarios","Home");
+            string get;
+            try
+            {
+                user.State = BusinessEntity.States.New;
+                new UsuarioLogic().Save(user);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Usuarios");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
         [HttpGet]
@@ -39,10 +50,20 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Editar(Usuario user)
         {
-            user.State = BusinessEntity.States.Modified;
-            new UsuarioLogic().Save(user);
-
-            return RedirectToAction("Usuarios","Home");
+            string get;
+            try
+            {
+                user.State = BusinessEntity.States.Modified;
+                new UsuarioLogic().Save(user);
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Usuarios");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
 
         [HttpGet]
@@ -60,9 +81,19 @@ namespace UI.Web.Controllers
         [HttpPost]
         public ActionResult Eliminar(string id)
         {
-            new UsuarioLogic().Delete(int.Parse(id));
-            
-            return RedirectToAction("Usuarios","Home");
+            string get;
+            try
+            {
+                new UsuarioLogic().Delete(int.Parse(id));
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Usuarios");
+            return RedirectToAction("Informacion", "Home", new { get });
         }
     }
 }
