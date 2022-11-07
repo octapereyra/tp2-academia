@@ -1,8 +1,11 @@
-﻿@model Business.Entities.Usuario
-
+﻿@model Usuario
+@using Business.Entities
+@using Business.Logic 
 @{
     ViewData["Title"] = "Editar";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<Persona> personas = new PersonaLogic().GetAll();
 }
 
 <h1 class="mt-2">Usuarios</h1>
@@ -38,6 +41,24 @@
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" class="form-control" name="EMail" value="@Html.DisplayTextFor(m => m.EMail)" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Persona</label>
+                <select class="form-select" name="IDPersona" aria-label="Elegir persona" required>
+                    @foreach (Persona per in personas)
+                    {
+                        string text = per.Legajo + " " + per.Apellido + " " + per.Nombre;
+                        if (Model.IdPersona == per.ID)
+                        {
+                            <option value="@per.ID" selected>@text</option>
+                        }
+                        else
+                        {
+                            <option value="@per.ID">@text</option>
+
+                        }
+                    }
+                </select>
             </div>
             <div class="form-check">
                 <label>Habilitado</label>

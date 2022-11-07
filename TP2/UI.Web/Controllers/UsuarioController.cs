@@ -13,7 +13,8 @@ namespace UI.Web.Controllers
     {
         public ActionResult Registrar()
         {
-            return View();
+            List<Persona> personas = new PersonaLogic().GetAll();
+            return View(personas);
         }
 
         [HttpPost]

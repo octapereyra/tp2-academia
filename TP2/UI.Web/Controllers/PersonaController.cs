@@ -12,8 +12,7 @@ namespace UI.Web.Controllers
     public class PersonaController : Controller
     {
         public ActionResult Registrar()
-        {
-            
+        {           
             List<Plan> planes = new PlanLogic().GetAll();
             return View(planes);
         }
@@ -34,9 +33,7 @@ namespace UI.Web.Controllers
             }
             HttpContext.Session.SetString("action", "Personas");
             return RedirectToAction("Informacion", "Home", new { get });
-        }
-
-       
+        }     
         [HttpGet]
         public ActionResult Editar(int? id)
         {
@@ -65,9 +62,6 @@ namespace UI.Web.Controllers
             HttpContext.Session.SetString("action", "Personas");
             return RedirectToAction("Informacion", "Home", new { get });
         }
-
-
-
         [HttpGet]
         public ActionResult Eliminar(int? id)
         {
@@ -79,25 +73,25 @@ namespace UI.Web.Controllers
 
             return View(per);
         }
-
         [HttpPost]
         public ActionResult Eliminar(string id)
         {
             string get;
             try
             {
+                //borrar primero persona vinculada a docentescursos
                 new PersonaLogic().Delete(int.Parse(id));
                 get = "success";
             }
             catch (Exception ex)
             {
                 get = "error";
+                //notificar en que docentecurso esta esta persona
                 HttpContext.Session.SetString("errorMsj", ex.Message);
             }
             HttpContext.Session.SetString("action", "Personas");
             return RedirectToAction("Informacion", "Home", new { get });
         }
-
 
     }
 }

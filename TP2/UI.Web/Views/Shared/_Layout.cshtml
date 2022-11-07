@@ -34,7 +34,6 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Registros</div>
                         @{ Persona personaActual;
                             if (Context.Session.IsAvailable)
                             {
@@ -48,50 +47,59 @@
 
                             if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Estudiante))
                             {
-                        <a class="nav-link" href="@Url.Action("InscribirMateria", "Home")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-pen"></i></div>
-                            Inscripcion a curso
-                        </a>
+                                <div class="sb-sidenav-menu-heading">Registros</div>
+                                <a class="nav-link" href="@Url.Action("InscribirMateria", "Home")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-pen"></i></div>
+                                    Inscripcion a curso
+                                </a>
                             }
                             if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Docente))
                             {
-                            <a class="nav-link" href="@Url.Action("RegistrarNotas", "Home")">
-                                <div class="sb-nav-link-icon"><i class="fas fa-check"></i></div>
-                                Registro de notas
-                            </a>
-                                }}
-                        <div class="sb-sidenav-menu-heading">Datos</div>
-                        @if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Administrativo)) { 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
-                            Entidades
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="@Url.Action("Usuarios", "Home")">Usuarios</a>
-                                <a class="nav-link" href="@Url.Action("Personas", "Home")">Personas</a>
-                                <a class="nav-link" href="@Url.Action("Docentes", "Home")">Docentes</a>
-                                <a class="nav-link" href="@Url.Action("Planes", "Home")">Planes</a>
-                                <a class="nav-link" href="@Url.Action("Especialidades", "Home")">Especialidades</a>
-                                <a class="nav-link" href="@Url.Action("Materias", "Home")">Materias</a>
-                                <a class="nav-link" href="@Url.Action("Comisiones", "Home")">Comisiones</a>
-                                <a class="nav-link" href="@Url.Action("Cursos", "Home")">Cursos</a>
-                            </nav>
-                        </div>
-                         }
-                        <div class="sb-sidenav-menu-heading">Reportes</div>
-                        @if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Docente)) { 
-                        <a class="nav-link" href="@Url.Action("Cursos", "Report")" target="_blank">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Cursos
-                        </a>
+                                <div class="sb-sidenav-menu-heading">Registros</div>
+                                <a class="nav-link" href="@Url.Action("RegistrarNotas", "Home")">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-check"></i></div>
+                                    Registro de notas
+                                </a>
+                            }
                         }
-                        @if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Estudiante)) { 
-                        <a class="nav-link" href="@Url.Action("Planes", "Report")" target="_blank">
-                            <div class="sb-nav-link-icon"><i class="fas fa-hand-paper"></i></div>
-                            Planes
-                        </a>
+
+                        @if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Administrativo))
+                        {
+                            <div class="sb-sidenav-menu-heading">Datos</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
+                                Entidades
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="@Url.Action("Usuarios", "Home")">Usuarios</a>
+                                    <a class="nav-link" href="@Url.Action("Personas", "Home")">Personas</a>
+                                    <a class="nav-link" href="@Url.Action("Docentes", "Home")">Docentes</a>
+                                    <a class="nav-link" href="@Url.Action("Planes", "Home")">Planes</a>
+                                    <a class="nav-link" href="@Url.Action("Especialidades", "Home")">Especialidades</a>
+                                    <a class="nav-link" href="@Url.Action("Materias", "Home")">Materias</a>
+                                    <a class="nav-link" href="@Url.Action("Comisiones", "Home")">Comisiones</a>
+                                    <a class="nav-link" href="@Url.Action("Cursos", "Home")">Cursos</a>
+                                </nav>
+                            </div>
+                        }
+
+                        @if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Docente))
+                        {
+                            <div class="sb-sidenav-menu-heading">Reportes</div>
+                            <a class="nav-link" href="@Url.Action("Cursos", "Report")" target="_blank">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Cursos
+                            </a>
+                        }
+                        @if (personaActual.TipoPersona.Equals(Persona.TiposPersonas.Estudiante))
+                        {
+                            <div class="sb-sidenav-menu-heading">Reportes</div>
+                            <a class="nav-link" href="@Url.Action("Planes", "Report")" target="_blank">
+                                <div class="sb-nav-link-icon"><i class="fas fa-hand-paper"></i></div>
+                                Planes
+                            </a>
                         }
 
                     </div>

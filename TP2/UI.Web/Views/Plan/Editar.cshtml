@@ -28,8 +28,8 @@
                 List<Especialidad> esp = new EspecialidadLogic().GetAll();
             }
             <div class="form-group">
-                <label>Plan</label>
-                <select class="form-select" name="IDPlan" aria-label="Default select example" required>
+                <label>Especialidad</label>
+                <select class="form-select" name="IDEspecialidad" aria-label="Default select example" required>
                     @{
                         foreach (Especialidad e in esp)
                         {
@@ -46,7 +46,7 @@
                 </select>
             </div>
 
-            <button type="submit" onclick="editar()" class="btn btn-primary">Editar</button>
+            <button type="submit" class="btn btn-primary">Editar</button>
             <a class="btn btn-warning" href="@Url.Action("Planes","Home")">Volver</a>
         </form>
     </div>

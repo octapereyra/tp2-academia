@@ -1,4 +1,6 @@
-﻿
+﻿@using Business.Entities
+@using Business.Logic
+@model List<Persona>
 @{
     ViewData["Title"] = "Registrar";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -36,6 +38,16 @@
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" class="form-control" name="EMail" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+                <label>Persona</label>
+                <select class="form-select" name="IDPersona" aria-label="Elegir persona" required>
+                    @foreach (Persona per in Model)
+                    {
+                        string text = per.Legajo + " " + per.Apellido + " " + per.Nombre;
+                        <option value="@per.ID">@text</option>
+                    }
+                </select>
             </div>
             <div class="form-check">
                 <label>Habilitado</label>

@@ -1,4 +1,6 @@
-﻿@model List<Business.Entities.Especialidad>
+﻿@using Business.Entities
+@using Business.Logic
+@model List<Especialidad>
 @{
     ViewData["Title"] = "Registrar";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,11 +23,10 @@
                 <label>Descripción</label>
                 <input type="text" class="form-control" name="Descripcion" autocomplete="off" required />
             </div>
-
             <div class="form-group">
                 <label>Especialidad</label>
                 <select class="form-select" name="IDEspecialidad" aria-label="Elegir especialidad" required>
-                    @foreach (Business.Entities.Especialidad esp in Model)
+                    @foreach (Especialidad esp in Model)
                     {
                         <option value="@esp.ID">@esp.Descripcion</option>
                         //

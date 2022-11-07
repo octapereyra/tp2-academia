@@ -124,7 +124,7 @@ namespace Data.Database
             {
                 this.OpenConnection();
                 SqlCommand cmdSave = new SqlCommand("UPDATE usuarios SET " +
-                    "nombre_usuario=@nombre_usuario,clave=@clave,habilitado=@habilitado,nombre=@nombre,apellido=@apellido,email=@email WHERE id_usuario=@id", SqlConn);
+                    "nombre_usuario=@nombre_usuario,clave=@clave,habilitado=@habilitado,nombre=@nombre,apellido=@apellido,email=@email,id_persona=@id_persona WHERE id_usuario=@id", SqlConn);
                 cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = usuario.ID;
                 cmdSave.Parameters.Add("@nombre_usuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
                 cmdSave.Parameters.Add("@clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
@@ -132,6 +132,7 @@ namespace Data.Database
                 cmdSave.Parameters.Add("@nombre", SqlDbType.VarChar, 50).Value = usuario.Nombre;
                 cmdSave.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = usuario.Apellido;
                 cmdSave.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = usuario.EMail;
+                cmdSave.Parameters.Add("@id_persona", SqlDbType.Int).Value = usuario.IdPersona;
                 cmdSave.ExecuteNonQuery();
             }
             catch (Exception Ex)
@@ -149,9 +150,9 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdInsert = new SqlCommand("INSERT INTO usuarios(nombre_usuario,clave,habilitado,nombre,apellido,email)" +
-                    " VALUES (@nombre_usuario,@clave,@habilitado,@nombre,@apellido,@email)" +
-                    " SELECT @@identity", SqlConn);// esta línea es para recuperar el ID que asignó el sql automáticamente
+                SqlCommand cmdInsert = new SqlCommand("INSERT INTO usuarios(nombre_usuario,clave,habilitado,nombre,apellido,email,cambia_clave,id_persona)" +
+                    " VALUES (@nombre_usuario,@clave,@habilitado,@nombre,@apellido,@email,@cc,@id_persona)" +
+                    " SELECT @@identity", SqlConn);
 
                 cmdInsert.Parameters.Add("@nombre_usuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
                 cmdInsert.Parameters.Add("@clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
@@ -159,6 +160,8 @@ namespace Data.Database
                 cmdInsert.Parameters.Add("@nombre", SqlDbType.VarChar, 50).Value = usuario.Nombre;
                 cmdInsert.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = usuario.Apellido;
                 cmdInsert.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = usuario.EMail;
+                cmdInsert.Parameters.Add("@cc", SqlDbType.Bit).Value = false;
+                cmdInsert.Parameters.Add("@id_persona", SqlDbType.Int).Value = usuario.IdPersona;
                 usuario.ID = Decimal.ToInt32((decimal)cmdInsert.ExecuteScalar());
 
                 return usuario.ID;

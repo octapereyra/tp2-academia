@@ -13,7 +13,8 @@ namespace UI.Web.Controllers
     {
         public IActionResult Registrar()
         {
-            return View();
+            List<Especialidad> especialidades = new EspecialidadLogic().GetAll();
+            return View(especialidades);
         }
 
         [HttpPost]
@@ -65,6 +66,34 @@ namespace UI.Web.Controllers
             HttpContext.Session.SetString("action", "Planes");
             return RedirectToAction("Informacion", "Home", new { get });
         }
+        
+        public ActionResult Eliminar(int? id)
+        {
+            if (id == null)
+                return RedirectToAction("Planes", "Home");
 
+            List<Plan> planes = new PlanLogic().GetAll();
+            Plan plan = planes.Where(u => u.ID == id).FirstOrDefault();
+
+            return View(plan);
+        }
+
+        [HttpPost]
+        public ActionResult Eliminar(string id)
+        {
+            string get;
+            try
+            {
+                new PlanLogic().Delete(int.Parse(id));
+                get = "success";
+            }
+            catch (Exception ex)
+            {
+                get = "error";
+                HttpContext.Session.SetString("errorMsj", ex.Message);
+            }
+            HttpContext.Session.SetString("action", "Planes");
+            return RedirectToAction("Informacion", "Home", new { get });
+        }
     }
 }
