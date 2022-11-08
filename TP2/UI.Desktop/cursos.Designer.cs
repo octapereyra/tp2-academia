@@ -126,7 +126,7 @@ namespace UI.Desktop
             this.tsbEliminar});
             this.tsCursos.Location = new System.Drawing.Point(3, 0);
             this.tsCursos.Name = "tsCursos";
-            this.tsCursos.Size = new System.Drawing.Size(112, 25);
+            this.tsCursos.Size = new System.Drawing.Size(81, 25);
             this.tsCursos.TabIndex = 0;
             // 
             // tsbNuevo

@@ -46,7 +46,8 @@ namespace UI.Desktop
                     MessageBox.Show("Usuario y/o contraseña incorrectos", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch
+
+            catch (Exception exe)
             {
                 MessageBox.Show("Ha ocurrido un error, intentelo de nuevo mas tarde.", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

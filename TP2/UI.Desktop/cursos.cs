@@ -41,6 +41,11 @@ namespace UI.Desktop
             this.Close();
         }
 
+
+
+
+
+
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
             frmCursoDesktop formCurso = new frmCursoDesktop(ApplicationForm.ModoForm.Alta);

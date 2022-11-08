@@ -103,6 +103,16 @@ namespace UI.Desktop
             comisiones.WindowState = FormWindowState.Maximized;
             comisiones.Show();
         }
+        private void mnuDocentes_Click(object sender, EventArgs e)
+        {
+            CloseForms();
+            frmDocentesCursos docentes = new();
+            docentes.MdiParent = this;
+            docentes.WindowState = FormWindowState.Maximized;
+            docentes.Show();
+
+        }
+
         private void CloseForms()
         {
             Form[] forms = this.MdiChildren;
@@ -140,5 +150,7 @@ namespace UI.Desktop
             rn.WindowState = FormWindowState.Maximized;
             rn.Show();
         }
+
+        
     }
 }
