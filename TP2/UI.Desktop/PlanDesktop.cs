@@ -17,25 +17,7 @@ namespace UI.Desktop
         public frmPlanDesktop()
         {
             InitializeComponent();
-            CargarCombo();
-
-            switch (Modo)
-            {
-                case ModoForm.Alta:
-                    btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Baja:
-                    btnAceptar.Text = "Eliminar";
-                    break;
-                case ModoForm.Modificacion:
-                    btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Consulta:
-                    btnAceptar.Text = "Aceptar";
-                    break;
-                default:
-                    break;
-            }
+            CargarCombo();         
         }
         public frmPlanDesktop(ModoForm modo) : this()
         {
@@ -67,6 +49,23 @@ namespace UI.Desktop
             txtID.Text = PlanActual.ID.ToString();
             txtDescripcion.Text = PlanActual.Descripcion;          
             cboEspecialidad.SelectedValue = PlanActual.IDEspecialidad;
+            switch (Modo)
+            {
+                case ModoForm.Alta:
+                    btnAceptar.Text = "Guardar";
+                    break;
+                case ModoForm.Baja:
+                    btnAceptar.Text = "Eliminar";
+                    break;
+                case ModoForm.Modificacion:
+                    btnAceptar.Text = "Guardar";
+                    break;
+                case ModoForm.Consulta:
+                    btnAceptar.Text = "Aceptar";
+                    break;
+                default:
+                    break;
+            }
         }
 
         public override void MapearADatos()
@@ -83,7 +82,6 @@ namespace UI.Desktop
 
             PlanActual.Descripcion = txtDescripcion.Text.Trim();
             PlanActual.IDEspecialidad = (int)cboEspecialidad.SelectedValue;
-
 
             switch (Modo)
             {

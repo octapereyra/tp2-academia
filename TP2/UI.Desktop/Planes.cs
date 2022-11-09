@@ -58,12 +58,11 @@ namespace UI.Desktop
             if (this.dgvPlanes.SelectedRows.Count > 0)
             {
                 int id = ((Plan)(dgvPlanes.SelectedRows[0].DataBoundItem)).ID;
-                frmPlanDesktop frmPlan = new frmPlanDesktop(id, ApplicationForm.ModoForm.Baja);
+                frmPlanDesktop frmPlan = new frmPlanDesktop(id, ModoForm.Baja);
                 frmPlan.ShowDialog();
                 this.Listar();
             }
         }
-
         private void Planes_Load(object sender, EventArgs e)
         {
             Listar();

@@ -29,157 +29,185 @@ namespace UI.Desktop
         /// </summary>
         private void InitializeComponent()
         {
+            this.tlpCursoDesktop = new System.Windows.Forms.TableLayoutPanel();
+            this.lblId = new System.Windows.Forms.Label();
+            this.lblMateria = new System.Windows.Forms.Label();
+            this.txtID = new System.Windows.Forms.TextBox();
+            this.txtCupo = new System.Windows.Forms.TextBox();
+            this.txtAnio = new System.Windows.Forms.TextBox();
+            this.lblCupo = new System.Windows.Forms.Label();
+            this.lblAnio = new System.Windows.Forms.Label();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.lbID = new System.Windows.Forms.Label();
-            this.lbAnio = new System.Windows.Forms.Label();
-            this.lbCupo = new System.Windows.Forms.Label();
-            this.lbMateria = new System.Windows.Forms.Label();
-            this.lbComision = new System.Windows.Forms.Label();
-            this.txtIDCurso = new System.Windows.Forms.TextBox();
-            this.txtAnio = new System.Windows.Forms.TextBox();
-            this.txtCupo = new System.Windows.Forms.TextBox();
-            this.txtIDMateria = new System.Windows.Forms.TextBox();
-            this.txtIDComision = new System.Windows.Forms.TextBox();
+            this.lblComision = new System.Windows.Forms.Label();
+            this.cboComision = new System.Windows.Forms.ComboBox();
+            this.cboMateria = new System.Windows.Forms.ComboBox();
+            this.tlpCursoDesktop.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnAceptar
+            // tlpCursoDesktop
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(134, 364);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 1;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            this.tlpCursoDesktop.ColumnCount = 4;
+            this.tlpCursoDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.74368F));
+            this.tlpCursoDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.25632F));
+            this.tlpCursoDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            this.tlpCursoDesktop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 307F));
+            this.tlpCursoDesktop.Controls.Add(this.lblId, 0, 0);
+            this.tlpCursoDesktop.Controls.Add(this.lblMateria, 0, 1);
+            this.tlpCursoDesktop.Controls.Add(this.txtID, 1, 0);
+            this.tlpCursoDesktop.Controls.Add(this.txtCupo, 3, 1);
+            this.tlpCursoDesktop.Controls.Add(this.txtAnio, 3, 2);
+            this.tlpCursoDesktop.Controls.Add(this.lblCupo, 2, 1);
+            this.tlpCursoDesktop.Controls.Add(this.lblAnio, 2, 2);
+            this.tlpCursoDesktop.Controls.Add(this.btnAceptar, 2, 4);
+            this.tlpCursoDesktop.Controls.Add(this.btnCancelar, 3, 4);
+            this.tlpCursoDesktop.Controls.Add(this.lblComision, 0, 2);
+            this.tlpCursoDesktop.Controls.Add(this.cboComision, 1, 2);
+            this.tlpCursoDesktop.Controls.Add(this.cboMateria, 1, 1);
+            this.tlpCursoDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpCursoDesktop.Location = new System.Drawing.Point(0, 0);
+            this.tlpCursoDesktop.Name = "tlpCursoDesktop";
+            this.tlpCursoDesktop.RowCount = 5;
+            this.tlpCursoDesktop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.55556F));
+            this.tlpCursoDesktop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpCursoDesktop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            this.tlpCursoDesktop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+            this.tlpCursoDesktop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            this.tlpCursoDesktop.Size = new System.Drawing.Size(863, 199);
+            this.tlpCursoDesktop.TabIndex = 1;
             // 
-            // btnCancelar
+            // lblId
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(488, 364);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 2;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.lblId.AutoSize = true;
+            this.lblId.Location = new System.Drawing.Point(3, 0);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(18, 15);
+            this.lblId.TabIndex = 0;
+            this.lblId.Text = "ID";
             // 
-            // lbID
+            // lblMateria
             // 
-            this.lbID.AutoSize = true;
-            this.lbID.Location = new System.Drawing.Point(48, 66);
-            this.lbID.Name = "lbID";
-            this.lbID.Size = new System.Drawing.Size(18, 15);
-            this.lbID.TabIndex = 3;
-            this.lbID.Text = "ID";
+            this.lblMateria.AutoSize = true;
+            this.lblMateria.Location = new System.Drawing.Point(3, 45);
+            this.lblMateria.Name = "lblMateria";
+            this.lblMateria.Size = new System.Drawing.Size(47, 15);
+            this.lblMateria.TabIndex = 1;
+            this.lblMateria.Text = "Materia";
             // 
-            // lbAnio
+            // txtID
             // 
-            this.lbAnio.AutoSize = true;
-            this.lbAnio.Location = new System.Drawing.Point(41, 109);
-            this.lbAnio.Name = "lbAnio";
-            this.lbAnio.Size = new System.Drawing.Size(87, 15);
-            this.lbAnio.TabIndex = 4;
-            this.lbAnio.Text = "Año calendario";
-            // 
-            // lbCupo
-            // 
-            this.lbCupo.AutoSize = true;
-            this.lbCupo.Location = new System.Drawing.Point(41, 149);
-            this.lbCupo.Name = "lbCupo";
-            this.lbCupo.Size = new System.Drawing.Size(36, 15);
-            this.lbCupo.TabIndex = 5;
-            this.lbCupo.Text = "Cupo";
-            // 
-            // lbMateria
-            // 
-            this.lbMateria.AutoSize = true;
-            this.lbMateria.Location = new System.Drawing.Point(41, 190);
-            this.lbMateria.Name = "lbMateria";
-            this.lbMateria.Size = new System.Drawing.Size(61, 15);
-            this.lbMateria.TabIndex = 6;
-            this.lbMateria.Text = "ID Materia";
-            // 
-            // lbComision
-            // 
-            this.lbComision.AutoSize = true;
-            this.lbComision.Location = new System.Drawing.Point(41, 234);
-            this.lbComision.Name = "lbComision";
-            this.lbComision.Size = new System.Drawing.Size(72, 15);
-            this.lbComision.TabIndex = 7;
-            this.lbComision.Text = "ID Comision";
-            // 
-            // txtIDCurso
-            // 
-            this.txtIDCurso.Location = new System.Drawing.Point(134, 63);
-            this.txtIDCurso.Name = "txtIDCurso";
-            this.txtIDCurso.ReadOnly = true;
-            this.txtIDCurso.Size = new System.Drawing.Size(100, 23);
-            this.txtIDCurso.TabIndex = 8;
-            // 
-            // txtAnio
-            // 
-            this.txtAnio.Location = new System.Drawing.Point(134, 106);
-            this.txtAnio.Name = "txtAnio";
-            this.txtAnio.Size = new System.Drawing.Size(100, 23);
-            this.txtAnio.TabIndex = 9;
+            this.txtID.Location = new System.Drawing.Point(102, 3);
+            this.txtID.Name = "txtID";
+            this.txtID.ReadOnly = true;
+            this.txtID.Size = new System.Drawing.Size(100, 23);
+            this.txtID.TabIndex = 4;
             // 
             // txtCupo
             // 
-            this.txtCupo.Location = new System.Drawing.Point(134, 146);
+            this.txtCupo.Location = new System.Drawing.Point(558, 48);
             this.txtCupo.Name = "txtCupo";
-            this.txtCupo.Size = new System.Drawing.Size(100, 23);
-            this.txtCupo.TabIndex = 10;
+            this.txtCupo.Size = new System.Drawing.Size(88, 23);
+            this.txtCupo.TabIndex = 2;
             // 
-            // txtIDMateria
+            // txtAnio
             // 
-            this.txtIDMateria.Location = new System.Drawing.Point(134, 190);
-            this.txtIDMateria.Name = "txtIDMateria";
-            this.txtIDMateria.Size = new System.Drawing.Size(100, 23);
-            this.txtIDMateria.TabIndex = 11;
+            this.txtAnio.Location = new System.Drawing.Point(558, 88);
+            this.txtAnio.Name = "txtAnio";
+            this.txtAnio.Size = new System.Drawing.Size(88, 23);
+            this.txtAnio.TabIndex = 4;
             // 
-            // txtIDComision
+            // lblCupo
             // 
-            this.txtIDComision.Location = new System.Drawing.Point(134, 226);
-            this.txtIDComision.Name = "txtIDComision";
-            this.txtIDComision.Size = new System.Drawing.Size(100, 23);
-            this.txtIDComision.TabIndex = 12;
+            this.lblCupo.AutoSize = true;
+            this.lblCupo.Location = new System.Drawing.Point(441, 45);
+            this.lblCupo.Name = "lblCupo";
+            this.lblCupo.Size = new System.Drawing.Size(36, 15);
+            this.lblCupo.TabIndex = 12;
+            this.lblCupo.Text = "Cupo";
+            // 
+            // lblAnio
+            // 
+            this.lblAnio.AutoSize = true;
+            this.lblAnio.Location = new System.Drawing.Point(441, 85);
+            this.lblAnio.Name = "lblAnio";
+            this.lblAnio.Size = new System.Drawing.Size(29, 15);
+            this.lblAnio.TabIndex = 13;
+            this.lblAnio.Text = "Año";
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Location = new System.Drawing.Point(441, 163);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
+            this.btnAceptar.TabIndex = 5;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(558, 163);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
+            // 
+            // lblComision
+            // 
+            this.lblComision.AutoSize = true;
+            this.lblComision.Location = new System.Drawing.Point(3, 85);
+            this.lblComision.Name = "lblComision";
+            this.lblComision.Size = new System.Drawing.Size(58, 15);
+            this.lblComision.TabIndex = 14;
+            this.lblComision.Text = "Comisión";
+            // 
+            // cboComision
+            // 
+            this.cboComision.FormattingEnabled = true;
+            this.cboComision.Location = new System.Drawing.Point(102, 88);
+            this.cboComision.Name = "cboComision";
+            this.cboComision.Size = new System.Drawing.Size(161, 23);
+            this.cboComision.TabIndex = 15;
+            // 
+            // cboMateria
+            // 
+            this.cboMateria.FormattingEnabled = true;
+            this.cboMateria.Location = new System.Drawing.Point(102, 48);
+            this.cboMateria.Name = "cboMateria";
+            this.cboMateria.Size = new System.Drawing.Size(161, 23);
+            this.cboMateria.TabIndex = 3;
             // 
             // frmCursoDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtIDComision);
-            this.Controls.Add(this.txtIDMateria);
-            this.Controls.Add(this.txtCupo);
-            this.Controls.Add(this.txtAnio);
-            this.Controls.Add(this.txtIDCurso);
-            this.Controls.Add(this.lbComision);
-            this.Controls.Add(this.lbMateria);
-            this.Controls.Add(this.lbCupo);
-            this.Controls.Add(this.lbAnio);
-            this.Controls.Add(this.lbID);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnAceptar);
+            this.ClientSize = new System.Drawing.Size(863, 199);
+            this.Controls.Add(this.tlpCursoDesktop);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmCursoDesktop";
             this.Text = "Curso";
+            this.tlpCursoDesktop.ResumeLayout(false);
+            this.tlpCursoDesktop.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TableLayoutPanel tlpCursoDesktop;
+        private System.Windows.Forms.Label lblId;
+        private System.Windows.Forms.Label lblMateria;
+        private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.TextBox txtCupo;
+        private System.Windows.Forms.TextBox txtAnio;
+        private System.Windows.Forms.Label lblCupo;
+        private System.Windows.Forms.Label lblAnio;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Label lbID;
-        private System.Windows.Forms.Label lbAnio;
-        private System.Windows.Forms.Label lbCupo;
-        private System.Windows.Forms.Label lbMateria;
-        private System.Windows.Forms.Label lbComision;
-        private System.Windows.Forms.TextBox txtIDCurso;
-        private System.Windows.Forms.TextBox txtAnio;
-        private System.Windows.Forms.TextBox txtCupo;
-        private System.Windows.Forms.TextBox txtIDMateria;
-        private System.Windows.Forms.TextBox txtIDComision;
+        private System.Windows.Forms.ComboBox cboMateria;
+        private System.Windows.Forms.Label lblComision;
+        private System.Windows.Forms.ComboBox cboComision;
     }
 }

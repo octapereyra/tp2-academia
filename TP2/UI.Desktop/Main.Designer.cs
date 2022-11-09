@@ -96,56 +96,56 @@ namespace UI.Desktop
             // mnuUsuarios
             // 
             this.mnuUsuarios.Name = "mnuUsuarios";
-            this.mnuUsuarios.Size = new System.Drawing.Size(180, 22);
+            this.mnuUsuarios.Size = new System.Drawing.Size(150, 22);
             this.mnuUsuarios.Text = "Usuarios";
             this.mnuUsuarios.Click += new System.EventHandler(this.mnuUsuarios_Click);
             // 
             // mnuPersonas
             // 
             this.mnuPersonas.Name = "mnuPersonas";
-            this.mnuPersonas.Size = new System.Drawing.Size(180, 22);
+            this.mnuPersonas.Size = new System.Drawing.Size(150, 22);
             this.mnuPersonas.Text = "Personas";
             this.mnuPersonas.Click += new System.EventHandler(this.mnuPersonas_Click);
             // 
             // mnuMaterias
             // 
             this.mnuMaterias.Name = "mnuMaterias";
-            this.mnuMaterias.Size = new System.Drawing.Size(180, 22);
+            this.mnuMaterias.Size = new System.Drawing.Size(150, 22);
             this.mnuMaterias.Text = "Materias";
             this.mnuMaterias.Click += new System.EventHandler(this.mnuMaterias_Click);
             // 
             // mnuEspecialidades
             // 
             this.mnuEspecialidades.Name = "mnuEspecialidades";
-            this.mnuEspecialidades.Size = new System.Drawing.Size(180, 22);
+            this.mnuEspecialidades.Size = new System.Drawing.Size(150, 22);
             this.mnuEspecialidades.Text = "Especialidades";
             this.mnuEspecialidades.Click += new System.EventHandler(this.mnuEspecialidades_Click);
             // 
             // mnuPlanes
             // 
             this.mnuPlanes.Name = "mnuPlanes";
-            this.mnuPlanes.Size = new System.Drawing.Size(180, 22);
+            this.mnuPlanes.Size = new System.Drawing.Size(150, 22);
             this.mnuPlanes.Text = "Planes";
             this.mnuPlanes.Click += new System.EventHandler(this.mnuPlanes_Click);
             // 
             // mnuCursos
             // 
             this.mnuCursos.Name = "mnuCursos";
-            this.mnuCursos.Size = new System.Drawing.Size(180, 22);
+            this.mnuCursos.Size = new System.Drawing.Size(150, 22);
             this.mnuCursos.Text = "Cursos";
             this.mnuCursos.Click += new System.EventHandler(this.mnuCursos_Click);
             // 
             // mnuComisiones
             // 
             this.mnuComisiones.Name = "mnuComisiones";
-            this.mnuComisiones.Size = new System.Drawing.Size(180, 22);
+            this.mnuComisiones.Size = new System.Drawing.Size(150, 22);
             this.mnuComisiones.Text = "Comisiones";
             this.mnuComisiones.Click += new System.EventHandler(this.mnuComisiones_Click);
             // 
             // mnuDocentes
             // 
             this.mnuDocentes.Name = "mnuDocentes";
-            this.mnuDocentes.Size = new System.Drawing.Size(180, 22);
+            this.mnuDocentes.Size = new System.Drawing.Size(150, 22);
             this.mnuDocentes.Text = "Docentes";
             this.mnuDocentes.Click += new System.EventHandler(this.mnuDocentes_Click);
             // 
@@ -183,13 +183,14 @@ namespace UI.Desktop
             // mnuReporteCursos
             // 
             this.mnuReporteCursos.Name = "mnuReporteCursos";
-            this.mnuReporteCursos.Size = new System.Drawing.Size(110, 22);
+            this.mnuReporteCursos.Size = new System.Drawing.Size(180, 22);
             this.mnuReporteCursos.Text = "Cursos";
+            this.mnuReporteCursos.Click += new System.EventHandler(this.mnuReporteCursos_Click);
             // 
             // mnuReportePlanes
             // 
             this.mnuReportePlanes.Name = "mnuReportePlanes";
-            this.mnuReportePlanes.Size = new System.Drawing.Size(110, 22);
+            this.mnuReportePlanes.Size = new System.Drawing.Size(180, 22);
             this.mnuReportePlanes.Text = "Planes";
             // 
             // frmMain

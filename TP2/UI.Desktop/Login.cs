@@ -47,7 +47,7 @@ namespace UI.Desktop
                 }
             }
 
-            catch (Exception exe)
+            catch
             {
                 MessageBox.Show("Ha ocurrido un error, intentelo de nuevo mas tarde.", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

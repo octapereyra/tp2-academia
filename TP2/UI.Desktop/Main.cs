@@ -36,6 +36,8 @@ namespace UI.Desktop
                     break;
                 case Persona.TiposPersonas.Administrativo:
                     mnuRegistroNotas.Enabled = false;
+                    mnuInscripcionCurso.Enabled = false;
+                    mnuReportes.Enabled = false;
                     break;
                 default:
                     break;
@@ -139,7 +141,9 @@ namespace UI.Desktop
 
         private void mnuLogout_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            UsuarioLogueado = null;
+            CloseForms();
+            frmMain_Shown(sender, e);
         }
 
         private void mnuRegistroNotas_Click(object sender, EventArgs e)
@@ -151,6 +155,11 @@ namespace UI.Desktop
             rn.Show();
         }
 
-        
+        private void mnuReporteCursos_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new();
+            save.FileName = DateTime.Now.ToString("ddMMyyyyHHmmss" + ".pdf");
+            save.ShowDialog();
+        }
     }
 }

@@ -17,33 +17,7 @@ namespace UI.Desktop
         public frmCursoDesktop()
         {
             InitializeComponent();
-        }
-
-        private Curso _CursoActual;
-        public Curso CursoActual { get => _CursoActual; set => _CursoActual = value; }
-
-        public frmCursoDesktop(ModoForm modo) : this() //2
-        {
-            this.Modo = modo;
-        }
-
-        public frmCursoDesktop(int ID, ModoForm modo) : this() //3
-        {
-            Modo = modo;
-            CursoLogic cur = new CursoLogic();
-            CursoActual = cur.GetOne(ID);
-            MapearDeDatos();
-        }
-        public override void MapearDeDatos()
-        {
-
-            this.txtIDCurso.Text = this.CursoActual.ID.ToString();
-            this.txtAnio.Text = this.CursoActual.AnioCalendario.ToString();
-            this.txtCupo.Text = this.CursoActual.Cupo.ToString();
-            this.txtIDComision.Text = this.CursoActual.IDComision.ToString();
-            this.txtIDMateria.Text = this.CursoActual.IDMateria.ToString();
-
-            //q hace esta parte?
+            CargarCombo();
             switch (Modo)
             {
                 case ModoForm.Alta:
@@ -60,19 +34,52 @@ namespace UI.Desktop
                     break;
             }
         }
+        private void CargarCombo()
+        {
+            cboComision.DataSource = new ComisionLogic().GetAll();
+            cboMateria.DataSource = new MateriaLogic().GetAll();
+            cboComision.ValueMember = "id";
+            cboComision.DisplayMember = "descripcion";
+            cboMateria.ValueMember = "id";
+            cboMateria.DisplayMember = "descripcion";
+        }
+
+        private Curso _CursoActual;
+        public Curso CursoActual { get => _CursoActual; set => _CursoActual = value; }
+
+        public frmCursoDesktop(ModoForm modo) : this() 
+        {
+            this.Modo = modo;
+        }
+        public frmCursoDesktop(int ID, ModoForm modo) : this() 
+        {
+            Modo = modo;
+            CursoLogic cur = new CursoLogic();
+            CursoActual = cur.GetOne(ID);
+            MapearDeDatos();
+        }
+        public override void MapearDeDatos()
+        {
+
+            txtID.Text = CursoActual.ID.ToString();
+            txtAnio.Text = CursoActual.AnioCalendario.ToString();
+            txtCupo.Text = CursoActual.Cupo.ToString();
+            cboComision.SelectedValue = CursoActual.IDComision;
+            cboMateria.SelectedValue = CursoActual.IDMateria;
+            
+        }
         public override void MapearADatos()
         {
-            CursoLogic curLogic = new CursoLogic();
-            Curso nuevoCur = new Curso();
+            CursoLogic curLogic = new();
+            Curso nuevoCur = new();
             CursoActual = nuevoCur;
 
             if (Modo == ModoForm.Alta || Modo == ModoForm.Modificacion)
             {
-                //nuevoCur.Descripcion = this.txtDescripcion.Text;
-                nuevoCur.AnioCalendario = int.Parse( this.txtAnio.Text);
-                nuevoCur.Cupo = int.Parse(this.txtCupo.Text);
-                nuevoCur.IDComision = int.Parse(this.txtIDComision.Text);
-                nuevoCur.IDMateria = int.Parse(this.txtIDMateria.Text);
+                nuevoCur.AnioCalendario = int.Parse(txtAnio.Text);
+                nuevoCur.Cupo = int.Parse(txtCupo.Text);
+                nuevoCur.IDComision = (int)cboComision.SelectedValue;
+                nuevoCur.IDMateria = (int)cboMateria.SelectedValue;
                 if (Modo == ModoForm.Alta)
                 {
                     nuevoCur.State = BusinessEntity.States.New;
@@ -80,21 +87,21 @@ namespace UI.Desktop
                 }
                 if (Modo == ModoForm.Modificacion)
                 {
-                    nuevoCur.ID = int.Parse(this.txtIDCurso.Text);
+                    nuevoCur.ID = int.Parse(txtID.Text);
                     nuevoCur.State = BusinessEntity.States.Modified;
                     curLogic.Save(nuevoCur);
                 }
             }
             if (Modo == ModoForm.Baja)
             {
-                nuevoCur.ID = int.Parse(this.txtIDCurso.Text);
+                nuevoCur.ID = int.Parse(this.txtID.Text);
                 nuevoCur.State = BusinessEntity.States.Deleted;
                 curLogic.Save(nuevoCur);
             }
         }
         public override bool Validar()
         {
-            if (txtAnio.TextLength == 0 && txtCupo.TextLength == 0 && txtIDComision.TextLength == 0 && txtIDCurso.TextLength == 0 && txtIDMateria.TextLength == 0)
+            if (txtAnio.TextLength == 0 || txtCupo.TextLength == 0)
             {
                 Notificar("Error", "No puede haber campos vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -104,14 +111,14 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            CursoLogic curLogic = new CursoLogic();
+            CursoLogic curLogic = new();
             try
             {
                 curLogic.Save(CursoActual);
             }
-            catch (Exception exc)
+            catch (Exception ex)
             {
-                DialogResult result = MessageBox.Show(exc.Message, "Error", MessageBoxButtons.OK);
+                DialogResult result = MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK);
             }
         }
 
@@ -131,10 +138,9 @@ namespace UI.Desktop
                 Close();
             }
         }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click_1(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

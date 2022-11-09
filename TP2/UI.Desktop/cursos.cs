@@ -24,6 +24,7 @@ namespace UI.Desktop
             CursoLogic cl = new();
             dgvCursos.AutoGenerateColumns = false;
             dgvCursos.DataSource = cl.GetAll();
+            
         }
 
         private void frmCursos_Load(object sender, EventArgs e)
@@ -40,11 +41,6 @@ namespace UI.Desktop
         {
             this.Close();
         }
-
-
-
-
-
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
@@ -63,7 +59,6 @@ namespace UI.Desktop
                 this.Listar();
             }
         }
-
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
             if (this.dgvCursos.SelectedRows.Count > 0)

@@ -11,7 +11,6 @@ namespace Data.Database
 {
     public class ComisionAdapter : Adapter
     {
-
         public List<Comision> GetAll()
         {
             List<Comision> comisiones = new();
@@ -19,7 +18,7 @@ namespace Data.Database
             {
                 this.OpenConnection();
 
-                SqlCommand cmdComisiones = new SqlCommand("select * from comisiones", SqlConn);
+                SqlCommand cmdComisiones = new("select * from comisiones", SqlConn);
                 SqlDataReader drComisiones = cmdComisiones.ExecuteReader();
 
                 while (drComisiones.Read())
