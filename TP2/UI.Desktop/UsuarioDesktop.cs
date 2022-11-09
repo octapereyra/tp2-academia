@@ -39,6 +39,7 @@ namespace UI.Desktop
             this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
             this.txtClave.Text = this.UsuarioActual.Clave;
             this.txtConfirmarClave.Text = this.UsuarioActual.Clave;
+            cboPersona.SelectedValue = UsuarioActual.IdPersona;
             switch (Modo)
             {
                 case ModoForm.Alta:
@@ -68,6 +69,7 @@ namespace UI.Desktop
                 nuevoUsu.Clave = this.txtClave.Text;
                 nuevoUsu.EMail = this.txtEmail.Text;
                 nuevoUsu.NombreUsuario = this.txtUsuario.Text;
+                nuevoUsu.IdPersona = (int)cboPersona.SelectedValue;
                 nuevoUsu.Habilitado = this.chkHabilitado.Checked;
 
                 if (Modo == ModoForm.Alta)
@@ -175,6 +177,14 @@ namespace UI.Desktop
         public frmUsuarioDesktop()
         {
             InitializeComponent();
+            CargarPersonas();
+        }
+
+        private void CargarPersonas()
+        {
+            cboPersona.DataSource = new PersonaLogic().GetAll();
+            cboPersona.ValueMember = "id";
+            cboPersona.DisplayMember = "legajo";
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)

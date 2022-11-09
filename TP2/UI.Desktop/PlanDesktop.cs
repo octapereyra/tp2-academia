@@ -125,14 +125,16 @@ namespace UI.Desktop
                 errorMsg += "Debe ingresar una descripción";
                 validate = false;
             }
-
             if (cboEspecialidad.SelectedIndex == -1)
             {
                 errorMsg += "Debe seleccionar una especialidad";
                 validate = false;
             }
-
-            Notificar("Error", errorMsg, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (errorMsg != String.Empty)
+            {
+                Notificar("Error", errorMsg, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
             return validate;
         }
 

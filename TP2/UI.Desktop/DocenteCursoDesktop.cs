@@ -14,19 +14,19 @@ namespace UI.Desktop
 {
     public partial class frmDocenteCursoDesktop : ApplicationForm
     {
-        public frmDocenteCursoDesktop() //1
+        public frmDocenteCursoDesktop() 
         {
             InitializeComponent();
         }
         private DocenteCurso _DocenteEnCursoActual;
         public DocenteCurso DocenteCursoActual { get => _DocenteEnCursoActual; set => _DocenteEnCursoActual = value; }
 
-        public frmDocenteCursoDesktop(ModoForm modo) : this() //2
+        public frmDocenteCursoDesktop(ModoForm modo) : this() 
         {
             this.Modo = modo;
         }
 
-        public frmDocenteCursoDesktop(int ID, ModoForm modo) : this() //3
+        public frmDocenteCursoDesktop(int ID, ModoForm modo) : this() 
         {
             Modo = modo;
             DocenteCursoLogic dcl = new DocenteCursoLogic();
@@ -73,10 +73,10 @@ namespace UI.Desktop
         {
             Dictionary<int, string> comboSourceCargo = new Dictionary<int, string>();
 
-            comboSourceCargo.Add(1, "Ayudante");  
-            comboSourceCargo.Add(2, "JTP");
-            comboSourceCargo.Add(3, "Profesor_Adjunto");
-            comboSourceCargo.Add(4, "Profesor_Titular"); 
+            comboSourceCargo.Add(0, "Ayudante");  
+            comboSourceCargo.Add(1, "JTP");
+            comboSourceCargo.Add(2, "Profesor_Adjunto");
+            comboSourceCargo.Add(3, "Profesor_Titular"); 
 
             cbCargos.DataSource = new BindingSource(comboSourceCargo, null);
             
@@ -178,7 +178,6 @@ namespace UI.Desktop
             }
             return result;
         }
-
         public override void GuardarCambios()
         {
             MapearADatos();

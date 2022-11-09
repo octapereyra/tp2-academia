@@ -39,6 +39,10 @@ namespace UI.Desktop
             this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idcurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iddocente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tcDocentes.ContentPanel.SuspendLayout();
             this.tcDocentes.TopToolStripPanel.SuspendLayout();
             this.tcDocentes.SuspendLayout();
@@ -105,7 +109,14 @@ namespace UI.Desktop
             // 
             // dgvDocentes
             // 
+            this.dgvDocentes.AllowUserToAddRows = false;
+            this.dgvDocentes.AllowUserToDeleteRows = false;
             this.dgvDocentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDocentes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.idcurso,
+            this.iddocente,
+            this.cargo});
             this.tlDocentes.SetColumnSpan(this.dgvDocentes, 2);
             this.dgvDocentes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDocentes.Location = new System.Drawing.Point(3, 3);
@@ -126,7 +137,7 @@ namespace UI.Desktop
             this.tsbEliminar});
             this.tsDocentes.Location = new System.Drawing.Point(3, 0);
             this.tsDocentes.Name = "tsDocentes";
-            this.tsDocentes.Size = new System.Drawing.Size(112, 25);
+            this.tsDocentes.Size = new System.Drawing.Size(81, 25);
             this.tsDocentes.TabIndex = 0;
             // 
             // tsbNuevo
@@ -161,6 +172,35 @@ namespace UI.Desktop
             this.tsbEliminar.ToolTipText = "Eliminar";
             this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // idcurso
+            // 
+            this.idcurso.DataPropertyName = "idcurso";
+            this.idcurso.HeaderText = "ID Curso";
+            this.idcurso.Name = "idcurso";
+            this.idcurso.ReadOnly = true;
+            // 
+            // iddocente
+            // 
+            this.iddocente.DataPropertyName = "iddocente";
+            this.iddocente.HeaderText = "ID Docente";
+            this.iddocente.Name = "iddocente";
+            this.iddocente.ReadOnly = true;
+            // 
+            // cargo
+            // 
+            this.cargo.DataPropertyName = "cargo";
+            this.cargo.HeaderText = "Cargo";
+            this.cargo.Name = "cargo";
+            this.cargo.ReadOnly = true;
+            // 
             // frmDocentesCursos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -194,5 +234,9 @@ namespace UI.Desktop
         private System.Windows.Forms.ToolStripButton tsbNuevo;
         private System.Windows.Forms.ToolStripButton tsbEditar;
         private System.Windows.Forms.ToolStripButton tsbEliminar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idcurso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iddocente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cargo;
     }
 }

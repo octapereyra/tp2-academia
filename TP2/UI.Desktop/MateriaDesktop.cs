@@ -61,6 +61,7 @@ namespace UI.Desktop
             cboPlan.Enabled = true;
             PlanLogic pl = new();
             cboPlan.DataSource = pl.GetPlanesByEspecialidad(idEspecialidad);
+            cboPlan.ValueMember = "id";
             cboPlan.DisplayMember = "descripcion";
         }
 

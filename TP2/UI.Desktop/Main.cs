@@ -52,7 +52,6 @@ namespace UI.Desktop
             p.WindowState = FormWindowState.Maximized;
             p.Show();
         }
-
         private void mnuMaterias_Click(object sender, EventArgs e)
         {
             CloseForms();
@@ -61,7 +60,6 @@ namespace UI.Desktop
             m.WindowState = FormWindowState.Maximized;
             m.Show();
         }
-
         private void mnuUsuarios_Click(object sender, EventArgs e)
         {
             CloseForms();
@@ -70,7 +68,6 @@ namespace UI.Desktop
             u.WindowState = FormWindowState.Maximized;
             u.Show();
         }
-
         private void mnuEspecialidades_Click(object sender, EventArgs e)
         {
             CloseForms();
@@ -79,7 +76,6 @@ namespace UI.Desktop
             esp.WindowState = FormWindowState.Maximized;
             esp.Show();
         }
-
         private void mnuPlanes_Click(object sender, EventArgs e)
         {
             CloseForms();
@@ -96,7 +92,6 @@ namespace UI.Desktop
             cursos.WindowState = FormWindowState.Maximized;
             cursos.Show();
         }
-
         private void mnuComisiones_Click(object sender, EventArgs e)
         {
             CloseForms();
@@ -114,18 +109,20 @@ namespace UI.Desktop
             docentes.Show();
 
         }
-
         private void CloseForms()
         {
+            pbLogo.Visible = false;
+            lblBienvenido.Visible = false;
             Form[] forms = this.MdiChildren;
             for (int i = 0; i < forms.Length; i++)
             {
                 forms[i].Dispose();
             }
         }
-
         private void frmMain_Shown(object sender, EventArgs e)
         {
+            pbLogo.Visible = true;
+            lblBienvenido.Visible = true;
             frmLogin login = new();
             if (login.ShowDialog() != DialogResult.OK)
             {
@@ -138,14 +135,12 @@ namespace UI.Desktop
                 UsuarioLogueado = login.UsuarioActual;
             }
         }
-
         private void mnuLogout_Click(object sender, EventArgs e)
         {
             UsuarioLogueado = null;
             CloseForms();
             frmMain_Shown(sender, e);
         }
-
         private void mnuRegistroNotas_Click(object sender, EventArgs e)
         {
             CloseForms();
@@ -154,7 +149,6 @@ namespace UI.Desktop
             rn.WindowState = FormWindowState.Maximized;
             rn.Show();
         }
-
         private void mnuReporteCursos_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new();

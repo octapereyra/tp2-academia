@@ -52,7 +52,7 @@ namespace UI.Desktop
         {
             if (this.dgvDocentes.SelectedRows.Count > 0)
             {
-                int ID = ((Curso)this.dgvDocentes.SelectedRows[0].DataBoundItem).ID;
+                int ID = ((DocenteCurso)this.dgvDocentes.SelectedRows[0].DataBoundItem).ID;
                 frmDocenteCursoDesktop formDocenteCurso = new frmDocenteCursoDesktop(ID, ApplicationForm.ModoForm.Modificacion);
                 formDocenteCurso.ShowDialog();
                 this.Listar();
@@ -63,7 +63,7 @@ namespace UI.Desktop
         {
             if (this.dgvDocentes.SelectedRows.Count > 0)
             {
-                int ID = ((Curso)this.dgvDocentes.SelectedRows[0].DataBoundItem).ID;
+                int ID = ((DocenteCurso)this.dgvDocentes.SelectedRows[0].DataBoundItem).ID;
                 frmDocenteCursoDesktop formDocenteCurso = new frmDocenteCursoDesktop(ID, ApplicationForm.ModoForm.Baja);
                 formDocenteCurso.ShowDialog();
                 this.Listar();

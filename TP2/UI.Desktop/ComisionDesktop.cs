@@ -34,7 +34,7 @@ namespace UI.Desktop
             this.txtID.Text = this.ComisionActual.ID.ToString();
             this.txtDescComision.Text = this.ComisionActual.Descripcion;
             this.txtAnioEspecialidad.Text = this.ComisionActual.AnioEspecialidad.ToString();
-            this.txtIDPlan.Text = this.ComisionActual.IDPlan.ToString();
+            cboPlan.SelectedValue = this.ComisionActual.IDPlan.ToString();
 
             switch (Modo)
             {
@@ -63,28 +63,39 @@ namespace UI.Desktop
             {
                 nuevaComi.Descripcion = this.txtDescComision.Text;
                 nuevaComi.AnioEspecialidad = int.Parse(txtAnioEspecialidad.Text);
-                nuevaComi.IDPlan = int.Parse(txtIDPlan.Text);
+                nuevaComi.IDPlan = (int)cboPlan.SelectedValue;
 
+                if (Modo == ModoForm.Alta)
+                {
+                    nuevaComi.State = BusinessEntity.States.New;
+                    comLogic.Save(nuevaComi);
+                }
                 if (Modo == ModoForm.Modificacion)
                 {
                     nuevaComi.ID = int.Parse(txtID.Text);
-                }
-
+                    nuevaComi.State = BusinessEntity.States.Modified;
+                    comLogic.Save(nuevaComi);
+                }              
+            }
+            if (Modo == ModoForm.Baja)
+            {
+                nuevaComi.ID = int.Parse(txtID.Text);
+                nuevaComi.State = BusinessEntity.States.Deleted;
                 comLogic.Save(nuevaComi);
             }
         }
 
-
         public override bool Validar()
         {
-            Boolean rta=false;
+            Boolean rta = true;
             string errorString = String.Empty;
 
-            if (this.txtDescComision.Text != String.Empty && this.txtAnioEspecialidad.Text != String.Empty && this.txtIDPlan.Text != String.Empty ) { 
-                rta = true;
+            if (txtDescComision.Text == String.Empty || txtAnioEspecialidad.Text == String.Empty || cboPlan.SelectedIndex == -1 ) 
+            { 
+                rta = false;
             }
 
-            else
+            if(!rta)
             {
                 errorString = "No puede haber campos vaíos\n";
             }
@@ -100,6 +111,14 @@ namespace UI.Desktop
         public frmComisionDesktop()
         {
             InitializeComponent();
+            CargarPlanes();
+        }
+
+        private void CargarPlanes()
+        {
+            cboPlan.DataSource = new PlanLogic().GetAll();
+            cboPlan.ValueMember = "id";
+            cboPlan.DisplayMember = "descripcion";
         }
 
         public override void GuardarCambios()
@@ -115,7 +134,6 @@ namespace UI.Desktop
             {
                 DialogResult result = MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
 
         }
 

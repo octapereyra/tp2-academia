@@ -47,7 +47,10 @@ namespace UI.Desktop
             this.mnuReportes = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReporteCursos = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReportePlanes = new System.Windows.Forms.ToolStripMenuItem();
+            this.pbLogo = new System.Windows.Forms.PictureBox();
+            this.lblBienvenido = new System.Windows.Forms.Label();
             this.mnuPrincipal.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // mnuPrincipal
@@ -183,15 +186,37 @@ namespace UI.Desktop
             // mnuReporteCursos
             // 
             this.mnuReporteCursos.Name = "mnuReporteCursos";
-            this.mnuReporteCursos.Size = new System.Drawing.Size(180, 22);
+            this.mnuReporteCursos.Size = new System.Drawing.Size(110, 22);
             this.mnuReporteCursos.Text = "Cursos";
             this.mnuReporteCursos.Click += new System.EventHandler(this.mnuReporteCursos_Click);
             // 
             // mnuReportePlanes
             // 
             this.mnuReportePlanes.Name = "mnuReportePlanes";
-            this.mnuReportePlanes.Size = new System.Drawing.Size(180, 22);
+            this.mnuReportePlanes.Size = new System.Drawing.Size(110, 22);
             this.mnuReportePlanes.Text = "Planes";
+            // 
+            // pbLogo
+            // 
+            this.pbLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pbLogo.Image = global::UI.Desktop.Properties.Resources.utn1;
+            this.pbLogo.Location = new System.Drawing.Point(0, 24);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(1279, 130);
+            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbLogo.TabIndex = 2;
+            this.pbLogo.TabStop = false;
+            // 
+            // lblBienvenido
+            // 
+            this.lblBienvenido.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.lblBienvenido.AutoSize = true;
+            this.lblBienvenido.Font = new System.Drawing.Font("Segoe UI Emoji", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblBienvenido.Location = new System.Drawing.Point(435, 157);
+            this.lblBienvenido.Name = "lblBienvenido";
+            this.lblBienvenido.Size = new System.Drawing.Size(406, 36);
+            this.lblBienvenido.TabIndex = 3;
+            this.lblBienvenido.Text = "Bienvenido al sistema académico";
             // 
             // frmMain
             // 
@@ -199,6 +224,8 @@ namespace UI.Desktop
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1279, 558);
+            this.Controls.Add(this.lblBienvenido);
+            this.Controls.Add(this.pbLogo);
             this.Controls.Add(this.mnuPrincipal);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
@@ -209,6 +236,7 @@ namespace UI.Desktop
             this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.mnuPrincipal.ResumeLayout(false);
             this.mnuPrincipal.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,5 +267,7 @@ namespace UI.Desktop
         private System.Windows.Forms.ToolStripMenuItem mnuReporteCursos;
         private System.Windows.Forms.ToolStripMenuItem mnuReportePlanes;
         private System.Windows.Forms.ToolStripMenuItem mnuDocentes;
+        private System.Windows.Forms.PictureBox pbLogo;
+        private System.Windows.Forms.Label lblBienvenido;
     }
 }

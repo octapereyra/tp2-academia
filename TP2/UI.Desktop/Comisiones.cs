@@ -22,6 +22,7 @@ namespace UI.Desktop
         public void Listar()
         {
             ComisionLogic cl = new();
+            dgvComisiones.AutoGenerateColumns = false;
             dgvComisiones.DataSource = cl.GetAll();
         }
 
@@ -37,14 +38,35 @@ namespace UI.Desktop
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            frmComisionDesktop formComision = new frmComisionDesktop(ApplicationForm.ModoForm.Alta);
+            frmComisionDesktop formComision = new(ApplicationForm.ModoForm.Alta);
             formComision.ShowDialog();
-            this.Listar();
+            Listar();
+        }
+
+        private void tsbEditar_Click(object sender, EventArgs e)
+        {
+            if (this.dgvComisiones.SelectedRows.Count > 0)
+            {
+                int ID = ((Comision)this.dgvComisiones.SelectedRows[0].DataBoundItem).ID;
+                frmComisionDesktop frmComision = new(ID, ApplicationForm.ModoForm.Modificacion);
+                frmComision.ShowDialog();
+                this.Listar();
+            }
+        }
+        private void tsbEliminar_Click(object sender, EventArgs e)
+        {
+            if (this.dgvComisiones.SelectedRows.Count > 0)
+            {
+                int ID = ((Comision)this.dgvComisiones.SelectedRows[0].DataBoundItem).ID;
+                frmComisionDesktop frmComision = new(ID, ApplicationForm.ModoForm.Baja);
+                frmComision.ShowDialog();
+                this.Listar();
+            }
         }
     }
 }
