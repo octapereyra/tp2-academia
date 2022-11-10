@@ -39,6 +39,12 @@ namespace UI.Desktop
             this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idcurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tcInsripciones.ContentPanel.SuspendLayout();
             this.tcInsripciones.TopToolStripPanel.SuspendLayout();
             this.tcInsripciones.SuspendLayout();
@@ -84,7 +90,16 @@ namespace UI.Desktop
             // 
             // dgvInscripciones
             // 
+            this.dgvInscripciones.AllowUserToAddRows = false;
+            this.dgvInscripciones.AllowUserToDeleteRows = false;
             this.dgvInscripciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInscripciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.idcurso,
+            this.materia,
+            this.comision,
+            this.condicion,
+            this.nota});
             this.tLInscripciones.SetColumnSpan(this.dgvInscripciones, 2);
             this.dgvInscripciones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInscripciones.Location = new System.Drawing.Point(3, 3);
@@ -124,7 +139,7 @@ namespace UI.Desktop
             this.tsbEliminar});
             this.tsInscripciones.Location = new System.Drawing.Point(3, 0);
             this.tsInscripciones.Name = "tsInscripciones";
-            this.tsInscripciones.Size = new System.Drawing.Size(112, 25);
+            this.tsInscripciones.Size = new System.Drawing.Size(81, 25);
             this.tsInscripciones.TabIndex = 0;
             // 
             // tsbNuevo
@@ -140,12 +155,12 @@ namespace UI.Desktop
             // tsbEditar
             // 
             this.tsbEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbEditar.Enabled = false;
             this.tsbEditar.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditar.Image")));
             this.tsbEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEditar.Name = "tsbEditar";
             this.tsbEditar.Size = new System.Drawing.Size(23, 22);
             this.tsbEditar.Text = "Editar";
-            this.tsbEditar.Click += new System.EventHandler(this.tsbEditar_Click);
             // 
             // tsbEliminar
             // 
@@ -155,7 +170,50 @@ namespace UI.Desktop
             this.tsbEliminar.Name = "tsbEliminar";
             this.tsbEliminar.Size = new System.Drawing.Size(23, 22);
             this.tsbEliminar.Text = "Eliminar";
-            this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // idcurso
+            // 
+            this.idcurso.DataPropertyName = "idcurso";
+            this.idcurso.HeaderText = "ID Curso";
+            this.idcurso.Name = "idcurso";
+            this.idcurso.ReadOnly = true;
+            this.idcurso.Visible = false;
+            // 
+            // materia
+            // 
+            this.materia.DataPropertyName = "materia";
+            this.materia.HeaderText = "Materia";
+            this.materia.Name = "materia";
+            this.materia.ReadOnly = true;
+            // 
+            // comision
+            // 
+            this.comision.DataPropertyName = "comision";
+            this.comision.HeaderText = "Comisión";
+            this.comision.Name = "comision";
+            this.comision.ReadOnly = true;
+            // 
+            // condicion
+            // 
+            this.condicion.DataPropertyName = "condicion";
+            this.condicion.HeaderText = "Condición";
+            this.condicion.Name = "condicion";
+            this.condicion.ReadOnly = true;
+            // 
+            // nota
+            // 
+            this.nota.DataPropertyName = "nota";
+            this.nota.HeaderText = "Nota";
+            this.nota.Name = "nota";
+            this.nota.ReadOnly = true;
             // 
             // frmInscripcionesCurso
             // 
@@ -190,5 +248,11 @@ namespace UI.Desktop
         private System.Windows.Forms.ToolStripButton tsbNuevo;
         private System.Windows.Forms.ToolStripButton tsbEditar;
         private System.Windows.Forms.ToolStripButton tsbEliminar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idcurso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn materia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn comision;
+        private System.Windows.Forms.DataGridViewTextBoxColumn condicion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nota;
     }
 }

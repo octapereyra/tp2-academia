@@ -33,7 +33,7 @@
         <form action="@Url.Action("Inscribir","Registro")" method="post">
             <div class="form-group">
                 <label>Elegir Materia</label>
-                <select class="form-select" name="IDMateria" id="IdMateria" onchange="cargaComision()" required>
+                <select class="form-select" name="IDMateria" id="IdMateria" onclick="cargaComision()" required>
                     @{
                         IEnumerable<Materia> materia = new MateriaLogic().GetAll();                      
                         materia = materia.Where(m => m.IDPlan == persona.IDPLan);

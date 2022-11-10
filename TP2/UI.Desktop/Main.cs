@@ -26,18 +26,20 @@ namespace UI.Desktop
             switch (personaActual.TipoPersona)
             {
                 case Persona.TiposPersonas.Estudiante:
-                    mnuDatos.Enabled = false;
-                    mnuRegistroNotas.Enabled = false;
-                    mnuReportes.Enabled = false;
+                    mnuDatos.Visible = false;
+                    mnuRegistroNotas.Visible = false;
+                    mnuInscripcionCurso.Visible = true;
+                    mnuReportes.Visible = false;
                     break;
                 case Persona.TiposPersonas.Docente:
-                    mnuDatos.Enabled = false;
-                    mnuInscripcionCurso.Enabled = false;                   
+                    mnuDatos.Visible = false;
+                    mnuInscripcionCurso.Visible = false;
+                    mnuRegistroNotas.Visible = true;
                     break;
                 case Persona.TiposPersonas.Administrativo:
-                    mnuRegistroNotas.Enabled = false;
-                    mnuInscripcionCurso.Enabled = false;
-                    mnuReportes.Enabled = false;
+                    mnuRegistros.Visible = false;
+                    mnuReportes.Visible = false;
+                    mnuDatos.Visible = true;
                     break;
                 default:
                     break;
@@ -154,6 +156,15 @@ namespace UI.Desktop
             SaveFileDialog save = new();
             save.FileName = DateTime.Now.ToString("ddMMyyyyHHmmss" + ".pdf");
             save.ShowDialog();
+        }
+
+        private void mnuInscripcionCurso_Click(object sender, EventArgs e)
+        {
+            CloseForms();
+            frmInscripcionesCurso ic = new(UsuarioLogueado);
+            ic.MdiParent = this;
+            ic.WindowState = FormWindowState.Maximized;
+            ic.Show();
         }
     }
 }

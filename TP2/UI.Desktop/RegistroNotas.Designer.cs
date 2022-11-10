@@ -34,6 +34,12 @@ namespace UI.Desktop
             this.dgvAlumnosInscripcion = new System.Windows.Forms.DataGridView();
             this.btnModificarNota = new System.Windows.Forms.Button();
             this.btnCargaGrilla = new System.Windows.Forms.Button();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idalumno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alumno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idcurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlumnosInscripcion)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,6 +65,13 @@ namespace UI.Desktop
             this.dgvAlumnosInscripcion.AllowUserToAddRows = false;
             this.dgvAlumnosInscripcion.AllowUserToDeleteRows = false;
             this.dgvAlumnosInscripcion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAlumnosInscripcion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.idalumno,
+            this.alumno,
+            this.idcurso,
+            this.nota,
+            this.condicion});
             this.dgvAlumnosInscripcion.Location = new System.Drawing.Point(13, 51);
             this.dgvAlumnosInscripcion.Name = "dgvAlumnosInscripcion";
             this.dgvAlumnosInscripcion.ReadOnly = true;
@@ -74,6 +87,7 @@ namespace UI.Desktop
             this.btnModificarNota.TabIndex = 3;
             this.btnModificarNota.Text = "Modificar nota";
             this.btnModificarNota.UseVisualStyleBackColor = true;
+            this.btnModificarNota.Click += new System.EventHandler(this.btnModificarNota_Click);
             // 
             // btnCargaGrilla
             // 
@@ -85,6 +99,51 @@ namespace UI.Desktop
             this.btnCargaGrilla.UseVisualStyleBackColor = true;
             this.btnCargaGrilla.Click += new System.EventHandler(this.btnCargaGrilla_Click);
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // idalumno
+            // 
+            this.idalumno.DataPropertyName = "idalumno";
+            this.idalumno.HeaderText = "ID Alumno";
+            this.idalumno.Name = "idalumno";
+            this.idalumno.ReadOnly = true;
+            this.idalumno.Visible = false;
+            // 
+            // alumno
+            // 
+            this.alumno.DataPropertyName = "alumno";
+            this.alumno.HeaderText = "Alumno (legajo)";
+            this.alumno.Name = "alumno";
+            this.alumno.ReadOnly = true;
+            // 
+            // idcurso
+            // 
+            this.idcurso.DataPropertyName = "idcurso";
+            this.idcurso.HeaderText = "ID Curso";
+            this.idcurso.Name = "idcurso";
+            this.idcurso.ReadOnly = true;
+            this.idcurso.Visible = false;
+            // 
+            // nota
+            // 
+            this.nota.DataPropertyName = "nota";
+            this.nota.HeaderText = "Nota";
+            this.nota.Name = "nota";
+            this.nota.ReadOnly = true;
+            // 
+            // condicion
+            // 
+            this.condicion.DataPropertyName = "condicion";
+            this.condicion.HeaderText = "Condición";
+            this.condicion.Name = "condicion";
+            this.condicion.ReadOnly = true;
+            // 
             // frmRegistroNotas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -95,6 +154,8 @@ namespace UI.Desktop
             this.Controls.Add(this.dgvAlumnosInscripcion);
             this.Controls.Add(this.cboCursos);
             this.Controls.Add(this.lblInfo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmRegistroNotas";
             this.Text = "RegistroNotas";
             this.Load += new System.EventHandler(this.frmRegistroNotas_Load);
@@ -111,5 +172,11 @@ namespace UI.Desktop
         private System.Windows.Forms.DataGridView dgvAlumnosInscripcion;
         private System.Windows.Forms.Button btnModificarNota;
         private System.Windows.Forms.Button btnCargaGrilla;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idalumno;
+        private System.Windows.Forms.DataGridViewTextBoxColumn alumno;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idcurso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nota;
+        private System.Windows.Forms.DataGridViewTextBoxColumn condicion;
     }
 }

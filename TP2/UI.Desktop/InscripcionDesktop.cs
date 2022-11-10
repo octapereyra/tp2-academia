@@ -14,89 +14,78 @@ namespace UI.Desktop
 {
     public partial class frmInscripcionDesktop : ApplicationForm
     {
-        public frmInscripcionDesktop()
+        public frmInscripcionDesktop() //Usuario usuarioLogueado
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
 
         private AlumnoInscripcion _InscripcionActual;
         public AlumnoInscripcion InscripcionActual { get => _InscripcionActual; set => _InscripcionActual = value; }
-        public frmInscripcionDesktop(ModoForm modo) : this() //2
+        public frmInscripcionDesktop(AlumnoInscripcion inscripcion) : this() 
         {
-            this.Modo = modo;
+            InscripcionActual = inscripcion;
+            CargaComboBoxMaterias();
         }
 
-        public frmInscripcionDesktop(int idInscripcion, ModoForm modo) : this() //3
+        private void CargaComboBoxMaterias()
         {
-            this.Modo = modo;
-            InscripcionLogic insLogic = new InscripcionLogic();
-            InscripcionActual = insLogic.GetOne(idInscripcion);
-
-            MapearDeDatos();
-        }
-
-        public override void MapearDeDatos()
-        {
-            this.txtIDInscripcion.Text = this.InscripcionActual.ID.ToString();
-            this.txtIdAlumno.Text = this.InscripcionActual.IDAlumno.ToString();
-            this.txtIdCurso.Text = "1"; //
-            this.txtCondicion.Text = this.InscripcionActual.Condicion;
-            this.txtNota.Text = this.InscripcionActual.Nota.ToString();
-
-            switch (Modo)
+            IEnumerable<Materia> materias = new MateriaLogic().GetAll();
+            materias = materias.Where(m => m.IDPlan == new PersonaLogic().GetOne(InscripcionActual.IDAlumno).IDPLan);
+            List<Materia> listaMaterias = new();
+            foreach (Materia m in materias)
             {
-                case ModoForm.Alta:
-                    this.btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Modificacion:
-                    this.btnAceptar.Text = "Guardar";
-                    break;
-                case ModoForm.Consulta:
-                    this.btnAceptar.Text = "Aceptar";
-                    break;
-                case ModoForm.Baja:
-                    this.btnAceptar.Text = "Eliminar";
-                    break;
+                listaMaterias.Add(m);
             }
+
+            cboMaterias.Enabled = true;
+            cboMaterias.DataSource = listaMaterias;
+            cboMaterias.ValueMember = "id";
+            cboMaterias.DisplayMember = "descripcion";
         }
+        private void CargaComboBoxComisiones()
+        {
+            IEnumerable<Curso> cursos = new CursoLogic().GetAll();
+            cursos = cursos.Where(c => c.IDMateria == (int)cboMaterias.SelectedValue && c.Cupo > 0);
+            List<Comision> comisiones = new();
+            foreach (Curso curso in cursos)
+            {
+                comisiones.Add(new ComisionLogic().GetOne(curso.IDComision));
+            }
+
+            cboComisiones.Enabled = true;
+            cboComisiones.DataSource = comisiones;
+            cboComisiones.ValueMember = "id";
+            cboComisiones.DisplayMember = "descripcion";
+        }    
+
+        //public override void MapearDeDatos()
+        //{      
+        //    lblIDInscripcion.Text = InscripcionActual.ID.ToString();          
+        //    cboMaterias.SelectedValue = cur.IDMateria;
+        //    cboComisiones.SelectedValue = cur.IDComision;
+        //}
 
         public override void MapearADatos()
         {
-            InscripcionLogic insLogic = new InscripcionLogic();
-            AlumnoInscripcion nuevaIns = new AlumnoInscripcion();
-            InscripcionActual = nuevaIns;
-
-            if (Modo == ModoForm.Alta || Modo == ModoForm.Modificacion)
+            Curso curso = new CursoLogic().GetOne(InscripcionActual.IDCurso);
+            IEnumerable<Curso> cursos = new CursoLogic().GetAll();
+            cursos = cursos.Where(c => c.IDComision == curso.IDComision && c.IDMateria == curso.IDMateria);
+            curso = cursos.First();
+            AlumnoInscripcion inscripcion = new()
             {
-                nuevaIns.IDAlumno = this.InscripcionActual.IDAlumno;
-                nuevaIns.IDCurso = 1; //
-                nuevaIns.Condicion = this.InscripcionActual.Condicion;
-                nuevaIns.Nota= this.InscripcionActual.Nota;
-                if (Modo == ModoForm.Alta)
-                {
-                    nuevaIns.State = BusinessEntity.States.New;
-                    insLogic.Save(nuevaIns);
-                }
-                if (Modo == ModoForm.Modificacion)
-                {
-                     
-                    nuevaIns.ID = int.Parse(this.txtIDInscripcion.Text);
-                    nuevaIns.State = BusinessEntity.States.Modified;
-                    insLogic.Save(nuevaIns);
-                }
-            }
-            if (Modo == ModoForm.Baja)
-            {
-                nuevaIns.ID = int.Parse(this.txtIDInscripcion.Text);
-                nuevaIns.State = BusinessEntity.States.Deleted;
-                insLogic.Save(nuevaIns);
-            }
-
+                IDCurso = curso.ID,
+                IDAlumno = InscripcionActual.IDAlumno,
+                Condicion = "Inscripto",
+                Nota = 0,
+                State = BusinessEntity.States.New,
+            };
+            InscripcionActual = inscripcion;
         }
+     
         public override void GuardarCambios()
         {
             MapearADatos();
-            InscripcionLogic insLogic = new InscripcionLogic();
+            InscripcionLogic insLogic = new();
             try
             {
                 insLogic.Save(InscripcionActual);
@@ -107,28 +96,20 @@ namespace UI.Desktop
             }
         }
 
-        public override bool Validar()
-        {
-            if (txtIdCurso.Text.Trim().Length == 0 || txtIdAlumno.Text.Trim().Length == 0 ||
-                txtCondicion.Text.Trim().Length == 0 || txtNota.Text.Trim().Length == 0 )
-            {
-                Notificar("Error", "No puede haber campos vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else return true;   
-        }
+        //public override bool Validar()
+        //{
+        //    if (this.cboMaterias.SelectedIndex == -1 || this.cboComisiones.SelectedIndex==-1 )
+        //    {
+        //        Notificar("Error", "No puede haber campos vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return false;
+        //    }
+        //    else return true;   
+        //}
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (this.Modo.Equals(ModoForm.Baja))
-            {
-                if (Confirmar(this.btnAceptar.Text.ToLower(), "inscripcion").Equals(DialogResult.Yes))
-                {
-                    GuardarCambios();
-                    this.Close();
-                }
-            }
-            else if (Validar())
+           
+            if (true)//Validar())
             {
                 GuardarCambios();
                 Close();
@@ -138,6 +119,11 @@ namespace UI.Desktop
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cboMaterias_SelectedValueChanged(object sender, EventArgs e)
+        {
+            CargaComboBoxComisiones();
         }
     }
 }

@@ -42,7 +42,7 @@ namespace UI.Desktop
             {
                 Comision comision = new ComisionLogic().GetOne(c.IDComision);
                 Materia materia = new MateriaLogic().GetOne(c.IDMateria);                
-                c.Descripcion = materia.Descripcion + " " + comision.Descripcion;                              
+                c.Descripcion = materia.Descripcion + " - " + comision.Descripcion;                              
             }
             cboCursos.DataSource = cursos_docente;
             cboCursos.DisplayMember = "descripcion";
@@ -53,7 +53,28 @@ namespace UI.Desktop
         {
             IEnumerable<AlumnoInscripcion> inscripciones = new InscripcionLogic().GetAll();
             inscripciones = inscripciones.Where(i => i.IDCurso == (int)cboCursos.SelectedValue);
-            dgvAlumnosInscripcion.DataSource = inscripciones;
+            List<AlumnoInscripcion> listInscripciones = new();
+            foreach (AlumnoInscripcion ai in inscripciones)
+            {
+                listInscripciones.Add(ai);
+            }
+            dgvAlumnosInscripcion.AutoGenerateColumns = false;
+            dgvAlumnosInscripcion.DataSource = listInscripciones;
+
+            foreach (DataGridViewRow fila in dgvAlumnosInscripcion.Rows)
+            {
+                fila.Cells["alumno"].Value = new PersonaLogic().GetOne((int)fila.Cells["idalumno"].Value).Legajo;
+            }
+        }
+
+        private void btnModificarNota_Click(object sender, EventArgs e)
+        {
+            if (dgvAlumnosInscripcion.SelectedRows.Count > 0)
+            {
+                AlumnoInscripcion inscripcion = ((AlumnoInscripcion)dgvAlumnosInscripcion.SelectedRows[0].DataBoundItem);
+                new frmModificaNota(inscripcion).ShowDialog();
+                btnCargaGrilla_Click(sender, e);
+            }
         }
     }
 }

@@ -164,13 +164,14 @@ namespace UI.Desktop
             // mnuInscripcionCurso
             // 
             this.mnuInscripcionCurso.Name = "mnuInscripcionCurso";
-            this.mnuInscripcionCurso.Size = new System.Drawing.Size(173, 22);
+            this.mnuInscripcionCurso.Size = new System.Drawing.Size(180, 22);
             this.mnuInscripcionCurso.Text = "Inscripción a curso";
+            this.mnuInscripcionCurso.Click += new System.EventHandler(this.mnuInscripcionCurso_Click);
             // 
             // mnuRegistroNotas
             // 
             this.mnuRegistroNotas.Name = "mnuRegistroNotas";
-            this.mnuRegistroNotas.Size = new System.Drawing.Size(173, 22);
+            this.mnuRegistroNotas.Size = new System.Drawing.Size(180, 22);
             this.mnuRegistroNotas.Text = "Registro de notas";
             this.mnuRegistroNotas.Click += new System.EventHandler(this.mnuRegistroNotas_Click);
             // 

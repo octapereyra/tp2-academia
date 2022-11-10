@@ -180,6 +180,7 @@ namespace UI.Desktop
             this.id.HeaderText = "ID";
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Visible = false;
             this.id.Width = 50;
             // 
             // descripcion
