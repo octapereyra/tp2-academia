@@ -27,14 +27,17 @@ namespace UI.Desktop
             {
                 case Persona.TiposPersonas.Estudiante:
                     mnuDatos.Visible = false;
+                    mnuRegistros.Visible = true;
                     mnuRegistroNotas.Visible = false;
                     mnuInscripcionCurso.Visible = true;
                     mnuReportes.Visible = false;
                     break;
                 case Persona.TiposPersonas.Docente:
                     mnuDatos.Visible = false;
+                    mnuRegistros.Visible = true;
                     mnuInscripcionCurso.Visible = false;
                     mnuRegistroNotas.Visible = true;
+                    mnuReportes.Visible = true;
                     break;
                 case Persona.TiposPersonas.Administrativo:
                     mnuRegistros.Visible = false;

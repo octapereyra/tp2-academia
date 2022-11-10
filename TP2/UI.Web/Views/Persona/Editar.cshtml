@@ -46,7 +46,28 @@
             </div>
             <div class="form-group">
                 <label>Tipo Persona</label>
-                <input type="text" class="form-control" name="TipoPersona" value="@Html.DisplayTextFor(p => p.TipoPersona)" autocomplete="off" required />
+                <select class="form-select" name="TipoPersona" aria-label="Elegir tipo persona" required>
+                    @{
+                        if (Model.TipoPersona == Persona.TiposPersonas.Estudiante)
+                        {
+                            <option value=0 selected>Estudiante</option>
+                            <option value=1>Docente</option>
+                            <option value=2>Administrativo</option>
+                        }
+                        if (Model.TipoPersona == Persona.TiposPersonas.Docente)
+                        {
+                            <option value=0>Estudiante</option>
+                            <option value=1 selected>Docente</option>
+                            <option value=2>Administrativo</option>
+                        }
+                        if (Model.TipoPersona == Persona.TiposPersonas.Administrativo)
+                        {
+                            <option value=0>Estudiante</option>
+                            <option value=1>Docente</option>
+                            <option value=2 selected>Administrativo</option>
+                        }
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label>Legajo</label>

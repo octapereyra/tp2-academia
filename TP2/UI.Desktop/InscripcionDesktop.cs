@@ -14,23 +14,26 @@ namespace UI.Desktop
 {
     public partial class frmInscripcionDesktop : ApplicationForm
     {
-        public frmInscripcionDesktop() //Usuario usuarioLogueado
+        public frmInscripcionDesktop()
         {
             InitializeComponent();          
         }
 
         private AlumnoInscripcion _InscripcionActual;
+        private Persona _alumnoActual;
         public AlumnoInscripcion InscripcionActual { get => _InscripcionActual; set => _InscripcionActual = value; }
-        public frmInscripcionDesktop(AlumnoInscripcion inscripcion) : this() 
+        public Persona AlumnoActual { get => _alumnoActual; set => _alumnoActual = value; }
+        public frmInscripcionDesktop(AlumnoInscripcion inscripcion, Persona alumno) : this() 
         {
             InscripcionActual = inscripcion;
+            AlumnoActual = alumno;
             CargaComboBoxMaterias();
         }
 
         private void CargaComboBoxMaterias()
         {
             IEnumerable<Materia> materias = new MateriaLogic().GetAll();
-            materias = materias.Where(m => m.IDPlan == new PersonaLogic().GetOne(InscripcionActual.IDAlumno).IDPLan);
+            materias = materias.Where(m => m.IDPlan == AlumnoActual.IDPLan);
             List<Materia> listaMaterias = new();
             foreach (Materia m in materias)
             {
@@ -39,13 +42,13 @@ namespace UI.Desktop
 
             cboMaterias.Enabled = true;
             cboMaterias.DataSource = listaMaterias;
-            cboMaterias.ValueMember = "id";
             cboMaterias.DisplayMember = "descripcion";
         }
         private void CargaComboBoxComisiones()
         {
+            int idMateria = ((Materia)cboMaterias.SelectedValue).ID;
             IEnumerable<Curso> cursos = new CursoLogic().GetAll();
-            cursos = cursos.Where(c => c.IDMateria == (int)cboMaterias.SelectedValue && c.Cupo > 0);
+            cursos = cursos.Where(c => c.IDMateria == idMateria  && c.Cupo > 0);
             List<Comision> comisiones = new();
             foreach (Curso curso in cursos)
             {
@@ -54,7 +57,6 @@ namespace UI.Desktop
 
             cboComisiones.Enabled = true;
             cboComisiones.DataSource = comisiones;
-            cboComisiones.ValueMember = "id";
             cboComisiones.DisplayMember = "descripcion";
         }    
 
@@ -67,14 +69,16 @@ namespace UI.Desktop
 
         public override void MapearADatos()
         {
-            Curso curso = new CursoLogic().GetOne(InscripcionActual.IDCurso);
+            int idMateria = ((Materia)cboMaterias.SelectedValue).ID;
+            int idComision = ((Comision)cboComisiones.SelectedValue).ID;
+            Curso curso = new();
             IEnumerable<Curso> cursos = new CursoLogic().GetAll();
-            cursos = cursos.Where(c => c.IDComision == curso.IDComision && c.IDMateria == curso.IDMateria);
+            cursos = cursos.Where(c => c.IDComision == idComision && c.IDMateria == idMateria);
             curso = cursos.First();
             AlumnoInscripcion inscripcion = new()
             {
                 IDCurso = curso.ID,
-                IDAlumno = InscripcionActual.IDAlumno,
+                IDAlumno = AlumnoActual.ID,
                 Condicion = "Inscripto",
                 Nota = 0,
                 State = BusinessEntity.States.New,
@@ -83,8 +87,7 @@ namespace UI.Desktop
         }
      
         public override void GuardarCambios()
-        {
-            MapearADatos();
+        {          
             InscripcionLogic insLogic = new();
             try
             {
@@ -96,20 +99,32 @@ namespace UI.Desktop
             }
         }
 
-        //public override bool Validar()
-        //{
-        //    if (this.cboMaterias.SelectedIndex == -1 || this.cboComisiones.SelectedIndex==-1 )
-        //    {
-        //        Notificar("Error", "No puede haber campos vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return false;
-        //    }
-        //    else return true;   
-        //}
+        public override bool Validar()
+        {
+            bool valida = true;
+
+            if (cboComisiones.SelectedIndex == -1 || cboMaterias.SelectedIndex == -1)
+            {
+                Notificar("Error", "Debes seleccionar materia y comisión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                valida = false;
+            }
+
+            List<AlumnoInscripcion> inscripciones = new InscripcionLogic().GetAll();
+            foreach (AlumnoInscripcion ai in inscripciones)
+            {
+                if (AlumnoActual.ID == ai.IDAlumno && InscripcionActual.IDCurso == ai.IDCurso)
+                {
+                    Notificar("Error", "Ya estás inscripto a ese curso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    valida = false;
+                }
+            }
+            return valida;
+        }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-           
-            if (true)//Validar())
+            MapearADatos();
+            if (Validar())
             {
                 GuardarCambios();
                 Close();
@@ -118,7 +133,7 @@ namespace UI.Desktop
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void cboMaterias_SelectedValueChanged(object sender, EventArgs e)

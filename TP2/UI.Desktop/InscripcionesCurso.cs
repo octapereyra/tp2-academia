@@ -40,8 +40,8 @@ namespace UI.Desktop
             foreach (DataGridViewRow fila in dgvInscripciones.Rows)
             {
                 Curso cursoActual = new CursoLogic().GetOne((int)fila.Cells["idcurso"].Value);
-                fila.Cells[2].Value = new MateriaLogic().GetOne(cursoActual.IDMateria).Descripcion;
-                fila.Cells[3].Value = new ComisionLogic().GetOne(cursoActual.IDComision).Descripcion;
+                fila.Cells["materia"].Value = new MateriaLogic().GetOne(cursoActual.IDMateria).Descripcion;
+                fila.Cells["comision"].Value = new ComisionLogic().GetOne(cursoActual.IDComision).Descripcion;
             }
         }
 
@@ -62,12 +62,10 @@ namespace UI.Desktop
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            if (dgvInscripciones.SelectedRows.Count > 0)
-            {
-                AlumnoInscripcion inscripcion = ((AlumnoInscripcion)dgvInscripciones.SelectedRows[0].DataBoundItem);
-                new frmInscripcionDesktop(inscripcion).ShowDialog();
-                Listar();
-            }
+            AlumnoInscripcion ai = new();
+            new frmInscripcionDesktop(ai,Alumno).ShowDialog();
+            Listar();
+            
         }
 
         //private void tsbEliminar_Click(object sender, EventArgs e)
