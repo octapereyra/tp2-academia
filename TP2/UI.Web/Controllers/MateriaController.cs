@@ -96,5 +96,17 @@ namespace UI.Web.Controllers
             HttpContext.Session.SetString("action", "Materias");
             return RedirectToAction("Informacion", "Home", new { get });
         }
+
+        public JsonResult GetPlanes(int id_especialidad)
+        {
+            IEnumerable<Plan> planes = new PlanLogic().GetAll();
+            planes = planes.Where(p => p.IDEspecialidad == id_especialidad);
+            List<Plan> result = new();
+            foreach (Plan p in planes)
+            {
+                result.Add(p);
+            }
+            return Json(result);
+        }
     }
 }

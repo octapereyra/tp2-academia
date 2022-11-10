@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Editar";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Especialidad> especialidades = new EspecialidadLogic().GetAll();
 }
 
 <h1 class="mt-2">Materias</h1>
@@ -32,26 +33,26 @@
                 <label>Horas Totales</label>
                 <input type="number" class="form-control" name="HSTotales" value="@Html.DisplayTextFor(m => m.HSTotales)" autocomplete="off" required />
             </div>
-            @{ 
-                List<Plan> planes = new PlanLogic().GetAll();
-            }
             <div class="form-group">
-                <label>Plan</label>
-                <select class="form-select" name="IDPlan" aria-label="Default select example" required>
-                    @{
-                        foreach (Plan p in planes)
+                <label>Especialidad</label>
+                <select class="form-select" name="IDEspecialidad" id="IdEspecialidad" onclick="cargaPlanes()" required>
+                    @foreach (Especialidad e in especialidades)
+                    {
+                        Plan plan = new PlanLogic().GetOne(Model.IDPlan);
+                        if (plan.IDEspecialidad == e.ID)
                         {
-                            if (Model.IDPlan == p.ID)
-                            {
-                                <option value="@p.ID" selected>@p.Descripcion</option>
-                            }
-                            else
-                            {
-                                <option value="@p.ID">@p.Descripcion</option>
-                            }
+                            <option selected value="@e.ID">@e.Descripcion</option>
+                        }
+                        else
+                        {
+                            <option value="@e.ID">@e.Descripcion</option>
                         }
                     }
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Plan</label>
+                <select class="form-select" name="IDPlan" id="IdPlan" required></select>
             </div>
 
             <button type="submit" onclick="editar()" class="btn btn-primary">Editar</button>
@@ -60,3 +61,31 @@
     </div>
 </div>
 
+@section scripts {
+    <script>
+        function cargaPlanes() {
+            let value = $("#IdEspecialidad option:selected").val();
+            document.getElementById('IdPlan').removeAttribute('disabled');
+
+            $.ajax({
+                url: "@Url.Action("GetPlanes","Materia")",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    id_especialidad: value
+                },
+                success: function (response) {
+
+                    $("#IdPlan").empty();
+                    $.each(response, function (i, element) {
+                        $("#IdPlan").append(
+                            $("<option>").attr({ "value": element.id }).text(element.descripcion)
+                        )
+                    })
+                }
+            })
+        }
+
+    </script>
+
+}
